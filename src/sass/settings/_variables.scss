@@ -1,0 +1,61 @@
+/* fuente principal */
+$fuentes: (
+    "tipo-principal": Helvetica Arial sans-serif,
+    "tipo-secundaria": Verdana
+);
+
+/* colores */
+$colores: (
+    "color-primario": #181818,
+    "color-secundario": #f0f0f0,
+    "color-facebook": #3b5998,
+    "color-twitter": #1da1f2,
+    "colorInstasgram": #3f729b,
+    "colorYoutube": #cd201f
+);
+
+/* 
+tamaños para media queries (desde este tamaño 
+en adelante, ej: @media (min-width: $tablet)
+*/
+$medidas: (
+    "telefono-m": 320px,
+    "telefono-xl": 480px, //por encima pasamos a tablet
+    "tablet": 768px,
+    "desktop": 960px, // por encima pasamos a ordenador
+    "desktop-m": 1024px,
+    "desktop-xl": 1440px
+);
+
+
+/* (Opcional) Las adaptamos al modo oscuro */
+@media (prefers-color-scheme: dark) {
+    $colores: (
+        "color-primario": #f0f0f0,
+        "color-secundario": #181818,
+        "color-facebook": #3b5998,
+        "color-twitter": #1da1f2,
+        "colorInstasgram": #3f729b,
+        "colorYoutube": #cd201f
+    );
+}
+
+/* (Opcional) Configuramos si un usuario ha activado el modo alto contraste. (WD) */
+@media (prefers-contrast: high){
+    $colores: (
+        "color-primario": #000000,
+        "color-secundario": #ffffff,
+        "color-facebook": #3b5998,
+        "color-twitter": #1da1f2,
+        "colorInstasgram": #3f729b,
+        "colorYoutube": #cd201f
+    );
+}
+
+/* (Opcional) Desactivamos los animations en el caso de que el usuario haya configurado el modo sin animation */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none;
+        transition: none;
+  } //NOTA: CAMBIAR EL * POR LA ETIQUETA CONCRETA PARA NO AFERCAR AL PERFORMANCE
+}

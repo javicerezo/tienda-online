@@ -1,0 +1,55 @@
+@use 'settings/variables' as v;
+
+// RESPONSIVE
+@mixin telefonoM {
+    @media (min-width: v.$telefonoM){
+        @content;
+    }
+}
+
+@mixin telefonoXL {
+    @media (min-width: v.$telefonoXL){
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: v.$tablet){
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: v.$desktop){
+        @content;
+    }
+}
+
+@mixin desktopXL {
+    @media (min-width: v.$desktopXL){
+        @content;
+    }
+}
+
+// GRID
+@mixin grid ($num-columnas, $espaciado-gap) {
+    display: grid;
+    grid-template-columns: repeat($num-columnas, 1fr);
+    gap: $espaciado-gap;
+}
+
+// FLEX
+@mixin flex ($flex-direction, $flex-wrap, $justify-content, $align-items) {
+    display: flex;
+    flex-flow: $flex-direction $flex-wrap;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+// NEOMORFISMO
+// https://neumorphism.io/ para usar los colores en fondo-sombra1-sombra2
+@mixin neomorfismo ($border-radius, $eje, $color-fondo, $color-sombra1, $color-sombra2) {
+    border-radius: $border-radius;
+    background: $color-fondo;
+    box-shadow: $eje $eje ($eje*2) $color-sombra1, (-$eje) (-$eje) ($eje*2) $color-sombra2;
+}
