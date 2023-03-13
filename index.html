@@ -43,7 +43,10 @@
                         <i class="fa-sharp fa-solid fa-caret-up"></i>
                     </div>
                     <div class="c-header__cesta">
-                        <i class="fa-solid fa-cart-shopping"></i>
+                        <div class="c-header__cesta-articulos">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <p class="c-header__cesta-articulos-p">0</p>
+                        </div>
                         <p>Cesta</p>
                         <i class="fa-sharp fa-solid fa-caret-up"></i>
                     </div>
@@ -62,7 +65,7 @@
         </nav>
     </header>
 
-    <section class="c-portada">
+    <section class="c-portada o-container-75">
     </section>
 
     <section class="c-item">
@@ -160,7 +163,7 @@
             <h4 class="c-newsletter__h4">
                 Recibe nuestras novedades, ofertas y promociones.
             </h4>
-            <form class="c-newsletter__form" action="">
+            <form class="c-newsletter__form js-newsletter__form" action="">
                 <input class="c-newsletter__input" type="email" name="" id="">
                 <label class="c-newsletter__label">Tu dirección de email</label>
                 <div class="c-newsletter__form-radio">
@@ -179,7 +182,7 @@
         </div>
     </section>
 
-    <section class="c-contacto">
+    <section class="c-contacto js-contacto">
         <div class="c-contacto__img">
             <i class="fa-regular fa-envelope"></i>
         </div>
@@ -238,5 +241,8 @@
             </div>
         </div>
     </footer>
+
+    <script src="src/js/app.js"></script>
+    <!-- <script src="build/js/bundle.min.js"></script> -->
 </body>
 </html>

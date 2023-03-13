@@ -1,8 +1,8 @@
 .c-portada {
-    background-image: url(../img/img-portada2.jpg);
-    background-size: cover;
+    background-image: url(../img/img-portada1.jpg);
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
     background-attachment: fixed;
-    background-position: center;
-    width: 100%;
-    height: 55vh;
+    height: 60vh;
 }

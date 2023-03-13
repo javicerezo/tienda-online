@@ -3,35 +3,47 @@
 
 .c-contacto {
     @include m.flex (column-reverse, nowrap, center, flex-end);
-    // @include m.position (relative, null, );
-    position: fixed;
-    bottom: .625rem;
-    right: 2rem;
+    @include m.position (fixed, null, 2rem, 0.625rem, null);
     z-index: 100;
     &__img {
+        width: 62px;
+        height: 62px;
+        // transition: all 0.5s ease;
+        @include m.flex(row, nowrap, center,center);
         @include m.neomorfismo (50%, 1px, map-get(v.$colores, color-fondo), map-get(v.$colores, color-fondo-hover), map-get(v.$colores, color-fondo-active));
         color: #723F00;
         cursor: pointer;
         padding: 1.2rem;
-        // transition: opacity 0.8s ease, transform 1.6s ease;
         &:hover {
             background-color: map-get(v.$colores, color-fondo-hover);
         }
         i {
+            transition: transform 0.5s ease;
             font-size: 1.5rem;
+        }
+        &--mod {
+            transform: rotate(180deg);
         }
     }
     &__screen {
-        // visibility: hidden;
-        // pointer-events: none;
+        @include m.position (relative, null, -25rem, null, null);
+        visibility: hidden;
+        pointer-events: none;
         margin-bottom: 1rem;
         color: map-get(v.$colores, color-texto-formulario);
+        transition: all 0.5s ease;
         @include m.neomorfismo (5px, 2px, map-get(v.$colores, color-secundario), map-get(v.$colores, color-secundario), map-get(v.$colores, color-primario));
+        &--mod {
+            right: 0;
+            visibility: visible;
+            pointer-events: unset;
+        }
     }
     &__arriba {
         background-color: map-get(v.$colores, color-fondo);
         @include m.flex (column, nowrap, center, center);
         padding: 1rem;
+        border-radius: 5px;
     }
     &__iconos {
         @include m.flex (row, nowrap, center, center);
@@ -39,12 +51,13 @@
             @include m.flex (row, nowrap, center, center);
             margin: 0 0.5rem;
             padding: 0.5rem 1rem;
-            background-color: map-get(v.$colores, color-fondo-active);
+            background-color: map-get(v.$colores, color-fondo-hover);
             border-radius: 15px;
             cursor: pointer;
-            // &:hover {
-
-            // }
+            transition: all 0.5s ease;
+            &:hover {
+                background-color: map-get(v.$colores, color-fondo-active);
+            }
             i {
                 padding-right: 0.5rem;
             }
@@ -91,6 +104,8 @@
         padding: 1rem;
         background: rgb(240,240,240);
         background: linear-gradient(180deg, rgba(240,240,240,1) 16%, rgba(255,255,255,1) 77%);
+        
+        border-radius: 0 0 5px 5px;
     }
     &__form {
         padding: 1rem 0;
