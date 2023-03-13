@@ -6,7 +6,23 @@ ul{
     margin: 0;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
     font-weight: 600;
     text-align: center;
+    font-family: map-get( v.$fuentes , tipo-secundaria);
+}
+
+h4 {
+    font-weight: normal;
+}
+
+body {
+    max-width: 112.5rem;
+    font-family : map-get(v.$fuentes, tipo-principal);
+    color: map-get(v.$colores, color-primario);
+    background-color: map-get(v.$colores, color-secundario);
+
+    // &.darkmode {
+
+    // }
 }

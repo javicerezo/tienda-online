@@ -1,0 +1,43 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-item {
+    margin: 3rem;
+    &__contenedor {
+        @include m.flex (column, nowrap, center, center);
+    }
+    &__h1 {
+        font-size: 2em;
+    }
+    &__h4 {
+        padding: 1.5rem 0;
+    }
+    &__grid {
+        @include m.grid (4, 1rem);
+        padding: 1rem;
+    }
+    &__articulo {
+        padding: 0.5rem 1rem;
+        @include m.flex (column, nowrap, space-between, center);
+    }
+    &__contenido {
+        padding: .625rem;
+        @include m.flex (column, nowrap, center, center);
+        &-h4 {
+            font-size: .75em;
+            padding-bottom: .625rem;
+            span {
+                font-weight: bold;
+            }
+        }
+        &-precio {
+            font-size: 1.2em;
+            color: map-get(v.$colores, color-precios);
+            &--old {
+                padding: 0 10px;
+                font-size: .9rem;
+                text-decoration: line-through;
+            }    
+        }
+    }
+}

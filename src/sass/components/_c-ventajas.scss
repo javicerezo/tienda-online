@@ -1,0 +1,38 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-ventajas {
+    margin: 1rem auto;
+    &__contenedor {
+        border-top: 1px dotted #000;
+        border-bottom: 1px dotted #000;
+        max-width: 60.3125rem;
+        padding: 2rem 0;
+    }
+    &__ul {
+        @include m.flex (row, nowrap, space-between, center);
+        padding: 1.3rem 0;
+        height: 11.25rem;
+    }
+    &__li {
+        height: 11.25rem;
+        @include m.flex (column, nowrap, flex-start, center);
+        width: 33%;
+        i {
+            font-size: 3.125rem;
+        }
+    }
+    &__li:nth-child(2) {
+        padding: 0 1rem;
+    }
+    &__h4 {
+        padding: 1rem 0;
+        font-size: 1.875rem;
+    }
+    &__p {
+        text-align: center;
+        span {
+            font-weight: bold;
+        }
+    }
+}

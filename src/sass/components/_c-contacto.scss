@@ -1,0 +1,121 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-contacto {
+    @include m.flex (column-reverse, nowrap, center, flex-end);
+    // @include m.position (relative, null, );
+    position: fixed;
+    bottom: .625rem;
+    right: 2rem;
+    z-index: 100;
+    &__img {
+        @include m.neomorfismo (50%, 1px, map-get(v.$colores, color-fondo), map-get(v.$colores, color-fondo-hover), map-get(v.$colores, color-fondo-active));
+        color: #723F00;
+        cursor: pointer;
+        padding: 1.2rem;
+        // transition: opacity 0.8s ease, transform 1.6s ease;
+        &:hover {
+            background-color: map-get(v.$colores, color-fondo-hover);
+        }
+        i {
+            font-size: 1.5rem;
+        }
+    }
+    &__screen {
+        // visibility: hidden;
+        // pointer-events: none;
+        margin-bottom: 1rem;
+        color: map-get(v.$colores, color-texto-formulario);
+        @include m.neomorfismo (5px, 2px, map-get(v.$colores, color-secundario), map-get(v.$colores, color-secundario), map-get(v.$colores, color-primario));
+    }
+    &__arriba {
+        background-color: map-get(v.$colores, color-fondo);
+        @include m.flex (column, nowrap, center, center);
+        padding: 1rem;
+    }
+    &__iconos {
+        @include m.flex (row, nowrap, center, center);
+        &-contacta {
+            @include m.flex (row, nowrap, center, center);
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: map-get(v.$colores, color-fondo-active);
+            border-radius: 15px;
+            cursor: pointer;
+            // &:hover {
+
+            // }
+            i {
+                padding-right: 0.5rem;
+            }
+        }
+    }
+    &__ul{
+        padding: 1.2rem 0;
+        @include m.flex (row, nowrap, center, center);
+        & > :nth-child(1) {
+            background-image: url(../img/avatar1.jpg);
+            right: -0.5rem;
+            z-index: 70;
+        }
+        & > :nth-child(2) {
+            background-image: url(../img/avatar2.jpg);
+            z-index: 80;
+        }
+        & > :nth-child(3) {
+            background-image: url(../img/avatar3.jpg);
+            right: 0.5rem;
+            z-index: 70;
+        }
+    }
+    &__li {
+        padding: 1rem;
+        background-size: cover;
+        background-position: center;
+        border: 1px solid #fff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        position: relative;
+    }
+    &__pregunta {
+        font-weight: bold;
+        align-content: center;
+        & > :nth-child(2) {
+            margin-top: 0.5rem;
+            font-size: 0.9em;
+            font-weight: normal;
+        }
+    }
+    &__abajo {
+        padding: 1rem;
+        background: rgb(240,240,240);
+        background: linear-gradient(180deg, rgba(240,240,240,1) 16%, rgba(255,255,255,1) 77%);
+    }
+    &__form {
+        padding: 1rem 0;
+    }
+    &__fieldset {
+        padding: 0 0 1rem 0;
+        label {
+            color: map-get(v.$colores, color-texto-formulario2);
+            margin-bottom: .5rem;
+            font-size: .9rem;
+        }
+        input, textarea {
+            border: 1px solid rgb(197, 206, 214);
+            border-radius: 5px;
+            min-width: 18.75rem;
+            max-width: 18.75rem;
+            padding: 0.5rem;
+        }
+        textarea {
+            min-height: 120px;
+            max-height: 120px;
+        }
+        button {
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+}

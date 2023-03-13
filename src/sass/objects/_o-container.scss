@@ -1,8 +1,29 @@
 @use 'settings/variables' as v;
 
-.o-container {
+.o-container-100 {
     display: block;
     width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.o-container-80 {
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.o-container-75 {
+    display: block;
+    width: 75%;
+    height: auto;
+    margin: 0 auto;
+}
+
+.o-container-50 {
+    display: block;
+    width: 50%;
     height: auto;
     margin: 0 auto;
 }

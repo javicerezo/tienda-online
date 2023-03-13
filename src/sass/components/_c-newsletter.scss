@@ -1,0 +1,58 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-newsletter {
+    margin: 3rem 0 1rem;
+    &__contenedor {
+        max-width: 31.25rem;
+    }
+    &__h2 {
+        font-size: 2em;
+    }
+    &__h4 {
+        padding: 1.2rem 0;
+    }
+    &__form {
+        position: relative;
+        @include m.flex (column, nowrap, space-between, center);
+    }
+    &__input {
+        width: 100%;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 1.5rem 1.2rem 1rem;
+        font-size: 1.1em;
+        &:focus + .c-newsletter__label{
+            top: .5rem;
+            left: .5rem;
+            right: null;
+            font-size: 0.75em;
+        }
+        &:hover ~ .c-newsletter__form-radio {
+            // padding: 4rem;
+            @include m.flex (row, nowrap, center, center);
+        }
+    }
+    &__label {
+        @include m.position (absolute, 1.5rem, null, null, 1.5rem);
+        color: map-get(v.$colores, color-gris);
+        font-size: 1.1em;
+        pointer-events: none;
+        transition: all 0.5s ease;
+    }
+    &__form-radio {
+        padding: 1rem;
+        display: none;
+    }
+    &__radio {
+        padding: 0 1rem;
+        @include m.flex (row, nowrap, center, center);
+        label {
+            padding-left: .3125rem;
+        }
+    }
+    &__boton {
+        margin: 2rem 1rem;
+        cursor: pointer;
+    }
+}

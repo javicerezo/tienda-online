@@ -48,8 +48,17 @@
 
 // NEOMORFISMO
 // https://neumorphism.io/ para usar los colores en fondo-sombra1-sombra2
-@mixin neomorfismo ($border-radius, $eje, $color-fondo, $color-sombra1, $color-sombra2) {
+@mixin neomorfismo ($border-radius:null, $eje, $color-fondo, $color-sombra1, $color-sombra2) {
     border-radius: $border-radius;
     background: $color-fondo;
     box-shadow: $eje $eje ($eje*2) $color-sombra1, (-$eje) (-$eje) ($eje*2) $color-sombra2;
+}
+
+// POSITION
+@mixin position ($position, $top:null, $right:null, $bottom:null, $left:null) {
+    position: $position;
+    top: $top;
+    right: $right;
+    bottom: $bottom;
+    left: $left;
 }

@@ -1,0 +1,101 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-header {
+    background-color: map-get(v.$colores, color-fondo);
+    @include m.flex (column, nowrap, center, center);
+    position: relative;
+    &__cabecera {
+        @include m.flex (row, nowrap, space-between, center);
+    }
+    &__izq {
+        max-width: 10em;
+        cursor: pointer;
+    }
+    &__centro {
+        @include m.flex (row, nowrap, center, center);
+        padding: 0.5rem;
+        border-radius: 10px;
+        background-color: map-get(v.$colores, color-fondo-iconos);
+    }
+    &__der {
+        @include m.flex (column, nowrap, center, center);
+        margin: .5rem;
+        &-arriba {
+            @include m.flex (row, nowrap, center, center);
+            border: 1px solid map-get(v.$colores, color-fondo-iconos);
+            border-radius: 5px;
+            i { 
+                padding-right: 0.5rem;
+                color: map-get(v.$colores, color-fondo-iconos);
+                font-size: 1.4375em;
+            }
+            p {
+                font-size: .8125em;
+            }
+            span {
+                font-weight: bold;
+                font-style: italic;
+            }
+        }
+        &-abajo {
+            @include m.flex (row, nowrap, center, center);
+            padding: 0.5rem 1rem;
+            i {
+                padding: 0 0.5rem;
+            }
+            p {
+                font-size: .8125em;
+            }
+            .fa-caret-up {
+                transform: rotate(180deg);
+            }
+            .fa-cart-shopping {
+                font-size: 1.8em;
+            }
+        }
+    }
+    &__portes {
+        @include m.flex (row, nowrap, center, center);
+        margin: .5rem 0 .5rem 0.5rem;
+        padding-right: 1rem;
+        border-right: 1px solid map-get(v.$colores, color-fondo-iconos);  
+    }
+    &__devoluciones {
+        @include m.flex (row, nowrap, center, center);
+        margin: 0.5rem;
+    }
+    &__cuenta {
+        @include m.flex (row, nowrap, center, center);
+        padding: 0.5rem;
+    }
+    &__ayuda {
+        @include m.flex (row, nowrap, center, center);
+        padding: 0.5rem;
+    }
+    &__cesta {
+        @include m.flex (row, nowrap, center, center);
+        padding: 0.5rem;
+    }
+    &__contenedor-nav {
+        background: url(https://www.barrabes.com/images/global/f_menuInferior_inv.gif);
+        border-radius: 5px;
+        position: absolute;
+        bottom: -1.0313rem;
+    }
+    &__nav {
+        @include m.flex (row, nowrap, flex-start, center);
+        padding: 0.5rem;
+    }
+    &__li {
+        color: map-get(v.$colores, color-secundario);
+        border-right: 1px solid #444;
+        padding: 0 2rem;
+        text-transform: uppercase;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    &__li:last-child {
+        border-right: none;
+    }
+}

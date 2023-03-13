@@ -1,14 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="build/img/favicon-transp.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+     integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="build/css/app.css">
     <title>Tienda de montaña</title>
 </head>
 <body>
-    
+    <header class="c-header o-container-100 js-header">
+        <div class="c-header__cabecera o-container-75">
+            <div class="c-header__izq">
+                <a href="#"><img src="build/img/logo.svg" 
+                    alt="logo tienda deportes montaña"></a>
+            </div>
+            <div class="c-header__centro">
+                <input id="buscador" type="text" placeholder="Buscar...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <div class="c-header__der">
+                <div class="c-header__der-arriba">
+                    <div class="c-header__portes">
+                            <i class="fa-sharp fa-solid fa-truck"></i>
+                            <p><span>Portes Gratis</span><br> a partir de 49€</p>
+                    </div>
+                    <div class="c-header__devoluciones">
+                        <i class="fa-solid fa-box-open"></i>
+                        <p><span>Devoluciones</span><br> gratis hasta 30 días</p>
+                    </div>
+                </div>
+                <div class="c-header__der-abajo">
+                    <div class="c-header__cuenta">
+                        <p>Mi Cuenta</p>
+                        <i class="fa-sharp fa-solid fa-caret-up"></i>
+                    </div>
+                    <div class="c-header__ayuda">
+                        <p>Ayuda</p>
+                        <i class="fa-sharp fa-solid fa-caret-up"></i>
+                    </div>
+                    <div class="c-header__cesta">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <p>Cesta</p>
+                        <i class="fa-sharp fa-solid fa-caret-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav class="c-header__contenedor-nav">
+            <ul class="c-header__nav">
+                <li class="c-header__li">Hombre</li>
+                <li class="c-header__li">Mujer</li>
+                <li class="c-header__li">Niños</li>
+                <li class="c-header__li">Calzado</li>
+                <li class="c-header__li">Esquí</li>
+                <li class="c-header__li">Material</li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="c-portada">
+    </section>
+
+    <section class="c-item">
+        <div class="c-item__contenedor o-container-80">
+            <h1 class="c-item__h1">Ropa y material de esquí y montaña</h1>
+            <h4 class="c-item__h4">Desde 1995, más de 20 años de experiencia en la venta de material técnico de esquí y montaña por internet.</h4>
+            <div class="c-item__grid">
+                <div class="c-item__articulo">
+                    <div class="c-item__img">
+                        <img src="build/img/destacados1.jpg" alt="imagen producto">
+                    </div>
+                    <div class="c-item__contenido">
+                        <h4 class="c-item__contenido-h4"><span>Producto</span> destacado 1</h4>
+                        <div class="c-item__contenido-precio">50 €<span class="c-item__contenido-precio--old"></span> </div>
+                    </div>
+                </div>
+                <div class="c-item__articulo">
+                    <div class="c-item__img">
+                        <img src="build/img/destacados2.jpg" alt="imagen producto">
+                    </div>
+                    <div class="c-item__contenido">
+                        <h4 class="c-item__contenido-h4"><span>Producto</span> destacado 2</h4>
+                        <div class="c-item__contenido-precio">50 €<span class="c-item__contenido-precio--old"></span></div>
+                    </div>
+                </div>
+                <div class="c-item__articulo">
+                    <div class="c-item__img">
+                        <img src="build/img/destacados3.jpg" alt="imagen producto">
+                    </div>
+                    <div class="c-item__contenido">
+                        <h4 class="c-item__contenido-h4"><span>Producto</span> destacado 3</h4>
+                        <div class="c-item__contenido-precio">50 € <span class="c-item__contenido-precio--old"></span></div>
+                    </div>
+                </div>
+                <div class="c-item__articulo">
+                    <div class="c-item__img">
+                        <img src="build/img/destacados4.jpg" alt="imagen producto">
+                    </div>
+                    <div class="c-item__contenido">
+                        <h4 class="c-item__contenido-h4"><span>Producto</span> destacado 4</h4>
+                        <div class="c-item__contenido-precio">50 €<span class="c-item__contenido-precio--old"> 60 €</span></div>
+                    </div>
+                </div>
+                <div class="c-item__articulo">
+                    <div class="c-item__img">
+                        <img src="build/img/destacados5.jpg" alt="imagen producto">
+                    </div>
+                    <div class="c-item__contenido">
+                        <h4 class="c-item__contenido-h4"><span>Producto</span> destacado 5</h4>
+                        <div class="c-item__contenido-precio">50 €<span class="c-item__contenido-precio--old"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </section>
+
+    <section class="c-ventajas o-container-100">
+        <div class="c-ventajas__contenedor o-container-75">
+            <ul class="c-ventajas__ul">
+                <li class="c-ventajas__li">
+                    <i class="fa-sharp fa-solid fa-arrow-rotate-left"></i>
+                    <h4 class="c-ventajas__h4">Devoluciones gratis</h4>
+                    <p class="c-ventajas__p">
+                        Devuelve tus productos de forma <span>gratuita</span> con
+                        <span>recogida en tu domicilio</span>, en un <span>punto de entrega</span>
+                        o en una de <span>nuestras tiendas.</span>
+                    </p>
+                </li>
+                <li class="c-ventajas__li">
+                    <i class="fa-solid fa-truck"></i>
+                    <h4 class="c-ventajas__h4">Envío gratis</h4>
+                    <p class="c-ventajas__p">
+                        Consigue <span>portes gratis</span> si tu pedido
+                        es igual o superior a 49 € y envías a España península
+                        o Baleares.
+                    </p>
+                </li>
+                <li class="c-ventajas__li">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4 class="c-ventajas__h4">Recogida gratis en tiendas</h4>
+                    <p class="c-ventajas__p">
+                        Recoge tu pedido en una de <span>nuestras tiendas</span> y
+                        ahórrate los portes.
+                    </p>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="c-newsletter o-container-100">
+        <div class="c-newsletter__contenedor o-container-50">
+            <h2 class="c-newsletter__h2">
+                Únete a nuestra Newsletter
+            </h2>
+            <h4 class="c-newsletter__h4">
+                Recibe nuestras novedades, ofertas y promociones.
+            </h4>
+            <form class="c-newsletter__form" action="">
+                <input class="c-newsletter__input" type="email" name="" id="">
+                <label class="c-newsletter__label">Tu dirección de email</label>
+                <div class="c-newsletter__form-radio">
+                    <div class="c-newsletter__radio">
+                        <input type="radio" name="sexo" id="Hombre">
+                        <label for="Hombre">Hombre</label>
+                    </div>
+                    <div class="c-newsletter__radio">
+                        <input type="radio" name="sexo" id="Mujer">
+                        <label for="Mujer">Mujer</label>
+                    </div>
+                </div>
+                <button class="c-newsletter__boton c-button c-button--amarillo" 
+                type="submit">Suscribirme</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="c-contacto">
+        <div class="c-contacto__img">
+            <i class="fa-regular fa-envelope"></i>
+        </div>
+        <div class="c-contacto__screen">
+            <div class="c-contacto__arriba">
+                <div>
+                    <div class="c-contacto__iconos">
+                        <div class="c-contacto__iconos-contacta">
+                            <i class="fa-regular fa-comment"></i>
+                            <p>Contacta</p>                      
+                        </div>
+                        <div class="c-contacto__iconos-contacta">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <p>Ayuda</p>
+                        </div>
+                    </div>
+                </div>
+                <ul class="c-contacto__ul">
+                    <li class="c-contacto__li"></li>
+                    <li class="c-contacto__li"></li>
+                    <li class="c-contacto__li"></li>
+                </ul>
+                <div class="c-contacto__pregunta">
+                    <p>¿En qué podemos ayudarte?</p>
+                    <p>Te responderemos en breve...</p>
+                </div>
+            </div>
+            <div class="c-contacto__abajo">
+                <form action="" class="c-contacto__form">
+                    <fieldset class="c-contacto__fieldset">
+                        <label for="">Email</label>
+                        <input type="email" name="" id="">
+                    </fieldset>
+                    <fieldset class="c-contacto__fieldset">
+                        <label for="">¿En qué podemos ayudarte?</label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    </fieldset>
+                    <fieldset class="c-contacto__fieldset">
+                        <button class="c-button c-button--amarillo">Enviar mensaje</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="c-footer o-container-100">
+        <div class="c-footer__contenedor o-container-75">
+            <ul class="c-footer__ul">
+                <li class="c-footer__li"><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
+                <li class="c-footer__li"><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+                <li class="c-footer__li"><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                <li class="c-footer__li"><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            </ul>
+            <div class="c-footer__copy">
+                <p>1995-2023 Tienda de Esquí y montaña S.L. Todos los derechos reservados</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
