@@ -11,68 +11,132 @@
     <link rel="stylesheet" href="build/css/app.css">
     <title>Tienda de montaña</title>
 </head>
-<body>
+<body class="o-container-100">
     <header class="c-header o-container-100 js-header">
         <div class="c-header__cabecera o-container-75">
             <div class="c-header__izq">
                 <a href="#"><img src="build/img/logo.svg" 
                     alt="logo tienda deportes montaña"></a>
             </div>
-            <div class="c-header__centro">
+            <div class="c-header__centro js-header__centro">
                 <input id="buscador" type="text" placeholder="Buscar...">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <div class="c-header__der">
                 <div class="c-header__der-arriba">
                     <div class="c-header__portes">
-                            <i class="fa-sharp fa-solid fa-truck"></i>
-                            <p><span>Portes Gratis</span><br> a partir de 49€</p>
+                        <i class="fa-sharp fa-solid fa-truck"></i>
+                        <p><span>Portes Gratis</span><br> a partir de 49€</p>
                     </div>
                     <div class="c-header__devoluciones">
                         <i class="fa-solid fa-box-open"></i>
                         <p><span>Devoluciones</span><br> gratis hasta 30 días</p>
                     </div>
                 </div>
-                <div class="c-header__der-abajo">
-                    <div class="c-header__cuenta">
+                <div class="c-header__der-abajo c-menus">
+                    <div class="c-menus__cuenta ">
                         <p>Mi Cuenta</p>
                         <i class="fa-sharp fa-solid fa-caret-up"></i>
+                        <div class="c-menus__submenus c-submenus ">
+                            <div class="c-submenus__cuenta c-submenus__contenedor">
+                                <div class="c-submenus__secciones--mod2 c-submenus__secciones">
+                                    <button class="c-button c-button--amarillo">log in<i class="fa-solid fa-angle-right"></i></button>
+                                    <p><span>¿Eres nuevo cliente?</span>
+                                    Crear una cuenta</p>
+                                </div>
+                                <div class="c-submenus__secciones c-submenus__secciones--mod2">
+                                    <h4>Mi Cuenta</h4>
+                                    <p>- Estado de mis pedidos</p>
+                                    <p>- Devolver productos</p>
+                                </div>
+                                <div class="c-submenus__secciones c-submenus__secciones--mod2">
+                                    <h4>Mi perfil</h4>
+                                    <p>- Datos personales</p>
+                                    <p>- Intereses</p>
+                                    <p>- Comunidad</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="c-header__ayuda">
+                    <div class="c-menus__ayuda">
                         <p>Ayuda</p>
                         <i class="fa-sharp fa-solid fa-caret-up"></i>
+                        <div class="c-menus__submenus c-submenus">
+                            <div class="c-submenus__ayuda c-submenus__contenedor">
+                                <h4 class="c-submenus__h4">¿Necestias ayuda?</h4>
+                                <div class="c-submenus__secciones c-submenus__secciones--mod">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <div>
+                                        <p>LLama al <span class="c-submenus__p">987 654 321</span></p>
+                                        <p>(horario de lunes a viernes de 9h a 19h)</p>
+                                    </div>
+                                </div>
+                                <div class="c-submenus__secciones c-submenus__secciones--mod">
+                                    <i class="fa-solid fa-comment"></i>
+                                    <div>
+                                        <p class="c-submenus__p js-submenu__boton-chat"><span>Chat online</span></p>
+                                        <p>Contacta en directo con uno de nuestros asesores</p>
+                                    </div>
+                                </div>
+                                <div class="c-submenus__secciones c-submenus__secciones--mod">
+                                    <i class="fa-solid fa-envelope"></i>
+                                    <div>
+                                        <p class="c-submenus__p js-submenu__boton-consulta"><span>Envíanos tu consulta</span></p>
+                                        <p>Nuestros asesores te responderán en breve</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="c-header__cesta">
-                        <div class="c-header__cesta-articulos">
+                    <div class="c-menus__cesta js-menus__cesta">
+                        <div class="c-menus__cesta-dibujo">
                             <i class="fa-solid fa-cart-shopping"></i>
-                            <p class="c-header__cesta-articulos-p">0</p>
+                            <!-- inyecto dinámico nº articulos  -->
                         </div>
                         <p>Cesta</p>
                         <i class="fa-sharp fa-solid fa-caret-up"></i>
+                        <div class="c-menus__submenus c-submenus">
+                            <ul class="c-submenus__cesta c-submenus__contenedor">
+                                <li class="c-submenus__secciones">
+                                    <p>df</p>
+                                    <p>sd</p>
+                                </li>
+                                <li class="c-submenus__secciones">hola</li>
+                                <li class="c-submenus__secciones">hola</li>
+                                <li class="c-submenus__secciones">hola</li>
+                                <!-- inyecto dinámico articulos cesta  -->
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <nav class="c-header__contenedor-nav">
-            <ul class="c-header__nav">
-                <li class="c-header__li">Hombre</li>
-                <li class="c-header__li">Mujer</li>
-                <li class="c-header__li">Niños</li>
-                <li class="c-header__li">Calzado</li>
-                <li class="c-header__li">Esquí</li>
-                <li class="c-header__li">Material</li>
+        <nav class="c-header__contenedor-nav o-container-80 c-nav">
+            <ul class="c-header__nav c-nav__ul">
+                <li class="c-nav__li">Hombre</li>
+                <li class="c-nav__li">Mujer</li>
+                <li class="c-nav__li">Niños</li>
+                <li class="c-nav__li">Calzado</li>
+                <li class="c-nav__li">Esquí</li>
+                <li class="c-nav__li">Material</li>
+            </ul>
+            <ul class="c-nav__outlet">
+                <li class="c-nav__li">Outlet</li>
             </ul>
         </nav>
     </header>
 
-    <section class="c-portada o-container-75">
+    <section class="c-portada o-container-60">
+         <div class="c-portada__contenedor"> 
+             <!-- <img src="build/img/img-portada2.jpg" alt="imagen portada"> -->
+        </div> 
     </section>
 
     <section class="c-item">
         <div class="c-item__contenedor o-container-80">
             <h1 class="c-item__h1">Ropa y material de esquí y montaña</h1>
             <h4 class="c-item__h4">Desde 1995, más de 20 años de experiencia en la venta de material técnico de esquí y montaña por internet.</h4>
-            <div class="c-item__grid">
+            <div class="c-item__grid js-item__grid">
                 <div class="c-item__articulo">
                     <div class="c-item__img">
                         <img src="build/img/destacados1.jpg" alt="imagen producto">

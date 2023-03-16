@@ -1,14 +1,28 @@
 @use 'settings/variables' as v;
+@use 'tools/mixins' as m;
 
 .c-button {
     padding: .625rem 1.5625rem;
     border-radius: 5px;
+    text-transform: capitalize;
+    font-weight: bold;
+    cursor: pointer;
+    @include m.flex (row, nowrap, space-between, center);
+    i {
+        padding-left: 2rem;
+    }
     &--amarillo {
         background-color: map-get(v.$colores, color-fondo);
         transition: all 0.5s ease;
         &:hover {
             background-color: map-get(v.$colores, color-primario);
             color: map-get(v.$colores, color-secundario);            
+            i {
+                color: map-get(v.$colores, color-secundario);
+            }
+        }
+        i {
+            color: map-get(v.$colores, color-primario);
         }
     }
 }

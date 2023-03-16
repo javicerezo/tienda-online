@@ -1,0 +1,50 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-menus {
+    &__cuenta, &__ayuda, &__cesta {
+        @include m.flex (row, nowrap, center, center);
+        padding: 0.5rem;
+        position: relative;
+        &:hover {
+            background: rgb(24,24,24);
+            background: linear-gradient(180deg, rgba(24,24,24,1) 16%, rgba(74,74,74,1) 77%);
+            color: map-get(v.$colores, color-secundario);
+            border-radius: 10px 10px 0 0;
+            z-index: 70;
+            .c-menus__submenus {
+                visibility: visible;
+                pointer-events: unset;
+                height: auto;
+                z-index: 70;
+            }
+            .c-menus__cesta-numero {
+                color: map-get(v.$colores, color-primario);
+            }
+        }
+    }
+    &__cesta {
+        &-dibujo {
+            position: relative;
+        }
+        &-numero {
+            @include m.flex (row, nowrap, center, flex-start);
+            width: 100%;
+            height: auto;
+            font-weight: bold;
+            color: map-get(v.$colores, color-fondo-iconos);
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            z-index: 70;
+            align-content: center;
+            margin-top: 1px;
+            pointer-events: none;
+        }
+    }
+    &__submenus {
+        z-index: 50;
+        visibility: hidden;
+        pointer-events: none
+    }
+}

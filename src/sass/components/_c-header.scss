@@ -25,7 +25,7 @@
             @include m.flex (row, nowrap, center, center);
             border: 1px solid map-get(v.$colores, color-fondo-iconos);
             border-radius: 5px;
-            i { 
+            i {
                 padding-right: 0.5rem;
                 color: map-get(v.$colores, color-fondo-iconos);
                 font-size: 1.4375em;
@@ -59,62 +59,18 @@
         @include m.flex (row, nowrap, center, center);
         margin: .5rem 0 .5rem 0.5rem;
         padding-right: 1rem;
-        border-right: 1px solid map-get(v.$colores, color-fondo-iconos);  
+        border-right: 1px solid map-get(v.$colores, color-fondo-iconos);
     }
     &__devoluciones {
         @include m.flex (row, nowrap, center, center);
         margin: 0.5rem;
     }
-    &__cuenta {
-        @include m.flex (row, nowrap, center, center);
-        padding: 0.5rem;
-        cursor: pointer;
-    }
-    &__ayuda {
-        @include m.flex (row, nowrap, center, center);
-        padding: 0.5rem;
-        cursor: pointer;
-    }
-    &__cesta {
-        @include m.flex (row, nowrap, center, center);
-        padding: 0.5rem;
-        cursor: pointer;
-        &-articulos {
-            position: relative;
-            &-p {
-                @include m.flex (row, nowrap, center, flex-start);
-                width: 100%;
-                height: auto;
-                font-weight: bold;
-                color: map-get(v.$colores, color-fondo-iconos);
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 50;
-                align-content: center;
-                margin-top: 1px;
-            }
-        }
-    }
     &__contenedor-nav {
-        background: url(https://www.barrabes.com/images/global/f_menuInferior_inv.gif);
+        background-color: map-get(v.$colores, color-primario);
+        color: map-get(v.$colores, color-secundario);
         border-radius: 5px;
         position: absolute;
         bottom: -1.0313rem;
-    }
-    &__nav {
-        @include m.flex (row, nowrap, flex-start, center);
-        padding: 0.5rem;
-    }
-    &__li {
-        color: map-get(v.$colores, color-secundario);
-        border-right: 1px solid #444;
-        padding: 0 2rem;
-        text-transform: uppercase;
-        font-size: 15px;
-        font-weight: 500;
-    }
-    &__li:last-child {
-        border-right: none;
+        z-index: 60;
     }
 }

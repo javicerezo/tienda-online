@@ -20,6 +20,9 @@
         padding: 0.5rem 1rem;
         @include m.flex (column, nowrap, space-between, center);
     }
+    &__img {
+        cursor: pointer;
+    }
     &__contenido {
         padding: .625rem;
         @include m.flex (column, nowrap, center, center);
