@@ -21,14 +21,7 @@
         border: 1px solid #ddd;
         border-radius: 5px;
         padding: 1.5rem 1.2rem 1rem;
-        font-size: 1.1em;
-        &:focus + .c-newsletter__label{
-            top: .5rem;
-            left: .5rem;
-            right: null;
-            font-size: 0.75em;
-        }
-        
+        font-size: 1.1em;    
     }
     &__label {
         @include m.position (absolute, 1.5rem, null, null, 1.5rem);
@@ -36,6 +29,12 @@
         font-size: 1.1em;
         pointer-events: none;
         transition: all 0.5s ease;
+        &--mod{
+            top: .5rem;
+            left: .5rem;
+            right: null;
+            font-size: 0.75em;
+        }
     }
     &__form-radio {
         padding: 1rem;

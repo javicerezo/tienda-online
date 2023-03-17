@@ -2,7 +2,7 @@
 @use 'tools/mixins' as m;
 
 .c-item {
-    margin: 3rem;
+    padding: 3rem;
     &__contenedor {
         @include m.flex (column, nowrap, center, center);
     }
@@ -19,17 +19,21 @@
     &__articulo {
         padding: 0.5rem 1rem;
         @include m.flex (column, nowrap, space-between, center);
+        position: relative;
     }
     &__img {
         cursor: pointer;
     }
     &__contenido {
+        cursor: pointer;
         padding: .625rem;
         @include m.flex (column, nowrap, center, center);
         &-h4 {
             font-size: .75em;
             padding-bottom: .625rem;
+            text-transform: capitalize;
             span {
+                text-transform: capitalize;
                 font-weight: bold;
             }
         }
@@ -41,6 +45,24 @@
                 font-size: .9rem;
                 text-decoration: line-through;
             }    
+        }
+        & > button {
+            margin-top: 0.5rem;
+            font-size: 0.8em;
+        }
+    }
+    &__descuento {
+        @include m.position (absolute, 0, 0, null, null);
+        background-color: map-get(v.$colores, color-fondo);
+        width: 3.125em;
+        height: 3.125em;
+        border-radius: 50% 50% 50% 0;
+        p {
+            @include m.flex (row, nowrap, center, center);
+            line-height: 3.125em;
+            width: 100%;
+            font-size: 1.1em;
+            font-weight: bold;
         }
     }
 }

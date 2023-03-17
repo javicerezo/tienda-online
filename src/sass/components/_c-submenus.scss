@@ -39,6 +39,9 @@
         &--mod {
             @include m.flex (row, nowrap, center, center);    
         }
+        &--mod3 {
+            @include m.flex (row, nowrap, space-around, center);            
+        }
         &--mod2 {
             @include m.flex (column, nowrap, center, flex-start); 
             p:hover {
@@ -50,11 +53,48 @@
     &__secciones:last-child {
         border-bottom: none;
     }
-    &__p {
-        cursor: pointer;
-        transition: color 0.3s ease;
+    &__img {
+        max-width: 30%;
+    }
+    &__contenido {
+        max-width: 70%;
+    }
+    &__eliminar {
+        color: blue;
+        border-left: 1px solid #000;
+        margin-left: 0.4rem;
+        padding-left: 0.4rem;
         &:hover {
-            color: map-get(v.$colores, color-fondo-hover);
+            text-decoration: underline;
+        }
+    }
+    &__separador {
+        border-top: 1px solid #000;
+        width: 100%;
+        background-color: #f1f1f1;
+        @include m.flex (row, nowrap, flex-end, center);
+        padding: 0.2rem 1rem 0.2rem 0.2rem;
+        text-transform: uppercase;
+        font-size: 0.8em;
+    }
+    &__resultado {
+        margin-top: 1rem;
+        @include m.flex (row, nowrap, flex-end, center);
+        & > button, & > a {
+            font-size: 0.8rem;
+        }
+        & > button {
+            padding: 0.5rem 1rem;
+        }
+        & > a {
+            margin-right: 1rem;
+        }
+    }
+    &__ver-cesta {
+        color: blue;
+        margin-left: 1rem;
+        &:hover {
+            text-decoration: underline;
         }
     }
 }
