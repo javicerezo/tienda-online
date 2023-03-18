@@ -23,29 +23,18 @@
         }
 
         leerArticulo (producto) {
-            // creo obj con el contenido del producto diferenciando si tiene descuento o no
-            if (producto.children[0].classList.contains('c-item__descuento')){
-                const infoProducto = {
-                    imagen: producto.querySelector('img').src,
-                    marca: producto.querySelector('.c-item__contenido-h4 span').textContent,
-                    nombre: producto.querySelector('.c-item__contenido-h4').textContent,
-                    precio: producto.querySelector('.c-item__contenido-precio').textContent,
-                    descuento: producto.querySelector('.c-item__descuento p').textContent,
-                    id: producto.querySelector('.c-button').getAttribute('data-id'),
-                    cantidad: 1
-                };               
-                this.agregarCarrito(infoProducto);
-            } else {
-                const infoProducto = {
-                    imagen: producto.querySelector('img').src,
-                    marca: producto.querySelector('.c-item__contenido-h4 span').textContent,
-                    nombre: producto.querySelector('.c-item__contenido-h4').textContent,
-                    precio: producto.querySelector('.c-item__contenido-precio').textContent,
-                    id: producto.querySelector('.c-button').getAttribute('data-id'),
-                    cantidad: 1
-                };
-                this.agregarCarrito(infoProducto);
-            };
+            // creo obj con el contenido del producto 
+            const infoProducto = {
+                imagen: producto.querySelector('img').src,
+                marca: producto.querySelector('.c-item__contenido-titulo:first-Child').textContent,
+                nombre: producto.querySelector('.c-item__contenido-titulo:last-Child').textContent,
+                precioNew: parseInt(producto.querySelector('.c-item__contenido-precio').textContent),
+                precio: parseInt(producto.querySelector('.c-item__contenido-precio--old').textContent),
+                descuento: parseInt(producto.querySelector('.c-item__descuento p').textContent),
+                id: producto.querySelector('.c-button').getAttribute('data-id'),
+                cantidad: 1
+            };     
+            this.agregarCarrito(infoProducto);
         }
 
         agregarCarrito (producto) {
@@ -69,30 +58,37 @@
         }
 
         imprimircarrito (articulosCarrito){
+            console.log(articulosCarrito)
             this.limpiarHTML(contenedorCarrito);
             this.limpiarHTML(contenedorCarrito.parentElement.children[1]);
 
             // imprime los artículos del array articulosCarrito
             articulosCarrito.forEach( articulo => {
-                const {imagen, marca, nombre, precio, cantidad} = articulo;
+                const {imagen, marca, nombre, precioNew, precio, descuento, cantidad} = articulo;
                 const li = document.createElement('li');
                 li.classList.add('c-submenus__secciones','c-submenus__secciones--mod3');
                 li.innerHTML = `
-                <div class="c-submenus__img">
-                    <img src="${imagen}" alt="imagen producto">
+                    <div class="c-submenus__img">
+                        <img src="${imagen}" alt="imagen producto">
                     </div>
                     <div class="c-submenus__contenido">
-                    <p class="c-submenus__contenido-nombre"><span>${marca}</span> ${nombre}</p>
-                    <p class="c-submenus__contenido-precio"><span>${precio}</span></p>
-                    <p class="c-submenus__contenido-cantidad">Cantidad: ${cantidad}<a href="#" class="c-submenus__eliminar">Eliminar</a></p>
-                </div>
+                        <p class="c-submenus__nombre"><span>${marca}</span> - ${nombre}</p>
+                        <div class='c-submenus__precios'>
+                        <p><span>${precioNew} €</span></p>
+                        <p>(${descuento}%) - <span class="c-submenus__precios-old">${precio}€</span></p>
+                        </div>
+                        <p class="c-submenus__contenido-cantidad">Cantidad: ${cantidad} €<a href="#" class="c-submenus__eliminar">Eliminar</a></p>
+                    </div>
                 `;
                 contenedorCarrito.appendChild(li);
+                if(descuento == 0) {
+                    console.log(' no tiene descuento')
+                }
             });
 
             // imprime el precio total de los articulos de articulosCarrito
             if(contenedorCarrito.childElementCount != 0) {
-                let sumaPrecios = articulosCarrito.reduce( (total, producto) => total + producto.precio, 0);
+                let sumaPrecios = articulosCarrito.reduce( (total, producto) => total += producto.cantidad*producto.precio, 0);
                 const total = document.createElement('div');
                 total.innerHTML = `
                     <div class="c-submenus__separador">total: ${sumaPrecios}</div>
@@ -111,7 +107,7 @@
                 const articulo = document.createElement ('li');
                 articulo.classList.add('c-submenus__secciones');
                 articulo.innerHTML = `
-                    <p>En este momento no hay productos en tu cesta</p>
+                    <p>En este momento no hay productos en tu cesta.</p>
                 `;
                 contenedorCarrito.appendChild(articulo);
                 ui.numeroArticulos(0);
@@ -125,9 +121,7 @@
             this.limpiarHTML(contenedorNumArticulos);
 
             const numeroArticulos = document.createElement('p');
-            // numeroArticulos.classList.add('c-menus__cesta-numero');
             numeroArticulos.textContent = cantidad;
-            // contenedorCarrito.parentElement.parentElement.parentElement.children[0].appendChild(numeroArticulos);
             contenedorNumArticulos.appendChild(numeroArticulos);
         }
 
@@ -135,36 +129,39 @@
             // destacados es un array en baseDatos.js
             destacados.forEach( d => {
                 const {marca, nombre, imagen, precio, descuento, id} = d;
-                if(descuento == 0) {
-                    const articulo = document.createElement('div');
-                    articulo.classList.add('c-item__articulo');
-                    articulo.innerHTML = `
-                        <div class='c-item__img'><img src='${imagen}' alt='imagen producto'></div>
-                        <div class='c-item__contenido'>
-                            <h4 class='c-item__contenido-h4'><span>${marca}</span> ${nombre}</h4>
-                            <p class='c-item__contenido-precio'>${precio} €</p>
-                            <button class="c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>
+                const precioNew = precio * ((100-descuento)/100);
+                const articulo = document.createElement('div');                    
+                articulo.classList.add('c-item__articulo');
+                articulo.innerHTML = `                        
+                    <div class='c-item__descuento'>
+                        <p>${descuento}%</p>
+                    </div>
+                    <div class='c-item__img'>
+                        <img src='${imagen}' alt='imagen producto'>
+                    </div>                        
+                    <div class='c-item__contenido'>
+                        <div class='c-item__contenido--mod'>
+                            <p class='c-item__contenido-titulo'><span>${marca}</span></p>
+                            <p class='c-item__contenido-titulo'>${nombre}</p>
                         </div>
-                    `;
-                    contenedorDestacados.appendChild(articulo);
-                } else {
-                    const precioOld = precio * ((100-descuento)/100);
-                    const articulo = document.createElement('div');                    
-                    articulo.classList.add('c-item__articulo');
-                    articulo.innerHTML = `                        
-                        <div class='c-item__descuento'>
-                            <p>${descuento}%</p>
-                        </div>
-                        <div class='c-item__img'><img src='${imagen}' alt='imagen producto'></div>
-                        <div class='c-item__contenido'>
-                            <h4 class='c-item__contenido-h4'><span>${marca}</span> ${nombre}</h4>
-                            <p class='c-item__contenido-precio'>${precio} € <span class='c-item__contenido-precio--old'>${precioOld} €</span></p>
-                            <button class="c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>
-                        </div>
-                    `;
-                    contenedorDestacados.appendChild(articulo);
-                }
+                        <div class ='c-item__contenido--mod'>
+                            <p class='c-item__contenido-precio'>${precioNew} €</p>  
+                            <p class='c-item__contenido-precio--old'>${precio} €</p>                        
+                    </div>
+                    <button class="c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>
+                    </div>
+                `;
+                contenedorDestacados.appendChild(articulo);
             });
+            // hago un repaso de los articulos sin descuento
+            for(let i=0; i<contenedorDestacados.childElementCount; i++) {
+                let descuento = parseInt(contenedorDestacados.children[i].children[0].children[0].textContent);
+                if (descuento === 0) {
+                    contenedorDestacados.children[i].children[0].classList.add('u-display--none');
+                    contenedorDestacados.children[i].children[2].children[1].children[1].classList.add('u-display--none');
+                }
+
+            }
         }
         
         imprimirAlerta () {

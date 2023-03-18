@@ -1,7 +1,14 @@
 
-.u-flex {
-    display: flex !important;
+.u-transform{
+    &--rotation {
+        transform: rotate(180deg);
+    }
 }
-.u-rotation {
-    transform: rotate(180deg);
+.u-display {
+    &--none {
+        display: none;
+    }
+    &--flex {
+        display: flex;
+    }
 }

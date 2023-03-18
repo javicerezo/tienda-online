@@ -25,12 +25,13 @@
         cursor: pointer;
     }
     &__contenido {
-        cursor: pointer;
         padding: .625rem;
         @include m.flex (column, nowrap, center, center);
-        &-h4 {
-            font-size: .75em;
-            padding-bottom: .625rem;
+        &--mod {
+            @include m.flex (row, nowrap, center, center); 
+        }
+        &-titulo {
+            padding: 0.5rem;
             text-transform: capitalize;
             span {
                 text-transform: capitalize;
@@ -57,6 +58,7 @@
         width: 3.125em;
         height: 3.125em;
         border-radius: 50% 50% 50% 0;
+        
         p {
             @include m.flex (row, nowrap, center, center);
             line-height: 3.125em;

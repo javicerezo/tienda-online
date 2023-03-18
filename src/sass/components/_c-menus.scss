@@ -44,7 +44,8 @@
     }
     &__submenus {
         z-index: 50;
-        visibility: hidden;
-        pointer-events: none;
+        // visibility: hidden;
+        // pointer-events: none;
+        z-index: 100;
     }
 }

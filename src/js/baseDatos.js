@@ -43,5 +43,50 @@ const destacados = [
         descuento: 0,
         sexo: 'u',
         id: 5
+    },
+    {
+        marca: 'marca',
+        nombre: 'producto 5',
+        imagen: 'build/img/destacados/destacados5.jpg',
+        precio: 50,
+        descuento: 0,
+        sexo: 'u',
+        id: 5
+    },
+    {
+        marca: 'marca',
+        nombre: 'producto 5',
+        imagen: 'build/img/destacados/destacados5.jpg',
+        precio: 50,
+        descuento: 0,
+        sexo: 'u',
+        id: 5
+    }, 
+    {
+        marca: 'marca',
+        nombre: 'producto 1',
+        imagen: 'build/img/destacados/destacados1.jpg',
+        precio: 50,
+        descuento: 0,
+        sexo: 'h',
+        id: 1
+    },
+    {
+        marca: 'marca',
+        nombre: 'producto 1',
+        imagen: 'build/img/destacados/destacados1.jpg',
+        precio: 50,
+        descuento: 0,
+        sexo: 'h',
+        id: 1
+    },
+    {
+        marca: 'marca',
+        nombre: 'producto 1',
+        imagen: 'build/img/destacados/destacados1.jpg',
+        precio: 50,
+        descuento: 0,
+        sexo: 'h',
+        id: 1
     }
 ];
