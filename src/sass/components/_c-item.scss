@@ -13,7 +13,7 @@
         padding: 1.5rem 0;
     }
     &__grid {
-        @include m.grid (4, 1rem);
+        @include m.grid (4, 0);
         padding: 1rem;
     }
     &__articulo {
@@ -25,6 +25,7 @@
         cursor: pointer;
     }
     &__contenido {
+        position: relative; //añado porque con js crerá un mensaje de exito al agregar elemento a cesta
         padding: .625rem;
         @include m.flex (column, nowrap, center, center);
         &--mod {

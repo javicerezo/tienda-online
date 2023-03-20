@@ -10,7 +10,10 @@
         border: 3px solid map-get(v.$colores, color-borde-cesta);
         border-radius: 3px 0 3px 3px;
     }
-    &__cuenta, &__ayuda {
+    &__cesta {
+        @include m.position (absolute, 2.9004rem, 0, null, null);
+    }
+    &__cuenta, &__ayuda, &__cesta {
         @include m.position (absolute, 2rem, 0, null, null);
         &-secciones {
             @include m.flex (column, nowrap, center, flex-start); 
@@ -18,6 +21,9 @@
             padding: .5rem;
             &--mod {
                 @include m.flex (row, nowrap, center, center);    
+            }
+            &--mod2 {
+                @include m.flex (row, nowrap, space-around, center);
             }
         }
         &-secciones:last-child {
@@ -31,8 +37,9 @@
             font-weight: bold;
             padding: 0.3rem 0 0.8rem 0;
         }
-        &-p {
-        }
+        // &-p {
+
+        // }
         &-p:hover {
             cursor: pointer;
             text-decoration: underline;
@@ -42,93 +49,57 @@
             font-size: 1.2em;
             font-weight: bold;
             cursor: pointer;
+            &--old {
+                text-decoration:line-through;
+                font-size: 0.8125em;
+                font-weight: normal;
+            }
         }
         &-i {
             margin-right: 0.5rem;
             color: map-get(v.$colores, color-fondo-hover);
         }
-    } 
-    &__cesta {
-        @include m.position (absolute, 2.9004rem, 0, null, null);
+        &-img {
+            max-width: 30%;
+        }
+        &-contenido {
+            max-width: 70%;
+        }
+        &-precios {
+            @include m.flex (row, nowrap, space-around, center);
+            padding: 0.5rem 0;   
+        }
+        &-eliminar {
+            color: blue;
+            border-left: 1px solid #000;
+            margin-left: 0.4rem;
+            padding-left: 0.4rem;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
-    
-    // &__secciones {
-    //     button {
-    //         
-    //     }
-    //     & > i {
-    //         
-    //     }
-    //     span {
-    //         
-    //     }
-    //     
-    //     &--mod3 {
-    //         @include m.flex (row, nowrap, space-around, center);            
-    //     }
-    //     &--mod2 {
-              
-    //     }
-    // }
-
-    
-    // &__img {
-    //     max-width: 30%;
-    // }
-    // &__contenido {
-    //     max-width: 70%;
-    // }
-    // &__nombre {
-    //     @include m.flex (row, nowrap, space-around, center);
-    //     text-transform: capitalize;
-    // }
-    // &__precios {
-    //     @include m.flex (row, nowrap, space-around, center);
-    //     padding: 0.5rem 0;
-    //     &-old {
-    //         & > span {
-    //             text-decoration:line-through;
-    //             font-size: 0.8125em;
-    //             font-weight: normal;
-    //         }
-    //     }
-    // }
-    // &__eliminar {
-    //     color: blue;
-    //     border-left: 1px solid #000;
-    //     margin-left: 0.4rem;
-    //     padding-left: 0.4rem;
-    //     &:hover {
-    //         text-decoration: underline;
-    //     }
-    // }
-    // &__separador {
-    //     border-top: 1px solid #000;
-    //     width: 100%;
-    //     background-color: #f1f1f1;
-    //     @include m.flex (row, nowrap, flex-end, center);
-    //     padding: 0.2rem 1rem 0.2rem 0.2rem;
-    //     text-transform: uppercase;
-    //     font-size: 0.8em;
-    // }
-    // &__resultado {
-    //     margin-top: 1rem;
-    //     @include m.flex (row, nowrap, flex-end, center);
-    //     & > button, & > a {
-    //         font-size: 0.8rem;
-    //     }
-    //     & > button {
-    //         padding: 0.5rem 1rem;
-    //     }
-    //     & > a {
-    //         margin-right: 1rem;
-    //     }
-    // }
-    // &__ver-cesta {
-    //     color: blue;
-    //     margin-left: 1rem;
-    //     &:hover {
-    //         text-decoration: underline;
-    //     }
-    // }
+    &__separador {
+        border-top: 1px solid #000;
+        width: 100%;
+        background-color: #f1f1f1;
+        @include m.flex (row, nowrap, flex-end, center);
+        padding: 0.2rem 1rem 0.2rem 0.2rem;
+        text-transform: uppercase;
+        font-size: 0.8em;
+    }
+    &__resultado {
+        margin-top: 0.5rem;
+        @include m.flex (row, nowrap, flex-end, center);
+        &-button{
+            font-size: 0.8rem;
+        }
+    }
+    &__ver-cesta {
+        color: blue;
+        margin: 0 1rem;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
