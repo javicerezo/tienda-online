@@ -1,0 +1,64 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-modal {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 1s ease;
+    &--mod {
+        opacity: 1;
+        visibility: visible
+    }
+    &__screen{
+        @include m.position (fixed, 0, 0, 0, 0);
+        z-index: 201;
+        @include m.flex (column, nowrap, center, center);
+        background-color: #111111bd;
+    }
+    &__contenedor {
+        position: relative;
+        max-width: 80%;
+        padding: .3125rem;
+        background-color: map-get(v.$colores, color-secundario);
+        color: map-get(v.$colores, color-primario);
+        border-radius: 10px;
+        // @include m.telefono-xl {
+        //     width: 85%;
+        //     padding: 0.5rem;
+        // }
+        // @include m.tablet {
+        //     width: 75%;
+        //     padding: 1rem;
+        //     max-width: 45rem;
+        // }
+        // @include m.desktop {
+        // }
+    }
+    &__close {
+        @include m.position (absolute, 2rem, null, null, 2rem);
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+    &__descuento {
+        @include m.position (absolute, 1rem, 1rem, null, null);
+    }
+    &__img {
+        max-width: 400px;
+        padding: 1rem;
+        cursor: default;
+    }
+    &__contenido {
+        padding: 1rem;
+        &-titulo {
+            padding: 1rem;
+            font-size: 1.5em;
+        }
+        &-precio {
+            font-size: 1.5em;
+            padding: 0 0.5rem;
+            &--old {
+                font-size: 1em;
+            }
+        }
+    }
+}

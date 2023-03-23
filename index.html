@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="build/css/app.css">
     <title>Tienda de montaña</title>
 </head>
-<body class="o-container-100">
+<body class="o-container-100 js-body">
+    <div class="c-buscador js-buscador"></div>
     <header class="c-header o-container-100 js-header">
         <div class="c-header__cabecera o-container-75">
             <div class="c-header__izq">
-                <a href="#"><img src="build/img/logo.svg" 
+                <a href="https://javicerezo.github.io/tienda-online/"><img src="build/img/logo.svg" 
                     alt="logo tienda deportes montaña"></a>
             </div>
             <div class="c-header__centro js-header__centro">
@@ -126,7 +127,7 @@
         </nav>
     </header>
 
-    <section class="c-portada o-container-60">
+    <section class="c-portada o-container-100">
          <div class="c-portada__contenedor"> 
              <!-- <img src="build/img/img-portada2.jpg" alt="imagen portada"> -->
         </div> 
@@ -247,7 +248,7 @@
             </div>
         </div>
     </section>
-
+    
     <footer class="c-footer o-container-100">
         <div class="c-footer__contenedor o-container-75">
             <ul class="c-footer__ul">
@@ -261,6 +262,8 @@
             </div>
         </div>
     </footer>
+
+    <div class="c-modal js-modal"></div>
 
     <script src="src/js/baseDatos.js"></script>
     <script src="src/js/app.js"></script>

@@ -1,3 +1,5 @@
+
+// destacados puede ser una base de datos que se modifica mensaualmente con las ofertas de ese mismo mes
 const destacados = [
     {
         marca: 'Marca',
@@ -43,5 +45,35 @@ const destacados = [
         descuento: 0,
         sexo: 'u',
         id: 5
+    }
+];
+
+const ejemploBusqueda = [
+    {
+        marca: 'Peztl',
+        nombre: 'Quark',
+        imagen: 'build/img/ejemplo-busquedas/ejemplo1.jpg',
+        precio: 242.00,
+        descuento: 25,
+        sexo: 'h',
+        id: 6
+    },
+    {
+        marca: 'Atomic',
+        nombre: 'Nightshade',
+        imagen: 'build/img/ejemplo-busquedas/ejemplo2.jpg',
+        precio: 129.99,
+        descuento: 30,
+        sexo: 'm',
+        id: 7
+    },
+    {
+        marca: 'Scarpa',
+        nombre: 'Ribelle HD',
+        imagen: 'build/img/ejemplo-busquedas/ejemplo3.jpg',
+        precio: 312.55,
+        descuento: 0,
+        sexo: 'u',
+        id: 8
     }
 ];

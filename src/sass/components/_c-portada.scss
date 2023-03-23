@@ -4,11 +4,11 @@
 .c-portada {
     @include m.flex (row, nowrap, center, center);
     &__contenedor {
-        background-image: url(../img/img-portada1.jpg);
+        background-image: url(../img/img-portada5.jpg);
         background-attachment: local;
-        background-repeat: no-repeat;
+        background-repeat: repeat;
         background-size: contain;
         width: 100%;
-        height: 60vh;
+        height: 70vh;
     }
 }

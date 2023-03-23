@@ -1,0 +1,138 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-buscador {
+    opacity: 0;
+    visibility: hidden;
+    height: 0px;
+    transition: all 1s ease;
+    // z-index: 201;
+    &--mod {
+        opacity: 1;
+        visibility: visible;
+        height: 100vh;
+    }
+    &__screen {
+        z-index: 201;
+        @include m.position (fixed, 0, 0, 0, 0);
+        background-color: #111111bd;
+    }
+    &__contenedor {
+        height: 90%;
+        width: 100%;
+        background-color: map-get(v.$colores, color-secundario-2);
+        color: map-get(v.$colores, color-primario);
+        padding: 1rem;
+    }
+    &__cabecera {
+        @include m.flex(row, nowrap, space-around, center);
+        padding: 1.5rem;
+    }
+    &__logo {
+        max-width: 10em;
+        cursor: pointer;
+    }
+    &__form {
+        @include m.flex (row, nowrap, space-between, center);
+        padding: 1rem;
+        border-radius: 10px;
+        background-color: map-get(v.$colores, color-secundario);
+        width: 70%;
+        i {
+            font-size: 1.5em;
+            padding: 0.5rem;
+        }
+    }
+    &__input {
+        padding: 0.5rem;
+        border-radius: 5px;
+        width: 90%;
+    }  
+    &__close {
+        cursor: pointer;
+        max-width: 20%;
+        padding: 0.5rem;
+        font-size: 2em;
+    }
+    &__contenido {
+        @include m.flex(row, nowrap, space-between, center);
+        padding: 1.5rem;
+    }
+    &__productos-populares {
+        padding: 1rem;
+        background-color: map-get(v.$colores, color-secundario);
+        width: 20%;
+        border-radius: 5px;
+    }
+    &__p {
+        font-size: 1.2em;
+        font-weight: bold;
+        padding: 0.5rem 1rem;
+    }
+    &__ul-populares {
+        @include m.flex(column, nowrap, center, flex-start);
+        max-height: 18.75rem;
+    }
+    &__li-populares {
+        font-size: 1.1em;
+        margin: 0.5rem 0;
+        padding: 0 1rem;
+        cursor: pointer;
+    }
+    &__productos-buscar {
+        padding: 1rem;
+        margin-left: 3rem;
+        background-color: map-get(v.$colores, color-secundario-2);
+        width: 80%;
+    }
+    &__ul-buscar {
+        @include m.grid(4, 0.5rem);
+    }
+    &__li {
+        position: relative;
+        margin: 0.5rem 0;
+        padding: 1.5rem;
+        background-color: map-get(v.$colores, color-secundario);
+        border-radius: 5px;
+        &-descuento {
+            @include m.position (absolute, 0, 0, null, null);
+            background-color: map-get(v.$colores, color-fondo);
+            width: 3.125em;
+            height: 3.125em;
+            border-radius: 50% 50% 50% 0;
+            p {
+                @include m.flex (row, nowrap, center, center);
+                line-height: 3.125em;
+                width: 100%;
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+        }
+        &-img {
+
+        }
+        &-contenido {  
+            @include m.flex (column, nowrap, center, center);
+            &--mod {
+                @include m.flex (row, nowrap, center, center);
+            }
+        }
+        &-titulo {
+            padding: 0.5rem;
+            text-transform: capitalize;
+            span {
+                text-transform: capitalize;
+                font-weight: bold;
+            }
+        }
+        &-precio {
+            font-size: 1.2em;
+            color: map-get(v.$colores, color-precios);
+            &--old {
+                padding: 0 10px;
+                font-size: .9rem;
+                text-decoration: line-through;
+            }
+        }
+    }
+}
