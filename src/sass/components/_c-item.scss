@@ -16,20 +16,38 @@
         @include m.grid (4, 0);
         padding: 1rem;
     }
-    &__articulo {
+    &__li {
         padding: 0.5rem 1rem;
         @include m.flex (column, nowrap, space-between, center);
         position: relative;
-    }
-    &__img {
-        cursor: pointer;
-    }
-    &__contenido {
-        position: relative; //añado porque con js crerá un mensaje de exito al agregar elemento a cesta
-        padding: .625rem;
-        @include m.flex (column, nowrap, center, center);
-        &--mod {
-            @include m.flex (row, nowrap, center, center); 
+        border-radius: 5px;
+        &:hover {
+            border: 2px solid map-get(v.$colores, color-gris);
+        }
+        &-descuento {
+            @include m.position (absolute, 0, 0, null, null);
+            background-color: map-get(v.$colores, color-fondo);
+            width: 3.125em;
+            height: 3.125em;
+            border-radius: 50% 50% 50% 0;
+            p {
+                @include m.flex (row, nowrap, center, center);
+                line-height: 3.125em;
+                width: 100%;
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+        }
+        &-img {
+            cursor: pointer;
+        }
+        &-contenido {
+            position: relative; //añado porque con js crerá un mensaje de exito al agregar elemento a cesta
+            padding: .625rem;
+            @include m.flex (column, nowrap, center, center);
+            &--mod {
+                @include m.flex (row, nowrap, center, center); 
+            }            
         }
         &-titulo {
             padding: 0.5rem;
@@ -48,24 +66,9 @@
                 text-decoration: line-through;
             }    
         }
-        & > button {
+        &-button {
             margin-top: 0.5rem;
             font-size: 0.8em;
-        }
-    }
-    &__descuento {
-        @include m.position (absolute, 0, 0, null, null);
-        background-color: map-get(v.$colores, color-fondo);
-        width: 3.125em;
-        height: 3.125em;
-        border-radius: 50% 50% 50% 0;
-        
-        p {
-            @include m.flex (row, nowrap, center, center);
-            line-height: 3.125em;
-            width: 100%;
-            font-size: 1.1em;
-            font-weight: bold;
         }
     }
 }

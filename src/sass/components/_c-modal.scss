@@ -4,7 +4,8 @@
 .c-modal {
     opacity: 0;
     visibility: hidden;
-    transition: all 1s ease;
+    transition: opacity 1s ease, visibility 1s ease;
+    z-index: 201;
     &--mod {
         opacity: 1;
         visibility: visible
@@ -15,10 +16,11 @@
         @include m.flex (column, nowrap, center, center);
         background-color: #111111bd;
     }
-    &__contenedor {
+    &__li {
+        @include m.flex (column, nowrap, space-between, center);
         position: relative;
         max-width: 80%;
-        padding: .3125rem;
+        padding: 1rem;
         background-color: map-get(v.$colores, color-secundario);
         color: map-get(v.$colores, color-primario);
         border-radius: 10px;
@@ -33,32 +35,54 @@
         // }
         // @include m.desktop {
         // }
-    }
-    &__close {
-        @include m.position (absolute, 2rem, null, null, 2rem);
-        font-size: 1.5em;
-        cursor: pointer;
-    }
-    &__descuento {
-        @include m.position (absolute, 1rem, 1rem, null, null);
-    }
-    &__img {
-        max-width: 400px;
-        padding: 1rem;
-        cursor: default;
-    }
-    &__contenido {
-        padding: 1rem;
+        
+        &-descuento {
+            @include m.position (absolute, 1rem, 1rem, null, null);
+            background-color: map-get(v.$colores, color-fondo);
+            width: 3.125em;
+            height: 3.125em;
+            border-radius: 50% 50% 50% 0;
+            p {
+                @include m.flex (row, nowrap, center, center);
+                line-height: 3.125em;
+                width: 100%;
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+        }
+        &-img {
+            max-width: 400px;
+            padding: 1rem;
+            cursor: default;
+        }
+        &-contenido {
+            position: relative;
+            padding: 1rem;
+            @include m.flex (column, nowrap, center, center);
+            &--mod {
+                @include m.flex (row, nowrap, center, center); 
+            }  
+        }
         &-titulo {
             padding: 1rem;
             font-size: 1.5em;
+            span {
+                text-transform: capitalize;
+                font-weight: bold;
+            }
         }
         &-precio {
             font-size: 1.5em;
             padding: 0 0.5rem;
             &--old {
                 font-size: 1em;
+                text-decoration: line-through;
             }
+        }
+        &-close {
+            @include m.position (absolute, 2rem, null, null, 2rem);
+            font-size: 1.5em;
+            cursor: pointer;
         }
     }
 }

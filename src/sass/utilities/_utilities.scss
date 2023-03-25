@@ -1,3 +1,4 @@
+@use 'settings/variables' as v;
 @use 'tools/mixins' as m;
 
 .u-transform{
@@ -22,5 +23,8 @@
     }
     &--exito {
         color: green;
+    }
+    &--alerta {
+        color: map-get(v.$colores, color-fondo-hover);
     }
 }

@@ -15,6 +15,7 @@
     const contenedorBuscador = document.querySelector('.js-buscador');
     
     let articulosCarrito = [];
+    const todasBasesDatos = [destacados, ejemploBusqueda, materialDeportivo];
 
     // CLASES
     class UI {
@@ -24,13 +25,44 @@
             }
         }
 
+        recorrerBD (array, contenedor, componente) {
+            // funcion que recorre una BD y la imprime en un contenedor (ambos como parámetros)
+            array.forEach( articulo => {
+                const {marca, nombre, imagen, precio, descuento, id} = articulo;
+                let precioNew = precio * ((100-descuento)/100);
+                precioNew = Math.round(precioNew *100)/100;
+                const li = document.createElement('li');                    
+                li.classList.add(`${componente}`+'__li');
+                li.innerHTML = `                        
+                    <div class='${componente}__li-descuento js-descuento'>
+                        <p>${descuento}%</p>
+                    </div>
+                    <div class='${componente}__li-img'>
+                        <img src='${imagen}' alt='imagen producto'>
+                    </div>                        
+                    <div class='${componente}__li-contenido'>
+                        <div class='${componente}__li-contenido--mod'>
+                            <p class='${componente}__li-titulo'><span>${marca}</span></p>
+                            <p class='${componente}__li-titulo'>${nombre}</p>
+                        </div>
+                        <div class ='${componente}__li-contenido--mod'>
+                            <p class='${componente}__li-precio'>${precioNew} €</p>  
+                            <p class='${componente}__li-precio--old js-precio--old'>${precio} €</p>                        
+                        </div>
+                        <button class="${componente}__li-button c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>                    
+                    </div>
+                    <div class="${componente}__mensaje"></div>
+                    `;
+                    contenedor.appendChild(li);
+            });
+            this.quitarDescuento(contenedor);
+        }
+        
         quitarDescuento (contenedor) {
-            // console.log(contenedor.childElementCount)
+            //repasa si los articulos de un contenedor tienen descuento y lo quita
             for(let i=0; i<contenedor.childElementCount; i++) {
                 let descuento = contenedor.children[i].children[0];
                 let precio = contenedor.children[i].children[2].children[1].children[1];
-                // console.log(descuento)
-                // console.log(precio)
                 if (parseInt(descuento.children[0].textContent) === 0) {
                     descuento.classList.add('u-display--none');
                     precio.classList.add('u-display--none');
@@ -64,9 +96,8 @@
                                 <li class='c-buscador__li-populares'>Sacos de dormir</li>
                                 <li class='c-buscador__li-populares'>Petzl</li>
                                 <li class='c-buscador__li-populares'>La Sportiva</li>
-                                <li class='c-buscador__li-populares'>Cuerdas dinámicas</li>
+                                <li class='c-buscador__li-populares'>Cuerdas</li>
                                 <li class='c-buscador__li-populares'>Patagonia</li>
-                                <li class='c-buscador__li-populares'>La Sportiva</li>
                             </ul>
                         </div>
                         <div class='c-buscador__productos-buscar'>
@@ -83,50 +114,49 @@
             contenedorBuscador.children[0].children[0].classList.add('c-buscador__screen--mod');
 
             const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
-            ejemploBusqueda.forEach( articulo => {
-                const {marca, nombre, imagen, precio, descuento} = articulo;
-                let precioNew = precio * ((100-descuento)/100);
-                precioNew = Math.round(precioNew *100)/100;
-                const li = document.createElement('li');
-                li.classList.add('c-buscador__li');
-                li.innerHTML = `
-                    <div class='c-buscador__li-descuento'>
-                        <p>${descuento}%</p>
-                    </div>
-                    <div class='c-buscador__li-img'>
-                        <img src='${imagen}' alt='imagen producto'>
-                    </div>                        
-                    <div class='c-buscador__li-contenido'>
-                        <p class='c-buscador__li-titulo'><span>${marca} </span>${nombre}</p>                                        
-                        <div class ='c-buscador__li-contenido--mod'>
-                            <p class='c-buscador__li-precio'>${precioNew} €</p>  
-                            <p class='c-buscador__li-precio--old'>${precio} €</p>                        
-                        </div>
-                    </div>
-                `;
-                contenedorUl.appendChild(li);
-            });
-            this.quitarDescuento(contenedorUl);            
+            this.recorrerBD(ejemploBusqueda, contenedorUl, 'c-buscador');           
         }
 
-        leerArticulo (accion, producto) {
+        filtarArticulos (string, contenedor) {
+            let nuevoArray = [];
+
+            todasBasesDatos.forEach( bd => {
+                bd.forEach( articulo => {
+                    const marcador = `${articulo.marca} ${articulo.nombre}`;
+                    const productoRepetido = nuevoArray.some( art => art.id === articulo.id);
+                    if (marcador.includes(string)) {
+                        if (productoRepetido == false) {
+                            // producto no repetido, lo agrego
+                            nuevoArray = [...nuevoArray, articulo];
+                        }
+                    }
+                });
+            });
+            if (nuevoArray.length === 0) {
+                this.imprimirAlerta(contenedor, 'alerta', 'Ups... Prueba con otra búsqueda');    
+            } else {
+                this.recorrerBD(nuevoArray, contenedor, 'c-buscador');
+            } 
+        }
+        
+        leerArticulo (accion, producto, componente) {
             // creo obj con el contenido del producto 
             const infoProducto = {
                 imagen: producto.querySelector('img').src,
-                marca: producto.querySelector('.c-item__contenido-titulo:first-Child').textContent,
-                nombre: producto.querySelector('.c-item__contenido-titulo:last-Child').textContent,
-                precioNew: parseFloat(producto.querySelector('.c-item__contenido-precio').textContent),
-                precio: parseFloat(producto.querySelector('.c-item__contenido-precio--old').textContent),
-                descuento: parseFloat(producto.querySelector('.c-item__descuento p').textContent),
+                marca: producto.querySelector('.' + componente + '__li-titulo:first-Child').textContent,
+                nombre: producto.querySelector('.' + componente + '__li-titulo:last-Child').textContent,
+                precioNew: parseFloat(producto.querySelector('.' + componente + '__li-precio').textContent),
+                precio: parseFloat(producto.querySelector('.' + componente + '__li-precio--old').textContent),
+                descuento: parseFloat(producto.querySelector('.' + componente + '__li-descuento p').textContent),
                 id: producto.querySelector('.c-button').getAttribute('data-id'),
                 cantidad: 1
             };    
+
             if(accion === 'carrito') {
-                console.log('añadiendo al carrito');
                 this.agregarCarrito(infoProducto);
             }
             if(accion === 'modal') {
-                this.modalArticulos(infoProducto)
+                this.modalArticulos(infoProducto);
             }
         }
 
@@ -135,24 +165,24 @@
             const modalScreen = document.createElement('div');
             modalScreen.classList.add('c-modal__screen');
             modalScreen.innerHTML = `
-                <div class='c-modal__contenedor'>
-                    <div class='c-item__descuento c-modal__descuento'>
+                <div class='c-modal__li'>
+                    <div class='c-modal__li-descuento'>
                         <p>${descuento}%</p>
                     </div>
-                    <div class='c-item__img c-modal__img'>
+                    <div class='c-modal__li-img'>
                         <img src='${imagen}' alt='imagen producto'>
                     </div>
-                    <div class='c-item__contenido c-modal__contenido'>
-                        <div class='c-item__contenido--mod'>
-                            <p class='c-item__contenido-titulo c-modal__contenido-titulo'><span>${marca}</span></p>
-                            <p class='c-item__contenido-titulo c-modal__contenido-titulo'>${nombre}</p>
+                    <div class='c-modal__contenido'>
+                        <div class='c-modal__li-contenido--mod'>
+                            <p class='c-modal__li-titulo'><span>${marca}</span></p>
+                            <p class='c-modal__li-titulo'>${nombre}</p>
                         </div>
-                        <div class ='c-item__contenido--mod'>
-                            <p class='c-item__contenido-precio c-modal__contenido-precio'>${precioNew} €</p>  
-                            <p class='c-item__contenido-precio--old c-modal__contenido-precio--old'>${precio} €</p>                        
+                        <div class ='c-modal__li-contenido--mod'>
+                            <p class='c-modal__li-precio'>${precioNew} €</p>  
+                            <p class='c-modal__li-precio--old'>${precio} €</p>                        
                         </div>                    
                     </div>
-                    <div class='c-modal__close'>
+                    <div class='c-modal__li-close'>
                         <i class='fa-solid fa-xmark'></i>
                     </div> 
                 </div>
@@ -255,55 +285,29 @@
             numeroArticulos.textContent = cantidad;
             contenedorNumArticulos.appendChild(numeroArticulos);
         }
-
-        imprimirDestacados (destacados) {
-            // destacados es un array en baseDatos.js
-            destacados.forEach( d => {
-                const {marca, nombre, imagen, precio, descuento, id} = d;
-                let precioNew = precio * ((100-descuento)/100);
-                precioNew = Math.round(precioNew *100)/100;
-                const articulo = document.createElement('div');                    
-                articulo.classList.add('c-item__articulo');
-                articulo.innerHTML = `                        
-                    <div class='c-item__descuento js-descuento'>
-                        <p>${descuento}%</p>
-                    </div>
-                    <div class='c-item__img'>
-                        <img src='${imagen}' alt='imagen producto'>
-                    </div>                        
-                    <div class='c-item__contenido'>
-                        <div class='c-item__contenido--mod'>
-                            <p class='c-item__contenido-titulo'><span>${marca}</span></p>
-                            <p class='c-item__contenido-titulo'>${nombre}</p>
-                        </div>
-                        <div class ='c-item__contenido--mod'>
-                            <p class='c-item__contenido-precio'>${precioNew} €</p>  
-                            <p class='c-item__contenido-precio--old js-precio--old'>${precio} €</p>                        
-                        </div>
-                        <button class="c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>                    
-                    </div>
-                    <div class="c-item__mensaje"></div>
-                    `;
-                contenedorDestacados.appendChild(articulo);
-            });
-            this.quitarDescuento(contenedorDestacados);
-        }
         
-        imprimirAlerta (lugar, tipo, mensaje) {
-            const p = document.createElement('p');
-            p.classList.add('u-mensaje');
-            p.textContent = mensaje;
-            if (tipo === 'exito') {
-                p.classList.add(`u-mensaje--${tipo}`);
+        imprimirAlerta (contenedorMensaje, tipo, mensaje) {
+            if(contenedorMensaje.childElementCount === 0) {
+                const p = document.createElement('p');
+                p.classList.add('u-mensaje');
+                p.textContent = mensaje;
+                if (tipo === 'exito') {
+                    p.classList.add(`u-mensaje--${tipo}`);
+                }
+                if (tipo === 'error') {
+                    p.classList.add(`u-mensaje--${tipo}`);
+                }
+                if (tipo === 'alerta') {
+                    p.classList.add(`u-mensaje--${tipo}`);
+                }
+                contenedorMensaje.appendChild(p);
+                if (contenedorMensaje.classList.contains('c-buscador__ul-buscar') == false ) {
+                    console.log('eliminando')
+                    setTimeout((e) => {
+                        ui.limpiarHTML(contenedorMensaje);
+                    }, 3000);
+                }
             }
-            if (tipo === 'error') {
-                p.classList.add(`u-mensaje--${tipo}`);
-            }
-            
-            lugar.parentElement.parentElement.children[3].appendChild(p);
-            setTimeout((e) => {
-                ui.limpiarHTML(lugar.parentElement.parentElement.children[3])
-            }, 3000);
         }
 
         verCesta (articulo) {
@@ -325,7 +329,7 @@
     // EVENTOS
     window.addEventListener('DOMContentLoaded', () => {
         ui.comprobarCarrito(articulosCarrito);
-        ui.imprimirDestacados(destacados);
+        ui.recorrerBD(destacados, contenedorDestacados, 'c-item');
         
         btnConsulta.addEventListener('click', mostrarContacto);
         btnContacto.children[0].addEventListener('click', mostrarContacto);
@@ -342,12 +346,13 @@
         contenedorDestacados.addEventListener('click', (e) => {
             if (e.target.classList.contains('c-button')){
                 const productoSeleccionado = e.target.parentElement.parentElement;
-                ui.leerArticulo('carrito', productoSeleccionado); 
-                ui.imprimirAlerta(e.target,'exito', 'has añadido el producto al carrito');          
+                const contenedorMensaje = e.target.parentElement.parentElement.children[3];
+                ui.leerArticulo('carrito', productoSeleccionado, 'c-item'); 
+                ui.imprimirAlerta(contenedorMensaje,'exito', 'has añadido el producto al carrito');          
             }
-            if (e.target.parentElement.classList.contains('c-item__img')) {
+            if (e.target.parentElement.classList.contains('c-item__li-img')) {
                 const productoSeleccionado = e.target.parentElement.parentElement;
-                ui.leerArticulo('modal', productoSeleccionado);
+                ui.leerArticulo('modal', productoSeleccionado, 'c-item');
             }
         });
 
@@ -365,19 +370,43 @@
                 contenedorModal.classList.remove('c-modal--mod');
                 setTimeout(() => {
                     ui.limpiarHTML(contenedorModal);
-                }, 1000);
+                }, 100);
             }
         });
 
-        contenedorBuscador.addEventListener('click', (e) => {
+        contenedorBuscador.addEventListener('click', (e) => {            
+            const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
             if(e.target.classList.contains('c-buscador__close') || e.target.classList.contains('fa-solid')) {
                 contenedorBuscador.classList.remove('c-buscador--mod');
                 setTimeout(() => {
                     ui.limpiarHTML(contenedorBuscador);
-                }, 1000);
+                }, 100);
+            }
+            if (e.target.classList.contains('c-button')){
+                const productoSeleccionado = e.target.parentElement.parentElement;
+                const contenedorMensaje = e.target.parentElement.parentElement.children[3];
+                ui.leerArticulo('carrito', productoSeleccionado, 'c-buscador'); 
+                ui.imprimirAlerta(contenedorMensaje,'exito', 'has añadido el producto al carrito');          
+            }
+            if (e.target.parentElement.classList.contains('c-buscador__li-img')) {
+                const productoSeleccionado = e.target.parentElement.parentElement;
+                ui.leerArticulo('modal', productoSeleccionado, 'c-buscador');
+            }
+            if(e.target.classList.contains('c-buscador__li-populares')) {
+                ui.limpiarHTML(contenedorUl);
+                ui.filtarArticulos(e.target.textContent, contenedorUl);
             }
         });
-    })
+
+        contenedorBuscador.addEventListener('input', (e) => {
+            const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
+            if(e.target.classList.contains('c-buscador__input') && e.target.value != 0) {
+                ui.limpiarHTML(contenedorUl);
+                let string = e.target.value;
+                ui.filtarArticulos(string, materialDeportivo, contenedorUl);
+            }
+        });
+    });
 
 
     // FUNCIONES

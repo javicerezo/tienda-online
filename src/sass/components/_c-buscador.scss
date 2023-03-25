@@ -13,7 +13,7 @@
         height: 100vh;
     }
     &__screen {
-        z-index: 201;
+        z-index: 150;
         @include m.position (fixed, 0, 0, 0, 0);
         background-color: #111111bd;
     }
@@ -55,7 +55,7 @@
         font-size: 2em;
     }
     &__contenido {
-        @include m.flex(row, nowrap, space-between, center);
+        @include m.flex(row, nowrap, space-between, flex-start);
         padding: 1.5rem;
     }
     &__productos-populares {
@@ -78,15 +78,21 @@
         margin: 0.5rem 0;
         padding: 0 1rem;
         cursor: pointer;
+        &:hover {
+            color: map-get(v.$colores, color-gris);
+        }
     }
     &__productos-buscar {
         padding: 1rem;
         margin-left: 3rem;
         background-color: map-get(v.$colores, color-secundario-2);
         width: 80%;
+        max-height: 450px;
+        overflow-y: scroll;
     }
     &__ul-buscar {
         @include m.grid(4, 0.5rem);
+        height: auto;
     }
     &__li {
         position: relative;
@@ -94,8 +100,11 @@
         padding: 1.5rem;
         background-color: map-get(v.$colores, color-secundario);
         border-radius: 5px;
+        &:hover {
+            border: 2px solid map-get(v.$colores, color-gris);
+        }
         &-descuento {
-            @include m.position (absolute, 0, 0, null, null);
+            @include m.position (absolute, 0.3rem, 0.3rem, null, null);
             background-color: map-get(v.$colores, color-fondo);
             width: 3.125em;
             height: 3.125em;
@@ -109,12 +118,15 @@
             }
         }
         &-img {
-
+            cursor: pointer;
         }
         &-contenido {  
             @include m.flex (column, nowrap, center, center);
             &--mod {
-                @include m.flex (row, nowrap, center, center);
+                @include m.flex (row, nowrap, center, flex-start);
+            }
+            &--mod:first-child {
+                min-height: 3.25rem;
             }
         }
         &-titulo {
@@ -133,6 +145,10 @@
                 font-size: .9rem;
                 text-decoration: line-through;
             }
+        }
+        &-button {
+            margin-top: 0.5rem;
+            font-size: 0.8em;
         }
     }
 }
