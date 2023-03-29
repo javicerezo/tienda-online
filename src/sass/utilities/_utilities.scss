@@ -28,3 +28,13 @@
         color: map-get(v.$colores, color-fondo-hover);
     }
 }
+.u-opacity {
+    &--50 {
+        opacity: 0.5;
+    }
+}
+.u-cursor{
+    &--not-allowed {
+        cursor: not-allowed;
+    }
+}

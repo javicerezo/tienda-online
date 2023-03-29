@@ -28,7 +28,7 @@
         @include m.position (relative, null, -25rem, null, null);
         visibility: hidden;
         pointer-events: none;
-        height: auto;
+        height: 200px;
         width: 100px;
         margin-bottom: 1rem;
         color: map-get(v.$colores, color-texto-formulario);
@@ -39,6 +39,7 @@
             visibility: visible;
             pointer-events: unset;
             width: auto;
+            height: auto;
         }
     }
     &__arriba {

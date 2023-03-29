@@ -27,7 +27,7 @@ const destacados = [
         nombre: 'Velez',
         imagen: 'build/img/destacados/destacados3.jpg',
         precio: 322.80,
-        descuento: 1,
+        descuento: 12,
         sexo: 'u',
         id: 3
     },

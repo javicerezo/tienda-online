@@ -1,16 +1,14 @@
 @use 'settings/variables' as v;
 @use 'tools/mixins' as m;
 
-.c-item {
+.c-visitados {
     padding: 3rem;
     &__contenedor {
         @include m.flex (column, nowrap, center, center);
     }
-    &__h1 {
+    &__h2 {
         font-size: 2em;
-    }
-    &__h4 {
-        padding: 1.5rem 0;
+        padding: 1rem;
     }
     &__grid {
         @include m.grid (4, 0);
@@ -43,7 +41,6 @@
         }
         &-contenido {
             position: relative;
-            //añado position:relative porque con js crerá un mensaje de exito al agregar elemento a cesta (y tendrá position:absolute)
             padding: .625rem;
             @include m.flex (column, nowrap, center, center);
             &--mod {

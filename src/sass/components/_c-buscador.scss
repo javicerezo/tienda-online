@@ -13,12 +13,12 @@
         height: 100vh;
     }
     &__screen {
-        z-index: 150;
+        z-index: 110;
         @include m.position (fixed, 0, 0, 0, 0);
         background-color: #111111bd;
     }
     &__contenedor {
-        height: 90%;
+        height: 95%;
         width: 100%;
         background-color: map-get(v.$colores, color-secundario-2);
         color: map-get(v.$colores, color-primario);
@@ -26,7 +26,7 @@
     }
     &__cabecera {
         @include m.flex(row, nowrap, space-around, center);
-        padding: 1.5rem;
+        padding: 1rem;
     }
     &__logo {
         max-width: 10em;
@@ -35,7 +35,7 @@
     &__form {
         @include m.flex (row, nowrap, space-between, center);
         padding: 1rem;
-        border-radius: 10px;
+        border-radius: 5px;
         background-color: map-get(v.$colores, color-secundario);
         width: 70%;
         i {
@@ -45,7 +45,6 @@
     }
     &__input {
         padding: 0.5rem;
-        border-radius: 5px;
         width: 90%;
     }  
     &__close {
@@ -56,7 +55,7 @@
     }
     &__contenido {
         @include m.flex(row, nowrap, space-between, flex-start);
-        padding: 1.5rem;
+        padding: .5rem;
     }
     &__productos-populares {
         padding: 1rem;
@@ -96,12 +95,11 @@
     }
     &__li {
         position: relative;
-        margin: 0.5rem 0;
         padding: 1.5rem;
         background-color: map-get(v.$colores, color-secundario);
         border-radius: 5px;
         &:hover {
-            border: 2px solid map-get(v.$colores, color-gris);
+            border: 1px solid map-get(v.$colores, color-gris);
         }
         &-descuento {
             @include m.position (absolute, 0.3rem, 0.3rem, null, null);
