@@ -3,13 +3,15 @@
 
 .c-header {
     background-color: map-get(v.$colores, color-fondo);
-    @include m.flex (column, nowrap, center, center);
+    height: 15.5vh;
     position: relative;
+    @include m.flex (column, nowrap, center, center);
     &__cabecera {
         @include m.flex (row, nowrap, space-between, center);
     }
     &__izq {
-        max-width: 10em;
+        @include m.flex (column, nowrap, flex-start, flex-start);
+        max-width: 9em;
         cursor: pointer;
     }
     &__centro {
@@ -28,10 +30,10 @@
             i {
                 padding-right: 0.5rem;
                 color: map-get(v.$colores, color-fondo-iconos);
-                font-size: 1.4375em;
+                font-size: 1.3em;
             }
             p {
-                font-size: .8125em;
+                font-size: .7em;
             }
             span {
                 font-weight: bold;
@@ -40,7 +42,7 @@
         }
         &-abajo {
             @include m.flex (row, nowrap, center, center);
-            padding: 0.5rem 1rem;
+            padding: 0.1rem 1rem;
             i {
                 padding: 0 0.5rem;
             }
@@ -51,7 +53,7 @@
                 transform: rotate(180deg);
             }
             .fa-cart-shopping {
-                font-size: 1.9em;
+                font-size: 1.6em;
             }
         }
     }
@@ -71,6 +73,6 @@
         border-radius: 5px;
         position: absolute;
         bottom: -1.0313rem;
-        z-index: 60;
+        // z-index: 60;
     }
 }

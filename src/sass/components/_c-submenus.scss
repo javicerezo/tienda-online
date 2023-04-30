@@ -3,16 +3,18 @@
 
 .c-submenus {
     &__contenedor {
-        min-width: 250px;
+        min-width: 18.75rem;
         background-color: map-get(v.$colores, color-secundario);
         color: map-get(v.$colores, color-primario);
         padding: 0.5rem;
         border: 3px solid map-get(v.$colores, color-borde-cesta);
         border-radius: 3px 0 3px 3px;
+        &--mod {
+            max-height: 31.25rem;
+            overflow-y: scroll;
+        }
     }
-    &__cesta {
-        @include m.position (absolute, 2.9004rem, 0, null, null);
-    }
+    
     &__cuenta, &__ayuda, &__cesta {
         @include m.position (absolute, 2rem, 0, null, null);
         &-secciones {
@@ -78,6 +80,10 @@
                 text-decoration: underline;
             }
         }
+    }
+    &__cesta {
+        @include m.position (absolute, 2.6rem, 0, null, null);
+        height: auto;
     }
     &__separador {
         border-top: 1px solid #000;

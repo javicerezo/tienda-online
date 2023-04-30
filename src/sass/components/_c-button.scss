@@ -8,9 +8,9 @@
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
-    i {
-        padding-left: 2rem;
-    }
+    // i {
+    //     padding-left: 2rem;
+    // }
     &--amarillo {
         background-color: map-get(v.$colores, color-fondo);
         transition: color 0.5s ease, background-color 0.5s ease;

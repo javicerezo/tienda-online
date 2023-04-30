@@ -14,8 +14,6 @@
 <body class="o-container-100 js-body">
     <section class="c-buscador js-buscador"></section>
     
-    <section class="c-cesta js-cesta"></section>
-    
     <header class="c-header o-container-100 js-header">
         <div class="c-header__cabecera o-container-75">
             <div class="c-header__izq">
@@ -102,7 +100,7 @@
                         <p>Cesta</p>
                         <i class="fa-sharp fa-solid fa-caret-up"></i>
                         <div class="c-menus__submenus c-submenus">
-                            <div class="c-submenus__cesta c-submenus__contenedor">
+                            <div class="c-submenus__cesta c-submenus__contenedor c-submenus__contenedor--mod">
                                 <ul class="js-submenus__cesta">
                                     
                                 </ul>
@@ -129,11 +127,12 @@
             </ul>
         </nav>
     </header>
-
+    
     <section class="c-portada o-container-100">
-         <div class="c-portada__contenedor"> 
-             <!-- <img src="build/img/img-portada2.jpg" alt="imagen portada"> -->
+        <div class="c-portada__foto">
         </div> 
+        <div class="c-portada__cesta c-cesta js-cesta">
+        </div>
     </section>
 
     <section class="c-item">
@@ -202,9 +201,10 @@
                         <label for="Mujer">Mujer</label>
                     </div>
                 </div>
-                <button class="c-newsletter__boton c-button c-button--amarillo" 
+                <button class="c-newsletter__boton c-button c-button--amarillo u-cursor--not-allowed u-opacity--50" 
                 type="submit">Suscribirme</button>
             </form>
+            <div class="js-newsletter__contenedor"></div>
         </div>
     </section>
 

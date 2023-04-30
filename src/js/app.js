@@ -6,8 +6,10 @@
     const btnChat = document.querySelector('.js-submenus__boton-chat');
     const btnContacto = document.querySelector('.js-contacto');
     const formularioNewsletter = document.querySelector('.js-newsletter__form');
+    const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
 
     // Variables contenedor para inyeccion dinámica de resultados
+    // const contenedorHeader = document.querySelector('.js-header');
     const contenedorDestacados = document.querySelector('.js-item__grid');
     const contenedorNumArticulos = document.querySelector('.js-menus__cesta-numero');
     const contenedorCarrito = document.querySelector('.js-submenus__cesta');
@@ -15,7 +17,8 @@
     const contenedorBuscador = document.querySelector('.js-buscador');
     const contenedorProductosVisitados = document.querySelector('.js-visitados');
     const contenedorCesta = document.querySelector('.js-cesta');
-
+    const contenedorNewsletter = document.querySelector('.js-newsletter__contenedor');
+    
     let articulosCarrito = [];
     let articulosVisitados = [];
     const todasBasesDatos = [destacados, ejemploBusqueda, materialDeportivo];
@@ -198,8 +201,15 @@
         agregarVisitados(producto) {
             const repetido = articulosVisitados.some( articulo => articulo.id === producto.id);
             if (repetido == false) {
-                articulosVisitados = [...articulosVisitados, producto];
+                if(articulosVisitados.length < 6) {
+                    articulosVisitados = [...articulosVisitados, producto];
+                }
+                else {
+                    articulosVisitados.shift();
+                    articulosVisitados = [...articulosVisitados, producto];
+                }
             }            
+            sincronizarStorage(articulosVisitados, 'articulosVisitados');
             this.imprimirVisitados(articulosVisitados);
         }
 
@@ -217,7 +227,6 @@
                 contenedorProductosVisitados.appendChild(div);
             }
             const contenedorGrid = contenedorProductosVisitados.children[0].children[1];
-            console.log(contenedorGrid);
             this.limpiarHTML(contenedorGrid);
             this.recorrerBD(array, contenedorGrid, 'c-visitados');
         }
@@ -240,14 +249,15 @@
                 articulosCarrito = [...articulosCarrito, producto];
                 this.imprimirCarrito(articulosCarrito);
             }
+            sincronizarStorage(articulosCarrito, 'articulosCarrito');
         }
 
-        imprimirCarrito (articulosCarrito){
+        imprimirCarrito (array){
             this.limpiarHTML(contenedorCarrito);
             this.limpiarHTML(contenedorCarrito.parentElement.children[1]);
 
             // imprime los artículos del array articulosCarrito
-            articulosCarrito.forEach( articulo => {
+            array.forEach( articulo => {
                 const {imagen, marca, nombre, precioNew, precio, descuento, cantidad, id} = articulo;
                 const li = document.createElement('li');
                 li.classList.add('c-submenus__cesta-secciones','c-submenus__cesta-secciones--mod2');
@@ -270,7 +280,7 @@
                 }
             });
             if(contenedorCarrito.childElementCount != 0) {
-                let sumaPrecios = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.cantidad*producto.precioNew, 0));
+                let sumaPrecios = redondearResultado(array.reduce( (total, producto) => total += producto.cantidad*producto.precioNew, 0));
                 const total = document.createElement('div');
                 total.innerHTML = `
                     <div class="c-submenus__separador">total: ${sumaPrecios} €</div>
@@ -281,7 +291,7 @@
                 `; 
                 contenedorCarrito.parentElement.children[1].appendChild(total);   
             }
-            this.comprobarCarrito(articulosCarrito);
+            this.comprobarCarrito(array);
         }
 
         eliminarArticulo (articulo, string=null) {            
@@ -292,6 +302,7 @@
                 this.limpiarHTML(contenedorCesta);
                 this.verCesta(articulosCarrito);
             }
+            sincronizarStorage(articulosCarrito, 'articulosCarrito');
         }
 
         comprobarCarrito (articulosCarrito) {
@@ -306,6 +317,7 @@
             } else {
                 const cantidad = articulosCarrito.reduce( (total, producto) => total + producto.cantidad, 0);
                 ui.numeroArticulos(cantidad);
+                // this.imprimirCarrito(articulosCarrito);
             }
         }
     
@@ -317,6 +329,8 @@
             contenedorNumArticulos.appendChild(numeroArticulos);
         }
         
+        // NOTA, el contenedor que recibe imprimirAlerta debe ser el contenedor que queramos mostrar el mensaje
+        //y que ademas, ESTE VACÍO
         imprimirAlerta (contenedorMensaje, tipo, mensaje) {
             if(contenedorMensaje.childElementCount === 0) {
                 const p = document.createElement('p');
@@ -341,6 +355,12 @@
         }
 
         verCesta () {
+            // antes de imprimir calculo los totales para meterlos en el innerHTML directamente
+            const subTotal = articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.cantidad, 0);
+            const gastosEnvio = 5;
+            const subtotalPedido = subTotal + gastosEnvio;
+            const ahorroTotal = articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0);
+
             const cestaScreen = document.createElement('div');
             cestaScreen.classList.add('c-cesta__screen');
             cestaScreen.innerHTML= `
@@ -370,15 +390,20 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class='c-cesta__detalle'>
-                        <p class='c-cesta__detalle-p'>Subtotal <span>(IVA incluido): </span></p>
-                        <p class='c-cesta__detalle-p'>Gastos de envío <span>(IVA incluido): </span></p>                    
-                        <p class='c-cesta__detalle-p'>Subtotal del pedido: </p>
-                        <p class='c-cesta__detalle-p'>Te has ahorrado <span>(IVA incluido): </span></p>
-                    </div>
-                    <div class='c-cesta__caja-botones'>
-                        <button class='c-cesta__boton c-button c-button--amarillo'>Continuar comprando</button>
-                        <button class='c-cesta__boton c-button c-button--amarillo js-cesta__boton'>Tramitar</button>
+                    <div class='c-cesta__resultado'>
+                        <div class='c-cesta__caja-botones'>
+                            <button class='c-cesta__boton c-button c-button--amarillo'>Continuar comprando</button>
+                            <div class='c-cesta__tramitar c-button c-button--amarillo js-cesta__boton'>
+                                <button class='c-cesta__boton'>Tramitar</button>
+                                <i class="fa-solid fa-cart-shopping"></i>
+                            </div>
+                        </div>
+                        <div class='c-cesta__detalle js-cesta__detalle'>
+                            <p class='c-cesta__detalle-p'>Subtotal <span>(IVA incluido):</span> ${subTotal} €</p>
+                            <p class='c-cesta__detalle-p'>Gastos de envío <span>(IVA incluido):</span> ${gastosEnvio} €</p>                    
+                            <p class='c-cesta__detalle-p'>Subtotal del pedido: ${subtotalPedido} €</p>
+                            <p class='c-cesta__detalle-p'>Te has ahorrado <span>(IVA incluido):</span> ${ahorroTotal} €</p>
+                        </div>
                     </div>
                 </div>
 
@@ -452,14 +477,27 @@
 
     // EVENTOS
     window.addEventListener('DOMContentLoaded', () => {
+        articulosCarrito = JSON.parse(localStorage.getItem('articulosCarrito')) || [];
+        articulosVisitados = JSON.parse(localStorage.getItem('articulosVisitados')) || [];
+        if (articulosCarrito.length != 0) {
+            ui.imprimirCarrito(articulosCarrito);
+        }
+        if (articulosVisitados.length != 0) {
+            ui.imprimirVisitados(articulosVisitados);
+        }
+
         ui.comprobarCarrito(articulosCarrito);
         ui.recorrerBD(destacados, contenedorDestacados, 'c-item');
         
         btnConsulta.addEventListener('click', mostrarContacto);
         btnContacto.children[0].addEventListener('click', mostrarContacto);
+        
         formularioNewsletter.children[0].addEventListener('click', mostrarRadioButton);
-        // formularioNewsletter.
-    
+        formularioNewsletter.children[0].addEventListener('blur', validarEmail);
+        formularioNewsletter.children[2].children[0].children[0].addEventListener('change', validarEmail);
+        formularioNewsletter.children[2].children[1].children[0].addEventListener('change', validarEmail);
+        formularioNewsletter.children[3].addEventListener('click', enviarEmail);
+        
         btnChat.addEventListener('click', () => {
             console.log('has pulsado el boton del chat');
         });
@@ -474,7 +512,7 @@
                 const productoSeleccionado = e.target.parentElement.parentElement;
                 const contenedorMensaje = e.target.parentElement.parentElement.children[3];
                 ui.leerArticulo('carrito', productoSeleccionado, 'c-item'); 
-                ui.imprimirAlerta(contenedorMensaje,'exito', 'has añadido el producto al carrito');          
+                ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
             }
                 //desplegar el modal
             if (e.target.parentElement.classList.contains('c-item__li-img')) {
@@ -488,7 +526,6 @@
                 ui.eliminarArticulo(e.target);
             }
         });
-
         contenedorCarrito.parentElement.children[1].addEventListener('click', e => {
             if (e.target.classList.contains('js-submenus__ver-cesta')) {
                 ui.verCesta();
@@ -519,7 +556,7 @@
                 const productoSeleccionado = e.target.parentElement.parentElement;
                 const contenedorMensaje = e.target.parentElement.parentElement.children[3];
                 ui.leerArticulo('carrito', productoSeleccionado, 'c-buscador'); 
-                ui.imprimirAlerta(contenedorMensaje,'exito', 'has añadido el producto al carrito');          
+                ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
             }
             if (e.target.parentElement.classList.contains('c-buscador__li-img')) {
                 const productoSeleccionado = e.target.parentElement.parentElement;
@@ -544,7 +581,7 @@
                 const productoSeleccionado = e.target.parentElement.parentElement;
                 const contenedorMensaje = e.target.parentElement.parentElement.children[3];
                 ui.leerArticulo('carrito', productoSeleccionado, 'c-visitados'); 
-                ui.imprimirAlerta(contenedorMensaje,'exito', 'has añadido el producto al carrito');          
+                ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
             }
                 //desplegar el modal
             if (e.target.parentElement.classList.contains('c-visitados__li-img')) {
@@ -565,7 +602,7 @@
             }
         });
     });
-
+    
 
     // FUNCIONES
     function mostrarContacto () {
@@ -582,15 +619,44 @@
         formularioNewsletter.children[0].addEventListener('input', () => {
             if(formularioNewsletter.children[0].value != '') {
                 formularioNewsletter.children[1].classList.add('c-newsletter__label--mod');
-    
             } else {
                 formularioNewsletter.children[1].classList.remove('c-newsletter__label--mod');
             }
         });
     };
+    function validarEmail (e) {
+        // validamos email con Email Regex
+        if(e.target.type === 'email'){
+            if (!er.test(e.target.value)){
+                ui.imprimirAlerta(contenedorNewsletter, 'error', 'El email no es valido');
+            } 
+            if(e.target.type === 'radio') {
+                console.log('checkeado')
+                if (e.target.checked) {
+                    // ui.imprimirAlerta(contenedorNewsletter, 'error', 'elige un género');
+                } 
+                
+            }
+        }
+        //habilitamos el botón de enviar la newsletter si todo esta ok
+        if (er.test(e.target.value)) {
+            formularioNewsletter.children[3].classList.remove('u-cursor--not-allowed','u-opacity--50');
+        }
+    }
+    function enviarEmail (e) {
+        e.preventDefault();
+        ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado');
+        formularioNewsletter.reset();
+        formularioNewsletter.children[3].classList.add('u-cursor--not-allowed','u-opacity--50');
+    }
+        // ui.imprimirAlerta(contenedorNewsletter, 'exito', 'Mensaje enviado correctamente')
 
     function redondearResultado (valor) {
         resultado = Math.round(valor*100)/100;
         return resultado;
-    }
+    };
+
+    function sincronizarStorage(array, string){
+        localStorage.setItem(string, JSON.stringify(array));
+    };
 })();

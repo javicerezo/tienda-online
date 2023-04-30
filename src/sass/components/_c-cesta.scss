@@ -9,19 +9,26 @@
     &--mod {
         opacity: 1;
         visibility: visible;
-        height: 100vh;
+        
+        width: 100%;
+        height: 85.5vh;
+        position: absolute;
+        top: 15.5vh;
     }
     &__screen {
-        z-index: 150;
-        @include m.position(fixed, 0, 0, 0, 0);
+        z-index: 79;
+        position: fixed;
+        top: 15.5vh;
+        width: 100%;
+        height: 85.5vh;
         background-color: map-get(v.$colores, color-secundario-2);
     }
     &__contenedor {
-        padding: 1rem;
+        padding-top: 2rem;
     }
     &__cabecera {
         @include m.flex(row, nowrap, space-between, center);
-        padding: 0 0.5rem 1.5rem 0.5rem;
+        padding-bottom: 1rem;
         border-bottom: 1px solid map-get(v.$colores, color-borde-cesta);
     }
     &__h2 {
@@ -33,12 +40,13 @@
         font-size: 1.5em;
     }
     &__p {
-        font-size: 1em;
-        margin: 1rem 0;
+        font-size: 0.9em;
+        margin: 0.5rem 0;
     }
     &__contenedor-table {
-        max-height: 350px;
+        max-height: 17.5em;
         overflow-y: scroll;
+        background-color: #fff;
     }
     &__table {
         width: 100%;
@@ -55,11 +63,15 @@
         display: table-row;
         border-bottom: 1px solid map-get(v.$colores, color-gris);
     }
+    &__tr:last-child {
+        border-bottom: none;
+    }
     &__th, &__td {
         display: table-cell;
         text-align: center;
-        padding: 0.8rem 1.5rem;
+        padding: 0.5rem 1.5rem;
         vertical-align: top;
+        font-size: 0.8em;
     }
     &__td:first-child {
         @include m.flex(row, nowrap, flex-start, flex-start);
@@ -79,8 +91,7 @@
             @include m.flex(row, nowrap, flex-start, center);
         }
         &-p, &-a, &-iconos{
-            padding: 0.2rem 0.5rem;
-            font-size: 0.9em;
+            padding: 0.15rem 0.5rem;
             span {
                 font-weight: bold;
             }
@@ -99,7 +110,6 @@
         // }
         &-precio {
             padding: 0.2rem 0.5rem;
-            font-size: 0.8em;
             &--mod {
                 display: none;
             }
@@ -108,11 +118,16 @@
             color: map-get(v.$colores, color-gris);
         }
     }
+    &__resultado {
+        @include m.flex(row, nowrap, flex-end, flex-end);
+        padding: 1rem;
+    }
     &__detalle {
         @include m.flex(column, nowrap, center, flex-end);
-        padding: 1rem;
+        font-size: 0.8em;
+        padding-left: 1rem;
         &-p {
-            padding: 0.2rem;
+            padding: 0.1rem;
             span {
                 color: map-get(v.$colores, color-gris);
             }
@@ -124,8 +139,15 @@
     }
     &__caja-botones {
         @include m.flex(row, nowrap, flex-end, center);
+        }
+    &__tramitar {
+        @include m.flex(row, nowrap, space-between, center);
     }
-    &__boton:first-child {
+    &__boton {
+        font-size: 0.8em;
+        text-transform: uppercase;
+        font-weight: bold;
         margin-right: 1rem;
+        cursor: pointer;
     }
 }

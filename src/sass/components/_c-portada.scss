@@ -2,8 +2,7 @@
 @use 'tools/mixins' as m;
 
 .c-portada {
-    @include m.flex (row, nowrap, center, center);
-    &__contenedor {
+    &__foto {
         background-image: url(../img/img-portada5.jpg);
         background-attachment: local;
         background-repeat: repeat;

@@ -31,6 +31,7 @@
             @include m.flex (row, nowrap, center, flex-start);
             width: 100%;
             height: auto;
+            font-size: 0.8em;
             font-weight: bold;
             color: map-get(v.$colores, color-fondo-iconos);
             position: absolute;
@@ -43,7 +44,7 @@
         }
     }
     &__submenus {
-        z-index: 50;
+        // z-index: 500;
         visibility: hidden;
         pointer-events: none;
     }
