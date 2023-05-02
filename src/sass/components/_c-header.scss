@@ -5,6 +5,10 @@
     background-color: map-get(v.$colores, color-fondo);
     height: 15.5vh;
     position: relative;
+    z-index: 80;
+    &--fixed {
+        position: fixed;
+    }
     @include m.flex (column, nowrap, center, center);
     &__cabecera {
         @include m.flex (row, nowrap, space-between, center);

@@ -54,4 +54,7 @@
     &__boton {
         margin: 2rem 1rem;
     }
+    &__spinner {
+        @include m.flex(row, nowrap, center, center);
+    }
 }

@@ -9,7 +9,7 @@
     const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
 
     // Variables contenedor para inyeccion dinámica de resultados
-    // const contenedorHeader = document.querySelector('.js-header');
+    const contenedorHeader = document.querySelector('.js-header');
     const contenedorDestacados = document.querySelector('.js-item__grid');
     const contenedorNumArticulos = document.querySelector('.js-menus__cesta-numero');
     const contenedorCarrito = document.querySelector('.js-submenus__cesta');
@@ -18,6 +18,7 @@
     const contenedorProductosVisitados = document.querySelector('.js-visitados');
     const contenedorCesta = document.querySelector('.js-cesta');
     const contenedorNewsletter = document.querySelector('.js-newsletter__contenedor');
+    const contenedorSpinner = document.querySelector('.js-newsletter__spinner');
     
     let articulosCarrito = [];
     let articulosVisitados = [];
@@ -126,7 +127,7 @@
             string = string.toLowerCase();
             todasBasesDatos.forEach( bd => {
                 bd.forEach( articulo => {
-                    let marcador = (`${articulo.marca} ${articulo.nombre}`).toLowerCase();
+                    let marcador = (`${articulo.marca} ${articulo.nombre} ${articulo.tipo}`).toLowerCase();
                     // marcador = marcador.;
                     const productoRepetido = nuevoArray.some( art => art.id === articulo.id);
                     if (marcador.includes(string)) {
@@ -294,19 +295,19 @@
             this.comprobarCarrito(array);
         }
 
-        eliminarArticulo (articulo, string=null) {            
+        eliminarArticulo (articulo, string=null) {
             const id = articulo.getAttribute('data-id');
             articulosCarrito = articulosCarrito.filter( a => a.id != id);
             this.imprimirCarrito(articulosCarrito);
-            if(string === 'cesta') {
+            if(string === 'cesta' || contenedorCesta.childElementCount != 0) {
                 this.limpiarHTML(contenedorCesta);
                 this.verCesta(articulosCarrito);
             }
             sincronizarStorage(articulosCarrito, 'articulosCarrito');
         }
 
-        comprobarCarrito (articulosCarrito) {
-            if(articulosCarrito.length == 0) {
+        comprobarCarrito (array) {
+            if(array.length == 0) {
                 const articulo = document.createElement ('li');
                 articulo.classList.add('c-submenus__secciones');
                 articulo.innerHTML = `
@@ -315,7 +316,7 @@
                 contenedorCarrito.appendChild(articulo);
                 ui.numeroArticulos(0);
             } else {
-                const cantidad = articulosCarrito.reduce( (total, producto) => total + producto.cantidad, 0);
+                const cantidad = array.reduce( (total, producto) => total + producto.cantidad, 0);
                 ui.numeroArticulos(cantidad);
                 // this.imprimirCarrito(articulosCarrito);
             }
@@ -356,10 +357,15 @@
 
         verCesta () {
             // antes de imprimir calculo los totales para meterlos en el innerHTML directamente
-            const subTotal = articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.cantidad, 0);
-            const gastosEnvio = 5;
+            const subTotal = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.cantidad, 0));
+            let gastosEnvio;
+            if(subTotal == 0) {
+                gastosEnvio = 0;
+            } else {
+                gastosEnvio = 5;
+            }
             const subtotalPedido = subTotal + gastosEnvio;
-            const ahorroTotal = articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0);
+            const ahorroTotal = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0));
 
             const cestaScreen = document.createElement('div');
             cestaScreen.classList.add('c-cesta__screen');
@@ -416,7 +422,6 @@
                 const botonTramitar = document.querySelector('.js-cesta__boton');
                 botonTramitar.disabled = true;
                 botonTramitar.classList.add('u-opacity--50','u-cursor--not-allowed');
-                console.log(botonTramitar)
             } else {
                 articulosCarrito.forEach( articulo => {
                     const {marca, nombre, imagen, precio, precioNew, descuento, cantidad, id} = articulo;
@@ -496,7 +501,9 @@
         formularioNewsletter.children[0].addEventListener('blur', validarEmail);
         formularioNewsletter.children[2].children[0].children[0].addEventListener('change', validarEmail);
         formularioNewsletter.children[2].children[1].children[0].addEventListener('change', validarEmail);
-        formularioNewsletter.children[3].addEventListener('click', enviarEmail);
+
+        formularioNewsletter.children[3].disabled = true;
+        formularioNewsletter.addEventListener('submit', enviarEmail);
         
         btnChat.addEventListener('click', () => {
             console.log('has pulsado el boton del chat');
@@ -529,6 +536,9 @@
         contenedorCarrito.parentElement.children[1].addEventListener('click', e => {
             if (e.target.classList.contains('js-submenus__ver-cesta')) {
                 ui.verCesta();
+                setTimeout(() => {
+                    contenedorHeader.classList.add('c-header--fixed');
+                }, 2000);
             }
             if (e.target.classList.contains('js-submenus__resultado-button')) {
                 ui.tramitarPedido();
@@ -593,6 +603,7 @@
         contenedorCesta.addEventListener('click', e => {
             if(e.target.classList.contains('fa-solid') || e.target.textContent == 'Continuar comprando') {
                 contenedorCesta.classList.remove('c-cesta--mod');
+                contenedorHeader.classList.remove('c-header--fixed');
                 setTimeout(() => {
                     ui.limpiarHTML(contenedorCesta);
                 }, 100);
@@ -624,32 +635,32 @@
             }
         });
     };
+
     function validarEmail (e) {
         // validamos email con Email Regex
         if(e.target.type === 'email'){
             if (!er.test(e.target.value)){
                 ui.imprimirAlerta(contenedorNewsletter, 'error', 'El email no es valido');
             } 
-            if(e.target.type === 'radio') {
-                console.log('checkeado')
-                if (e.target.checked) {
-                    // ui.imprimirAlerta(contenedorNewsletter, 'error', 'elige un género');
-                } 
-                
-            }
         }
         //habilitamos el botón de enviar la newsletter si todo esta ok
         if (er.test(e.target.value)) {
             formularioNewsletter.children[3].classList.remove('u-cursor--not-allowed','u-opacity--50');
+            formularioNewsletter.children[3].disabled = false;
         }
     }
     function enviarEmail (e) {
         e.preventDefault();
-        ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado');
-        formularioNewsletter.reset();
-        formularioNewsletter.children[3].classList.add('u-cursor--not-allowed','u-opacity--50');
+        //mostramos spinner
+        contenedorSpinner.classList.remove('u-display--none');
+
+        setTimeout(() => {
+            contenedorSpinner.classList.add('u-display--none');
+            ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado correctamente');
+            formularioNewsletter.reset();
+            formularioNewsletter.children[3].classList.add('u-cursor--not-allowed','u-opacity--50');
+        }, 3000);
     }
-        // ui.imprimirAlerta(contenedorNewsletter, 'exito', 'Mensaje enviado correctamente')
 
     function redondearResultado (valor) {
         resultado = Math.round(valor*100)/100;
