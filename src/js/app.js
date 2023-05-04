@@ -5,7 +5,12 @@
     const btnConsulta = document.querySelector('.js-submenus__boton-consulta');
     const btnChat = document.querySelector('.js-submenus__boton-chat');
     const btnContacto = document.querySelector('.js-contacto');
+    const btnEnviarContacto = document.querySelector('.js-contacto__enviar');
+    const btnEnviarNewsletter = document.querySelector('.js-newsletter__enviar');
     const formularioNewsletter = document.querySelector('.js-newsletter__form');
+    const spinnerNewsletter = document.querySelector('.js-newsletter__spinner');
+    const formularioContacto = document.querySelector('.js-contacto__form');
+    const spinnerContacto = document.querySelector('.js-contacto__spinner');
     const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
 
     // Variables contenedor para inyeccion dinámica de resultados
@@ -18,7 +23,7 @@
     const contenedorProductosVisitados = document.querySelector('.js-visitados');
     const contenedorCesta = document.querySelector('.js-cesta');
     const contenedorNewsletter = document.querySelector('.js-newsletter__contenedor');
-    const contenedorSpinner = document.querySelector('.js-newsletter__spinner');
+    const contenedorContacto = document.querySelector('.js-contacto__contenedor');
     
     let articulosCarrito = [];
     let articulosVisitados = [];
@@ -168,7 +173,7 @@
         }
 
         modalArticulos (producto) {
-            const {imagen, marca, nombre, precioNew, precio, descuento} = producto;
+            const {imagen, marca, nombre, precioNew, precio, descuento, id} = producto;
             const modalScreen = document.createElement('div');
             modalScreen.classList.add('c-modal__screen');
             modalScreen.innerHTML = `
@@ -179,21 +184,35 @@
                     <div class='c-modal__li-img'>
                         <img src='${imagen}' alt='imagen producto'>
                     </div>
-                    <div class='c-modal__contenido'>
+                    <div class='c-modal__li-contenido'>
+                        <div class='c-modal__li-caracteristicas'>
+                            <p class='c-modal__li-caracteristicas-p'><span>Color:</span> blanco</p>
+                            <p class='c-modal__li-caracteristicas-p'><span>Talla:</span> M</p>
+                        </div>
                         <div class='c-modal__li-contenido--mod'>
                             <p class='c-modal__li-titulo'><span>${marca}</span></p>
                             <p class='c-modal__li-titulo'>${nombre}</p>
                         </div>
-                        <div class ='c-modal__li-contenido--mod'>
-                            <p class='c-modal__li-precio'>${precioNew} €</p>  
-                            <p class='c-modal__li-precio--old'>${precio} €</p>                        
-                        </div>                    
+                        <p class='c-modal__li-precio'>${precioNew} €</p>  
+                        <div class='c-modal__li-contenido--mod'>
+                            <p class='c-modal__li-precio--old'>${precio} €</p>
+                            <p class='c-modal__li-precio--descuento'>(${descuento}%)</p>                        
+                        </div>
+                        <div class='c-modal__li-caracteristicas'>
+                            <p class='c-modal__li-caracteristicas-p'>¡ENVÍOS Y DEVOLUCIONES GRATIS!</p>
+                            <p class='c-modal__li-caracteristicas-p c-modal__li-caracteristicas-p--mod'>Ver condiciones</p>
+                        </div>
+                        <div class='c-modal__li-contenido--mod c-modal__li-button'>
+                            <button class='c-button c-button--amarillo' data-id=${id}>Añadir a la cesta</button>
+                        </div>                   
                     </div>
                     <div class='c-modal__li-close'>
                         <i class='fa-solid fa-xmark'></i>
+                    </div>
+                    <div class='c-modal__li-mensaje'>
                     </div> 
                 </div>
-            `;
+                `;
             contenedorModal.appendChild(modalScreen);
             contenedorModal.classList.add('c-modal--mod');
             this.quitarDescuento(modalScreen);
@@ -497,14 +516,25 @@
         btnConsulta.addEventListener('click', mostrarContacto);
         btnContacto.children[0].addEventListener('click', mostrarContacto);
         
+        btnEnviarNewsletter.disabled = true;
         formularioNewsletter.children[0].addEventListener('click', mostrarRadioButton);
-        formularioNewsletter.children[0].addEventListener('blur', validarEmail);
-        formularioNewsletter.children[2].children[0].children[0].addEventListener('change', validarEmail);
-        formularioNewsletter.children[2].children[1].children[0].addEventListener('change', validarEmail);
-
-        formularioNewsletter.children[3].disabled = true;
-        formularioNewsletter.addEventListener('submit', enviarEmail);
+        formularioNewsletter.children[0].addEventListener('blur', (e) => {
+            validarEmail(e, btnEnviarNewsletter, contenedorNewsletter);
+        });
+        formularioNewsletter.addEventListener('submit', (e) => {
+            e.preventDefault();
+            enviarEmail(spinnerNewsletter, formularioNewsletter, btnEnviarNewsletter, contenedorNewsletter);
+        });
         
+        btnEnviarContacto.disabled = true;
+        formularioContacto.children[0].children[1].addEventListener('blur', (e) => {
+            validarEmail(e, btnEnviarContacto, contenedorContacto);
+        });
+        formularioContacto.addEventListener('submit', (e) => {
+            e.preventDefault();
+            enviarEmail(spinnerContacto, formularioContacto, btnEnviarContacto, contenedorContacto);
+        });
+
         btnChat.addEventListener('click', () => {
             console.log('has pulsado el boton del chat');
         });
@@ -551,6 +581,12 @@
                 setTimeout(() => {
                     ui.limpiarHTML(contenedorModal);
                 }, 100);
+            }
+            if(e.target.classList.contains('c-button')) {
+                const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
+                const contenedorMensaje = productoSeleccionado.children[4];
+                ui.leerArticulo('carrito', productoSeleccionado, 'c-modal'); 
+                ui.imprimirAlerta(contenedorMensaje, 'exito', 'producto añadido al carrito');
             }
         });
 
@@ -636,31 +672,31 @@
         });
     };
 
-    function validarEmail (e) {
+    function validarEmail (e, botonEnviar, contenedor) {
         // validamos email con Email Regex
         if(e.target.type === 'email'){
             if (!er.test(e.target.value)){
-                ui.imprimirAlerta(contenedorNewsletter, 'error', 'El email no es valido');
+                ui.imprimirAlerta(contenedor, 'error', 'El email no es valido');
             } 
         }
         //habilitamos el botón de enviar la newsletter si todo esta ok
         if (er.test(e.target.value)) {
-            formularioNewsletter.children[3].classList.remove('u-cursor--not-allowed','u-opacity--50');
-            formularioNewsletter.children[3].disabled = false;
+            botonEnviar.classList.remove('u-cursor--not-allowed','u-opacity--50');
+            botonEnviar.disabled = false;
         }
-    }
-    function enviarEmail (e) {
-        e.preventDefault();
+    };
+    function enviarEmail (contenedorSpinner, formulario, botonEnviar, contenedor) {
         //mostramos spinner
         contenedorSpinner.classList.remove('u-display--none');
 
         setTimeout(() => {
             contenedorSpinner.classList.add('u-display--none');
-            ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado correctamente');
-            formularioNewsletter.reset();
-            formularioNewsletter.children[3].classList.add('u-cursor--not-allowed','u-opacity--50');
+            ui.imprimirAlerta(contenedor, 'exito', 'mensaje enviado correctamente');
+            formulario.reset();
+            botonEnviar.classList.add('u-cursor--not-allowed','u-opacity--50');
+            botonEnviar.disabled = true;
         }, 3000);
-    }
+    };
 
     function redondearResultado (valor) {
         resultado = Math.round(valor*100)/100;

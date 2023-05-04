@@ -201,7 +201,8 @@
                         <label for="Mujer">Mujer</label>
                     </div>
                 </div>
-                <button class="c-newsletter__boton c-button c-button--amarillo u-cursor--not-allowed u-opacity--50" 
+                <button class="c-newsletter__boton c-button c-button--amarillo 
+                u-cursor--not-allowed u-opacity--50 js-newsletter__enviar" 
                 type="submit">Suscribirme</button>
             </form>
             <div class="js-newsletter__contenedor"></div>
@@ -247,7 +248,7 @@
                 </div>
             </div>
             <div class="c-contacto__abajo">
-                <form action="" class="c-contacto__form">
+                <form action="" class="c-contacto__form js-contacto__form">
                     <fieldset class="c-contacto__fieldset">
                         <label for="">Email</label>
                         <input type="email" name="" id="">
@@ -257,9 +258,21 @@
                         <textarea name="" id="" cols="30" rows="10"></textarea>
                     </fieldset>
                     <fieldset class="c-contacto__fieldset">
-                        <button class="c-button c-button--amarillo" type="submit">Enviar mensaje</button>
+                        <button class="c-button c-button--amarillo
+                        u-cursor--not-allowed u-opacity--50 js-contacto__enviar" type="submit">Enviar mensaje</button>
                     </fieldset>
                 </form>
+                <div class="js-contacto__contenedor"></div>
+                <div class="c-contacto__spinner u-display--none js-contacto__spinner">
+                    <div class="sk-chase">
+                        <div class="sk-chase-dot"></div>
+                        <div class="sk-chase-dot"></div>
+                        <div class="sk-chase-dot"></div>
+                        <div class="sk-chase-dot"></div>
+                        <div class="sk-chase-dot"></div>
+                        <div class="sk-chase-dot"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

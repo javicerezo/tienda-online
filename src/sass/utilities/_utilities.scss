@@ -15,11 +15,11 @@
     }
 }
 .u-mensaje {
-    // font-size: 0.8em;
+    font-size: 0.8em;
     text-align: center;
     text-transform: uppercase;
     font-weight: bold;
-    padding: 1rem;
+    padding: 0.5rem;
     &--error {
         color: red;
     }
