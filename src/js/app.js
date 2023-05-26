@@ -393,7 +393,7 @@
             const cestaScreen = document.createElement('div');
             cestaScreen.classList.add('c-cesta__screen');
             cestaScreen.innerHTML= `
-                <div class='c-cesta__contenedor o-container-80'>
+                <div class='c-cesta__contenedor'>
                     <div class='c-cesta__cabecera'>
                         <h2 class='c-cesta__h2'>Cesta de la compra</h2>
                         <div class='c-cesta__close'>

@@ -9,39 +9,62 @@
     &--mod {
         opacity: 1;
         visibility: visible;
-        
         width: 100%;
-        height: 85.5vh;
         position: absolute;
-        top: 15.5vh;
+        top: 12vh;
+        height: 88vh;
+        @include m.tablet {
+            top: 16vh;
+            height: 84vh;
+        }
     }
     &__screen {
         z-index: 79;
         position: fixed;
-        top: 15.5vh;
         width: 100%;
-        height: 85.5vh;
+        top: 12vh;
+        height: 88vh;
         background-color: map-get(v.$colores, color-secundario-2);
+        @include m.tablet {
+            top: 16vh;
+            height: 84vh;
+        }
     }
     &__contenedor {
-        padding-top: 2rem;
+        padding: 0.5rem;
+        @include m.tablet {
+            padding: 3rem 2rem 1rem;
+        }
     }
     &__cabecera {
         @include m.flex(row, nowrap, space-between, center);
-        padding-bottom: 1rem;
         border-bottom: 1px solid map-get(v.$colores, color-borde-cesta);
+        padding-bottom: 0.5rem;
+        @include m.tablet {
+            padding-bottom: 1rem;
+        }
     }
     &__h2 {
-        font-size: 1.5em;
+        font-size: 1em;
+        @include m.tablet {
+            font-size: 1.5em;
+        }
     }
     &__close {
         cursor: pointer;
         max-width: 20%;
-        font-size: 1.5em;
+        font-size: 1.2em;
+        @include m.tablet {
+            font-size: 1.5em;
+        }
     }
     &__p {
-        font-size: 0.9em;
-        margin: 0.5rem 0;
+        font-size: 0.7em;
+        margin: 0.3rem 0;
+        @include m.tablet {
+            font-size: 0.9em;
+            margin: 0.5rem 0;
+        }
     }
     &__contenedor-table {
         max-height: 17.5em;
@@ -119,13 +142,21 @@
         }
     }
     &__resultado {
-        @include m.flex(row, nowrap, flex-end, flex-end);
-        padding: 1rem;
+        @include m.flex(column-reverse, nowrap, center, center);
+        padding: 0.5rem;
+        @include m.tablet {
+            @include m.flex(row, nowrap, center, flex-end);
+            padding: 1rem;
+        }
     }
     &__detalle {
         @include m.flex(column, nowrap, center, flex-end);
-        font-size: 0.8em;
-        padding-left: 1rem;
+        font-size: 0.7em;
+        padding: 0 0 1rem 0;
+        @include m.tablet {
+            padding: 0 0 0 1rem;
+            font-size: 0.8em;
+        }
         &-p {
             padding: 0.1rem;
             span {
@@ -138,16 +169,32 @@
         }
     }
     &__caja-botones {
-        @include m.flex(row, nowrap, flex-end, center);
+        @include m.flex(column, nowrap, center, flex-start);
+        @include m.tablet {
+            @include m.flex(row, nowrap, flex-end, center);
         }
+    }
     &__tramitar {
-        @include m.flex(row, nowrap, space-between, center);
+        i {
+            font-size: 0.7rem;
+            margin-left: 0.5rem;
+            @include m.tablet {
+                font-size: 1rem;
+            }
+        }
+        margin-top: 0.5rem;
+        @include m.tablet {
+            margin-top: 0;
+        }
     }
     &__boton {
-        font-size: 0.8em;
         text-transform: uppercase;
         font-weight: bold;
-        margin-right: 1rem;
+        font-size: 0.7em;
         cursor: pointer;
+        @include m.tablet {
+            font-size: 0.8em;
+            margin: 0 1rem 0 0;
+        }
     }
 }

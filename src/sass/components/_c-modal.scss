@@ -22,37 +22,67 @@
         background-color: map-get(v.$colores, color-secundario);
         color: map-get(v.$colores, color-primario);
         border-radius: 10px;
+        width: 90%;
+        height: 95%;
         @include m.telefonoXL {
-            //     width: 85%;
-            //     padding: 0.5rem;
+            @include m.flex (row, nowrap, space-around, center);
+            height: 75%;
         }
         @include m.tablet {
-            //     width: 75%;
-            //     padding: 1rem;
-            //     max-width: 45rem;
+            width: 85%;
+            height: 85%;
         }
         @include m.desktop {
-            @include m.flex (row, nowrap, space-around, center);
             width: 70%;
             height: 90%;
         }
        
         &-descuento {
             @include m.flex (row, nowrap, center, center);
-            @include m.position (absolute, 1.5rem, null, null, null);
+            @include m.position (absolute, 1.5rem, 1.5rem, null, null);
             background-color: map-get(v.$colores, color-fondo);
-            width: 5em;
-            height: 5em;
             border-radius: 50% 50% 50% 0;
+            width: 3em;
+            height: 3em;
+            @include m.telefonoXL {
+                top: 2.5rem;
+                left: 13rem;
+            }
+            @include m.tablet {
+                width: 5em;
+                height: 5em;
+                left: 19rem;
+            }
+            @include m.desktop {
+                top: 2rem;
+                left: 20rem;
+            }
             p {
-                font-size: 1.5em;
+                font-size: 1em;
                 font-weight: bold;
+                @include m.tablet {
+                    font-size: 1.5em;
+                }
             }
         }
         &-img {
             cursor: default;
+            max-width: 12.5rem;
+            @include m.telefonoM {
+                max-width: 15rem;
+            }
+            @include m.telefonoXL {
+                max-width: 20rem;
+            }
+            @include m.tablet {
+                max-width: 23.75rem;
+            }
         }
         &-contenido {
+            width: 100%;
+            @include m.telefonoM {
+                width: auto;
+            }
             position: relative;
             padding: 1rem;
             @include m.neomorfismo (5px, 2px, map-get(v.$colores, color-secundario-2), map-get(v.$colores, color-secundario-2), map-get(v.$colores, color-primario));
@@ -65,9 +95,19 @@
         &-caracteristicas {
             width: 100%;
             @include m.flex(column, nowrap, center, flex-start);
-            padding: 0.3rem 0;
+            padding: 0.1rem 0;
+            @include m.tablet {
+                padding: 0.3rem 0;
+
+            }
             &-p {
-                padding: 0.2rem 0;
+                font-size: 0.75em;
+                padding: 0.1rem 0;
+                @include m.tablet {
+                    font-size: 1em;
+                    padding: 0.2rem 0;
+
+                }
                 span {
                     font-weight: bold;
                 }
@@ -79,35 +119,57 @@
             }
         }
         &-titulo {
-            padding: 0.5rem;
-            font-size: 1.7em;
+            font-size: 1em;
+            padding: 0.3rem;
+            @include m.tablet {
+                font-size: 1.7em;
+                padding: 0.5rem;
+
+            }
             span {
                 text-transform: capitalize;
                 font-weight: bold;
             }
         }
         &-precio {
-            font-size: 2.5em;
+            font-size: 2em;
+            padding: 0.2rem;
             font-weight: bold;
-            padding: 0.5rem;
             color: map-get(v.$colores, color-precios);
+            @include m.tablet {
+                font-size: 2.5em;
+                padding: 0.5rem;
+            }
             &--old {
-                font-size: 1.4em;
+                font-size: 1.1em;
                 text-decoration: line-through;
                 padding-right: 1rem;
+                @include m.tablet {
+                    font-size: 1.4em;
+                }
             }
             &--descuento {
-                font-size: 1.4em;
+                font-size: 1.1em;
                 color: map-get(v.$colores, color-gris);
+                @include m.tablet {
+                    font-size: 1.4em;
+                }
             }
         }
         &-button {
-            padding-top: 2rem;
+            padding-top: 1rem;
+            @include m.tablet {
+                padding-top: 2rem;
+            }
         }
         &-close {
             @include m.position (absolute, 2rem, null, null, 2rem);
-            font-size: 2rem;
+            font-size: 1.5rem;
             cursor: pointer;
+            @include m.tablet {
+                font-size: 2rem;
+
+            }
         }
         &-mensaje {
             position: absolute;

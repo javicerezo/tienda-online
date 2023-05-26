@@ -5,8 +5,13 @@
     background-color: map-get(v.$colores, color-primario);  
     padding: 2rem 0;      
     &__contenedor {
+        margin: 0 auto;
+        width: 90%;
         color: map-get(v.$colores, color-gris);
         @include m.flex (column, nowrap, space-between, center);
+        @include m.tablet {
+            width: 75%;
+        }
     }
     &__ul {
         @include m.flex (row, nowrap, center, center);
@@ -14,7 +19,10 @@
     }
     &__li {
         padding: 0 1rem;
-        font-size: 2em;
+        font-size: 1.5em;
+        @include m.tablet {
+            font-size: 2em;
+        }
         a {
             transition: all 0.3s ease;
             cursor: pointer;
@@ -24,6 +32,9 @@
         }
     }
     &__copy {
-        font-size: 1em;
+        font-size: 0.85em;
+        @include m.tablet {
+            font-size: 1em;
+        }
     }
 }

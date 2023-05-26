@@ -6,7 +6,6 @@
     visibility: hidden;
     height: 0px;
     transition: all 1s ease;
-    // z-index: 201;
     &--mod {
         opacity: 1;
         visibility: visible;
@@ -22,82 +21,133 @@
         width: 100%;
         background-color: map-get(v.$colores, color-secundario-2);
         color: map-get(v.$colores, color-primario);
-        padding: 1rem;
+        padding: 0.2rem;
+        @include m.tablet {
+            padding: 1rem;
+        }
     }
     &__cabecera {
         @include m.flex(row, nowrap, space-around, center);
-        padding: 1rem;
+        padding: 0.2rem;
+        @include m.tablet {
+            padding: 1rem;
+        }
     }
     &__logo {
-        max-width: 10em;
+        max-width: 5em;
         cursor: pointer;
+        @include m.tablet {
+            max-width: 10em;
+        }
     }
     &__form {
         @include m.flex (row, nowrap, space-between, center);
-        padding: 1rem;
         border-radius: 5px;
         background-color: map-get(v.$colores, color-secundario);
-        width: 70%;
+        width: 50%;
+        @include m.tablet {
+            padding: 1rem;
+            width: 60%;
+        }
+        @include m.desktop {
+            width: 70%;
+        }
         i {
-            font-size: 1.5em;
+            // font-size: 1.5em;
             padding: 0.5rem;
+            @include m.tablet {
+                font-size: 1.5em;
+            }
         }
     }
     &__input {
         padding: 0.5rem;
         width: 90%;
-    }  
+    }
     &__close {
         cursor: pointer;
         max-width: 20%;
         padding: 0.5rem;
-        font-size: 2em;
+        font-size: 1.6em;
+        @include m.tablet {
+            font-size: 2em;
+        }
     }
     &__contenido {
-        @include m.flex(row, nowrap, space-between, flex-start);
-        padding: .5rem;
+        @include m.flex(column, nowrap, center, center);
+        padding: .2rem;
+        @include m.tablet {
+            padding: .5rem;
+            @include m.flex(row, nowrap, space-between, flex-start);
+        }
     }
     &__productos-populares {
-        padding: 1rem;
+        padding: .1rem;
         background-color: map-get(v.$colores, color-secundario);
-        width: 20%;
+        width: 95%;
         border-radius: 5px;
+        @include m.tablet {
+            padding: 1rem;
+            width: 20%;
+        }
     }
     &__p {
-        font-size: 1.2em;
+        font-size: 1em;
+        padding: 0.2rem 1rem;
         font-weight: bold;
-        padding: 0.5rem 1rem;
+        @include m.tablet {
+            font-size: 1.2em;
+            padding: 0.5rem 1rem;
+        }
     }
     &__ul-populares {
         @include m.flex(column, nowrap, center, flex-start);
         max-height: 18.75rem;
     }
     &__li-populares {
-        font-size: 1.1em;
-        margin: 0.5rem 0;
+        font-size: 0.9em;
+        margin: 0.2rem 0;
         padding: 0 1rem;
         cursor: pointer;
+        @include m.tablet {
+            font-size: 1.1em;
+            margin: 0.5rem 0;
+        }
         &:hover {
             color: map-get(v.$colores, color-gris);
         }
     }
     &__productos-buscar {
-        padding: 1rem;
-        margin-left: 3rem;
+        padding: 0.2rem;
+        margin-top: 0.5rem;
         background-color: map-get(v.$colores, color-secundario-2);
-        width: 80%;
+        width: 95%;
         max-height: 450px;
         overflow-y: scroll;
+        @include m.tablet {
+            padding: 1rem;
+            margin-top: 0;
+            margin-left: 3rem;
+            width: 80%
+        }
     }
     &__ul-buscar {
-        @include m.grid(4, 0.5rem);
+        @include m.grid(50, 0.5rem);
         height: auto;
+        @include m.tablet {
+            @include m.grid(4, 0.5rem);
+        }
     }
     &__li {
         position: relative;
-        padding: 1.5rem;
+        @include m.flex (column, nowrap, flex-end, center);
         background-color: map-get(v.$colores, color-secundario);
         border-radius: 5px;
+        // padding: .5rem;
+        min-width: 9.375rem;
+        @include m.tablet {
+            min-width: 9.375rem;
+        }
         &:hover {
             border: 1px solid map-get(v.$colores, color-gris);
         }
@@ -118,7 +168,7 @@
         &-img {
             cursor: pointer;
         }
-        &-contenido {  
+        &-contenido {
             @include m.flex (column, nowrap, center, center);
             &--mod {
                 @include m.flex (row, nowrap, center, flex-start);
