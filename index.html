@@ -15,13 +15,18 @@
     <section class="c-buscador js-buscador"></section>
     
     <header class="c-header o-container-100 js-header">
-        <div class="c-header__cabecera o-container-75">
+        <div class="c-header__cabecera">
+            <div class="c-header__burger js-header__burger">
+                <label class="c-header__burger-icono" for="check__menu">
+                    <i class="fa-solid fa-bars"></i>
+                </label>
+            </div>
             <div class="c-header__izq">
                 <a href="https://javicerezo.github.io/tienda-online/"><img src="build/img/logo.svg" 
                     alt="logo tienda deportes montaña"></a>
             </div>
             <div class="c-header__centro js-header__centro">
-                <input id="buscador" type="text" placeholder="Buscar...">
+                <input class="c-header__centro-input" id="buscador" type="text" placeholder="Buscar...">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
             <div class="c-header__der">
@@ -97,8 +102,8 @@
                                 
                             </div>
                         </div>
-                        <p>Cesta</p>
-                        <i class="fa-sharp fa-solid fa-caret-up"></i>
+                        <p class="c-menus__cesta-p">Cesta</p>
+                        <i class="c-menus__cesta-i fa-sharp fa-solid fa-caret-up"></i>
                         <div class="c-menus__submenus c-submenus">
                             <div class="c-submenus__cesta c-submenus__contenedor c-submenus__contenedor--mod">
                                 <ul class="js-submenus__cesta">
@@ -113,17 +118,38 @@
                 </div>
             </div>
         </div>
-        <nav class="c-header__contenedor-nav o-container-80 c-nav">
+        <nav class="c-header__contenedor-nav o-container-80 c-nav js-nav">
             <ul class="c-header__nav c-nav__ul">
-                <li class="c-nav__li">Hombre</li>
-                <li class="c-nav__li">Mujer</li>
-                <li class="c-nav__li">Niños</li>
-                <li class="c-nav__li">Calzado</li>
-                <li class="c-nav__li">Esquí</li>
-                <li class="c-nav__li">Material</li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Hombre</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Mujer</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Niños</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Calzado</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Esquí</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Material</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
             </ul>
             <ul class="c-nav__outlet">
-                <li class="c-nav__li">Outlet</li>
+                <li class="c-nav__li js-nav__li">
+                    <p>Outlet</p>
+                    <i class="fa-sharp fa-solid fa-caret-up"></i>
+                </li>
             </ul>
         </nav>
     </header>
@@ -133,10 +159,11 @@
         </div> 
         <div class="c-portada__cesta c-cesta js-cesta">
         </div>
+        <a class="c-button c-button--amarillo c-portada__boton js-portada__boton" href="#c-item">Ver ofertas</a>
     </section>
 
-    <section class="c-item">
-        <div class="c-item__contenedor o-container-80">
+    <section class="c-item" id="c-item">
+        <div class="c-item__contenedor">
             <h1 class="c-item__h1">Ropa y material de esquí y montaña</h1>
             <h4 class="c-item__h4">Desde 1995, más de 20 años de experiencia en la venta de material técnico de esquí y montaña por internet.</h4>
             <ul class="c-item__grid js-item__grid">
@@ -146,7 +173,7 @@
     </section>
 
     <section class="c-ventajas o-container-100">
-        <div class="c-ventajas__contenedor o-container-75">
+        <div class="c-ventajas__contenedor o-container-90">
             <ul class="c-ventajas__ul">
                 <li class="c-ventajas__li">
                     <i class="fa-sharp fa-solid fa-arrow-rotate-left"></i>
@@ -181,7 +208,7 @@
     <section class="js-visitados"></section>
 
     <section class="c-newsletter o-container-100">
-        <div class="c-newsletter__contenedor o-container-50">
+        <div class="c-newsletter__contenedor">
             <h2 class="c-newsletter__h2">
                 Únete a nuestra Newsletter
             </h2>

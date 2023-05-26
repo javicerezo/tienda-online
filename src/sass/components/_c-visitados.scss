@@ -2,25 +2,51 @@
 @use 'tools/mixins' as m;
 
 .c-visitados {
-    padding: 3rem;
+    padding: 0.5rem 0;
+    @include m.tablet {
+        padding: 1.5rem 0;
+    }
+    @include m.desktop {
+        padding: 3rem 0;
+    }
     &__contenedor {
+        margin: 0 1rem;
         @include m.flex (column, nowrap, center, center);
+        @include m.tablet {
+            width: 80%;
+            margin: 0 auto;
+        }
     }
     &__h2 {
-        font-size: 2em;
-        padding: 1rem;
+        font-size: 1.5em;
+        @include m.desktop {
+            font-size: 2em;
+        }
     }
     &__grid {
-        @include m.grid (4, 0);
-        padding: 1rem;
+        @include m.grid (1, 0);
+        @include m.telefonoM {
+            @include m.grid (2, 0);
+        }
+        @include m.telefonoXL {
+            padding: 1rem;
+        }
+        @include m.tablet {
+            @include m.grid (3, 0);
+        }
+        @include m.desktop {
+            @include m.grid (4, 0);
+        }
     }
     &__li {
-        padding: 0.5rem 1rem;
         @include m.flex (column, nowrap, space-between, center);
         position: relative;
         border-radius: 5px;
         &:hover {
             border: 1px solid map-get(v.$colores, color-gris);
+        }
+        @include m.telefonoXL {
+            padding: 0.5rem 1rem;
         }
         &-descuento {
             @include m.position (absolute, 0.3rem, 0.3rem, null, null);
@@ -48,6 +74,12 @@
             }  
             &--mod:first-child {
                 min-height: 3.25rem;
+            }
+            p {
+                font-size: 0.9em;
+                @include m.telefonoXL {
+                    font-size: 1em;
+                }
             }          
         }
         &-titulo {

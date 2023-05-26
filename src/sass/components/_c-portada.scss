@@ -2,6 +2,8 @@
 @use 'tools/mixins' as m;
 
 .c-portada {
+    position: relative;
+    @include m.flex (row, nowrap, center, center);
     &__foto {
         background-image: url(../img/img-portada5.jpg);
         background-attachment: local;
@@ -9,5 +11,8 @@
         background-size: contain;
         width: 100%;
         height: 70vh;
+    }
+    &__boton {
+        @include m.position (absolute, null, null, 5rem, null);
     }
 }

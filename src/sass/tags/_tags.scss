@@ -21,8 +21,4 @@ body {
     font-family : map-get(v.$fuentes, tipo-principal);
     color: map-get(v.$colores, color-primario);
     background-color: map-get(v.$colores, color-secundario);
-
-    // &.darkmode {
-
-    // }
 }

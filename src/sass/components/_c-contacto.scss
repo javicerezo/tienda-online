@@ -35,11 +35,18 @@
         transition: all 0.5s ease;
         @include m.neomorfismo (5px, 2px, map-get(v.$colores, color-secundario), map-get(v.$colores, color-secundario), map-get(v.$colores, color-primario));
         &--mod {
-            right: 0;
+            right: -1.5rem;
             visibility: visible;
             pointer-events: unset;
-            width: auto;
             height: auto;
+            width: 250px;
+            @include m.telefonoM {
+                width: 300px;
+            }
+            @include m.telefonoXL {
+                width: auto;
+                right: 0;
+            }
         }
     }
     &__arriba {

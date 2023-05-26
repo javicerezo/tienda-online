@@ -86,6 +86,7 @@ const destacados = [
     }
 ];
 
+// ejemploBusqueda es una BD que se usa de entrada en el buscador de artículos
 const ejemploBusqueda = [
     {
         marca: 'Petzl',
@@ -119,6 +120,7 @@ const ejemploBusqueda = [
     }
 ];
 
+// materialDeportivo es una BD
 const materialDeportivo = [
     {
         marca: 'Petzl',

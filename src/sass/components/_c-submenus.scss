@@ -3,7 +3,7 @@
 
 .c-submenus {
     &__contenedor {
-        min-width: 18.75rem;
+        min-width: 16rem;
         background-color: map-get(v.$colores, color-secundario);
         color: map-get(v.$colores, color-primario);
         padding: 0.5rem;
@@ -12,6 +12,15 @@
         &--mod {
             max-height: 31.25rem;
             overflow-y: scroll;
+        }
+        @include m.telefonoM{
+            min-width: 17rem;
+        }
+        @include m.telefonoXL {
+            min-width: 18.75rem;
+        }
+        @include m.tablet {
+            min-width: 20rem;
         }
     }
     

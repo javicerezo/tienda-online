@@ -2,15 +2,34 @@
 @use 'tools/mixins' as m;
 
 .c-newsletter {
-    margin: 3rem 0 1rem;
+    margin: 1rem 0;
+    @include m.tablet {
+        margin: 3rem 0 1rem;
+    }
     &__contenedor {
         max-width: 31.25rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+        @include m.tablet {
+            width: 50%;
+        }
     }
     &__h2 {
-        font-size: 2em;
+        font-size: 1.5em;
+        @include m.desktop{
+            font-size: 2em;
+            }
     }
     &__h4 {
-        padding: 1.2rem 0;
+        font-size: 0.85em;
+        padding: 0.5rem 0;
+        @include m.tablet {
+            font-size: 1em;
+            padding: 1rem 0;
+        }
+        @include m.desktop {
+            padding: 1.5rem 0;
+        }
     }
     &__form {
         position: relative;

@@ -16,26 +16,27 @@
         background-color: #111111bd;
     }
     &__li {
-        @include m.flex (row, nowrap, space-around, center);
+        @include m.flex (column, nowrap, space-around, center);
         position: relative;
-        width: 70%;
-        height: 90%;
         padding: 1rem;
         background-color: map-get(v.$colores, color-secundario);
         color: map-get(v.$colores, color-primario);
         border-radius: 10px;
-        // @include m.telefono-xl {
-        //     width: 85%;
-        //     padding: 0.5rem;
-        // }
-        // @include m.tablet {
-        //     width: 75%;
-        //     padding: 1rem;
-        //     max-width: 45rem;
-        // }
-        // @include m.desktop {
-        // }
-        
+        @include m.telefonoXL {
+            //     width: 85%;
+            //     padding: 0.5rem;
+        }
+        @include m.tablet {
+            //     width: 75%;
+            //     padding: 1rem;
+            //     max-width: 45rem;
+        }
+        @include m.desktop {
+            @include m.flex (row, nowrap, space-around, center);
+            width: 70%;
+            height: 90%;
+        }
+       
         &-descuento {
             @include m.flex (row, nowrap, center, center);
             @include m.position (absolute, 1.5rem, null, null, null);

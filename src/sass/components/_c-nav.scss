@@ -2,29 +2,36 @@
 @use 'tools/mixins' as m;
 
 .c-nav {
-    
-    @include m.flex (row, nowrap, space-between, center);
-    &__ul {
-        @include m.flex (row, nowrap, space-around, center);
-    }
-    &__outlet {
-        @include m.flex (row, nowrap, center, center);
-    }
-    &__li {
-        @include m.flex (row, nowrap, center, center);
-        margin-top: .375rem;
-        padding: .3125rem 1.375rem;
-        border-right: 1px solid #444;
-        text-transform: uppercase;
-        font-size: 15px;
-        font-weight: 500;
-        &:hover {
-            background-color: map-get(v.$colores, color-secundario);
-            color: map-get(v.$colores, color-primario);
-            border-radius: 10px 10px 0 0;
+    @include m.desktop {
+        width: 80%;
+        @include m.flex (row, nowrap, space-between, center);
+        &__ul {
+            @include m.flex (row, nowrap, space-around, center);
         }
-    }
-    &__li:last-child {
-        border-right: none;
+        &__outlet {
+            @include m.flex (row, nowrap, center, center);
+        }
+        &__li {
+            @include m.flex (row, nowrap, center, center);
+            margin-top: .375rem;
+            padding: .3125rem 1.375rem;
+            border-right: 1px solid #444;
+            &:hover {
+                background-color: map-get(v.$colores, color-secundario);
+                color: map-get(v.$colores, color-primario);
+                border-radius: 10px 10px 0 0;
+            }
+            p {
+                text-transform: uppercase;
+                font-size: 15px;
+                font-weight: 500;
+            }
+            i {
+                display: none;
+            }
+        }
+        &__li:last-child {
+            border-right: none;
+        }
     }
 }

@@ -4,35 +4,87 @@
 .c-ventajas {
     margin: 1rem auto;
     &__contenedor {
+        margin: 0 auto;
         border-top: 1px dotted #000;
         border-bottom: 1px dotted #000;
         max-width: 60.3125rem;
-        padding: 2rem 0;
+        @include m.telefonoXL {
+            padding: 1rem 0;
+        }
+        @include m.tablet {
+            padding: 1.5rem 0;
+            width: 80%
+        }
+        @include m.desktop {
+            padding: 2rem 0;
+        }
     }
     &__ul {
-        @include m.flex (row, nowrap, space-between, center);
-        padding: 1.3rem 0;
-        height: 11.25rem;
+        padding: 0.5rem;
+        @include m.flex (column, nowrap, space-between, center);
+        @include m.telefonoXL {
+            padding: 1rem;
+        }
+        @include m.tablet {
+            padding: 1rem;
+        }
+        @include m.desktop {
+            @include m.flex (row, nowrap, space-between, flex-start);
+            padding: 1.3rem 0;
+        }
     }
     &__li {
-        height: 11.25rem;
-        @include m.flex (column, nowrap, flex-start, center);
-        width: 33%;
+        padding: 0.5rem;
+        width: 100%;
+        @include m.flex (row, nowrap, space-around, center);
         i {
-            font-size: 3.125rem;
+            font-size: 1.5rem;
+            width: 10%;
+        }
+        @include m.tablet {
+            i {
+                font-size: 2rem;
+            }
+        }
+        @include m.desktop {
+            @include m.flex (column, nowrap, flex-start, center);
+            width: 33%;
+            i {
+                font-size: 3rem;
+                width: auto;
+            }
+        }
+        @include m.desktopXL {
+            i {
+                font-size: 3.125rem;
+            }
         }
     }
     &__li:nth-child(2) {
-        padding: 0 1rem;
+        @include m.desktop {
+            padding: 0 1rem;
+        }
     }
     &__h4 {
-        padding: 1rem 0;
-        font-size: 1.875rem;
+        padding: 0 1rem;
+        font-size: 1rem;
+        width: 45%;
+        @include m.desktop {
+            padding: 1rem 0;
+            font-size: 1.875rem;
+            width: auto;
+        }
     }
     &__p {
+        font-size: 0.8rem;
         text-align: center;
+        width: 45%;
         span {
             font-weight: bold;
+        }
+        @include m.desktop {
+            font-size: 1rem;
+            width: auto;
         }
     }
 }

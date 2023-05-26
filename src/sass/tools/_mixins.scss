@@ -1,32 +1,37 @@
 @use 'settings/variables' as v;
 
 // RESPONSIVE
+@mixin telefonoXS {
+    @media (min-width: map-get(v.$medidas, telefono-xs)){
+        @content;
+    }
+}
 @mixin telefonoM {
-    @media (min-width: v.$telefonoM){
+    @media (min-width: map-get(v.$medidas, telefono-m)){
         @content;
     }
 }
 
 @mixin telefonoXL {
-    @media (min-width: v.$telefonoXL){
+    @media (min-width: map-get(v.$medidas, telefono-xl)){
         @content;
     }
 }
 
 @mixin tablet {
-    @media (min-width: v.$tablet){
+    @media (min-width: map-get(v.$medidas, tablet)){
         @content;
     }
 }
 
 @mixin desktop {
-    @media (min-width: v.$desktop){
+    @media (min-width: map-get(v.$medidas, desktop-m)){
         @content;
     }
 }
 
 @mixin desktopXL {
-    @media (min-width: v.$desktopXL){
+    @media (min-width: map-get(v.$medidas, desktop-xl)){
         @content;
     }
 }

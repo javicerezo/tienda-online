@@ -1,9 +1,12 @@
 (function (){ 
     // VARIABLES 
+    const desktop = 1024;
     // variables para eventos
     const btnBuscador = document.querySelector('.js-header__centro');
+    const btnBurger = document.querySelector('.js-header__burger');
     const btnConsulta = document.querySelector('.js-submenus__boton-consulta');
     const btnChat = document.querySelector('.js-submenus__boton-chat');
+    const btnNav = document.querySelectorAll('.js-nav__li');
     const btnContacto = document.querySelector('.js-contacto');
     const btnEnviarContacto = document.querySelector('.js-contacto__enviar');
     const btnEnviarNewsletter = document.querySelector('.js-newsletter__enviar');
@@ -15,6 +18,7 @@
 
     // Variables contenedor para inyeccion dinámica de resultados
     const contenedorHeader = document.querySelector('.js-header');
+    const contenedorNav = document.querySelector('.js-nav');
     const contenedorDestacados = document.querySelector('.js-item__grid');
     const contenedorNumArticulos = document.querySelector('.js-menus__cesta-numero');
     const contenedorCarrito = document.querySelector('.js-submenus__cesta');
@@ -237,7 +241,7 @@
             contenedorProductosVisitados.classList.add('c-visitados');
             if(contenedorProductosVisitados.childElementCount == 0) {
                 const div = document.createElement('div');
-                div.classList.add('c-visitados__contenedor', 'o-container-80');
+                div.classList.add('c-visitados__contenedor');
                 div.innerHTML = `
                     <h2 class='c-visitados__h2'>Últimos productos que has visitado</h2>
                     <ul class='c-visitados__grid js-visitados__grid'>
@@ -509,9 +513,11 @@
         if (articulosVisitados.length != 0) {
             ui.imprimirVisitados(articulosVisitados);
         }
-
         ui.comprobarCarrito(articulosCarrito);
         ui.recorrerBD(destacados, contenedorDestacados, 'c-item');
+        
+        // EVENTOS PARA BOTONES
+        btnBurger.addEventListener('click', mostrarNav);
         
         btnConsulta.addEventListener('click', mostrarContacto);
         btnContacto.children[0].addEventListener('click', mostrarContacto);
@@ -541,6 +547,23 @@
 
         btnBuscador.addEventListener('click', () => {
             ui.buscadorArticulos();
+        });
+
+        window.addEventListener("resize",() => {
+            if (contenedorHeader.clientWidth >= desktop) {
+                if (contenedorNav.classList.contains('c-header__contenedor-nav--mod')) {
+                    contenedorNav.classList.remove('c-header__contenedor-nav--mod');
+                    contenedorHeader.classList.remove('c-header--fixed');
+                    btnBurger.children[0].children[0].classList.toggle('fa-bars');
+                    btnBurger.children[0].children[0].classList.toggle('fa-xmark');
+                }
+            }
+        });
+
+
+        //EVENTOS PARA CONTENEDORES
+        contenedorNav.addEventListener('click', e => {
+            console.log(e.target)
         });
 
         contenedorDestacados.addEventListener('click', e => {
@@ -652,6 +675,12 @@
     
 
     // FUNCIONES
+    function mostrarNav () {
+        contenedorNav.classList.toggle('c-header__contenedor-nav--mod');
+        contenedorHeader.classList.toggle('c-header--fixed');
+        btnBurger.children[0].children[0].classList.toggle('fa-bars');
+        btnBurger.children[0].children[0].classList.toggle('fa-xmark');
+    }
     function mostrarContacto () {
         btnContacto.children[1].classList.toggle('c-contacto__screen--mod');
         btnContacto.children[0].children[0].classList.toggle('c-contacto__img--mod');

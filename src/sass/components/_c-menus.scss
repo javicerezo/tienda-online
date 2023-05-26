@@ -23,7 +23,23 @@
             }
         }
     }
+    @include m.telefonoXS {
+        &__cuenta, &__ayuda {
+            display: none;
+        }
+    }
+    @include m.tablet {
+        &__cuenta, &__ayuda {
+            @include m.flex (row, nowrap, center, center);
+        }
+    }
     &__cesta {
+        &-p, &-i {
+            display: none;
+            @include m.tablet {
+                display: block;
+            }
+        }
         &-dibujo {
             position: relative;
         }
@@ -44,7 +60,6 @@
         }
     }
     &__submenus {
-        // z-index: 500;
         visibility: hidden;
         pointer-events: none;
     }
