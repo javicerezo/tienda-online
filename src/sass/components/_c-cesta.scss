@@ -105,7 +105,8 @@
     &__tbody {
         &-img {
             width: 15%;
-            margin-right: 2rem
+            margin-right: 2rem;
+            min-width: 5rem;
         }
         &-descripcion {
             @include m.flex (column, nowrap, center, flex-start);
@@ -144,7 +145,7 @@
     &__resultado {
         @include m.flex(column-reverse, nowrap, center, center);
         padding: 0.5rem;
-        @include m.tablet {
+        @include m.telefonoXL {
             @include m.flex(row, nowrap, center, flex-end);
             padding: 1rem;
         }

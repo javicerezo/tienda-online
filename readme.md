@@ -1,5 +1,5 @@
 # Título del proyecto
-![Imagen del proyecto](https://github.com/eduardofierropro/Portafolio-y-CV/blob/main/IMAGEN-DEL-PROYECTO.jpg?raw=true)
+![Imagen del proyecto](https://raw.githubusercontent.com/javicerezo/tienda-online/master/src/assets/img/imagen1.png)
 
 ## Ejemplo en vivo
 - [Haz click para ver el proyecto](https://javicerezo.github.io/tienda-online/) 🚀
@@ -19,9 +19,9 @@ Frontend de una tienda online dedicada a los deportes de montaña. Hecho con arq
 ## Vista previa del proyecto
 Si quieres hechar un vistazo al proyecto, te recomiendo:
 
-![Captura del proyecto](https://github.com/eduardofierropro/Portafolio-y-CV/blob/main/CAPTURA-DEL-PROYECTO.jpg?raw=true)
-![Captura del proyecto](https://github.com/eduardofierropro/Portafolio-y-CV/blob/main/CAPTURA-DEL-PROYECTO.jpg?raw=true)
-![Captura del proyecto](https://github.com/eduardofierropro/Portafolio-y-CV/blob/main/CAPTURA-DEL-PROYECTO.jpg?raw=true)
+![Captura del proyecto](https://raw.githubusercontent.com/javicerezo/tienda-online/master/src/assets/img/imagen2.png)
+![Captura del proyecto](https://raw.githubusercontent.com/javicerezo/tienda-online/master/src/assets/img/imagen3.png)
+![Captura del proyecto](https://raw.githubusercontent.com/javicerezo/tienda-online/master/src/assets/img/imagen4.png)
 
 ## Autor ✒️
 **JAVI CEREZO**
