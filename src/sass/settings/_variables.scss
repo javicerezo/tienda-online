@@ -33,3 +33,12 @@ $colores: (
     "color-texto-formulario2": #556575,
     "color-borde-cesta": #4a4a4a
 ); 
+
+/* variables en el root para modificar dinámicamente */
+$slide-transform: 0;
+$transition: transform 1s;
+
+:root {
+    --slide-transform: #{$slide-transform};
+    --transition: #{$transition};
+}

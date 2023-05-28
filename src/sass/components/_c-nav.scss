@@ -12,7 +12,8 @@
             @include m.flex (row, nowrap, center, center);
         }
         &__li {
-            @include m.flex (row, nowrap, center, center);
+            position: relative;
+            @include m.flex (column, nowrap, center, center);
             margin-top: .375rem;
             padding: .3125rem 1.375rem;
             border-right: 1px solid #444;
@@ -20,13 +21,24 @@
                 background-color: map-get(v.$colores, color-secundario);
                 color: map-get(v.$colores, color-primario);
                 border-radius: 10px 10px 0 0;
+                .c-nav__li-subnav {
+                    display: block;
+                }
             }
-            p {
-                text-transform: uppercase;
-                font-size: 15px;
-                font-weight: 500;
+            &-encabezado {
+                @include m.flex (row, nowrap, center, center);
+                p {
+                    cursor: pointer;
+                    text-transform: uppercase;
+                    font-size: 15px;
+                    font-weight: 500;
+                }
+                i {
+                    transform: rotate(180deg);
+                    margin-left: 0.5rem;
+                }
             }
-            i {
+            &-subnav {
                 display: none;
             }
         }

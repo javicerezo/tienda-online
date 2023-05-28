@@ -1,6 +1,7 @@
 (function (){ 
     // VARIABLES 
     const desktop = 1024;
+    let contadorvisitados = 0;
     // variables para eventos
     const btnBuscador = document.querySelector('.js-header__centro');
     const btnBurger = document.querySelector('.js-header__burger');
@@ -247,6 +248,10 @@
                     <ul class='c-visitados__grid js-visitados__grid'>
                     
                     </ul>
+                    <div class='c-visitados__contenedor-botones'>
+                        <button class='c-visitados__botones js-visitados__botones'><i class="fa-solid fa-angle-left"></i></button>
+                        <button class='c-visitados__botones js-visitados__botones'><i class="fa-solid fa-angle-right"></i></button>
+                    </div>
                 `;
                 contenedorProductosVisitados.appendChild(div);
             }
@@ -645,17 +650,35 @@
         });
 
         contenedorProductosVisitados.addEventListener('click', e => {
+            //agregar carrito
+            
             if (e.target.classList.contains('c-button')){
-                //agregar carrito
                 const productoSeleccionado = e.target.parentElement.parentElement;
                 const contenedorMensaje = e.target.parentElement.parentElement.children[3];
                 ui.leerArticulo('carrito', productoSeleccionado, 'c-visitados'); 
                 ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
             }
-                //desplegar el modal
+            //desplegar el modal
             if (e.target.parentElement.classList.contains('c-visitados__li-img')) {
                 const productoSeleccionado = e.target.parentElement.parentElement;
                 ui.leerArticulo('modal', productoSeleccionado, 'c-visitados');
+            }
+            
+            // slider de visitados
+            const rootstyle = document.documentElement.style;
+            const elementosVisitados = document.querySelectorAll('.c-visitados__li');
+            let anchoElemento = elementosVisitados[0].scrollWidth;
+            if(e.target.classList.contains('fa-angle-left')){
+                if(contadorvisitados > 0) {
+                    moverVisitados('izquierda', anchoElemento, rootstyle);
+                    contadorvisitados--;
+                }
+            }
+            if(e.target.classList.contains('fa-angle-right')){
+                if(contadorvisitados < elementosVisitados.length - 1) {
+                    moverVisitados('derecha', anchoElemento, rootstyle);
+                    contadorvisitados++;
+                }
             }
         });
 
@@ -672,7 +695,6 @@
             }
         });
     });
-    
 
     // FUNCIONES
     function mostrarNav () {
@@ -689,6 +711,16 @@
         btnContacto.children[0].children[0].classList.toggle('fa-solid');
         btnContacto.children[0].children[0].classList.toggle('fa-regular'); 
     };
+
+    function moverVisitados (direccion, anchoElemento, rootstyle) {
+        const transformValue = Number(rootstyle.getPropertyValue('--slide-transform').replace('px', ''));
+        if(direccion === 'izquierda') {
+            rootstyle.setProperty('--slide-transform', `${transformValue + anchoElemento}px`);
+        }
+        else if(direccion === 'derecha') {
+            rootstyle.setProperty('--slide-transform', `${transformValue - anchoElemento}px`);
+        }
+    }
 
     function mostrarRadioButton() {
         formularioNewsletter.children[2].classList.add('c-newsletter__form-radio--mod');

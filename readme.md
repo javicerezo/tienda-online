@@ -5,7 +5,7 @@
 - [Haz click para ver el proyecto](https://javicerezo.github.io/tienda-online/) 🚀
 
 ## Descripción 📑
-Frontend de una tienda online dedicada a los deportes de montaña. Hecho con arquitectura BEMIT.
+Frontend de una tienda online dedicada a los deportes de montaña. Hecho con arquitectura BEMIT. Todos los datos sobre los productos son leídos directamente en una pequeña base de datos creada con js (NO ES UNA BASE DE DATOS REAL). Usa localStorage para guardar los productos de la cesta, además de los productos ya visitados para mostralos de nuevo más abajo. 
 
 ## Tecnologías 🛠
 <!-- Iconos de https://github.com/alexandresanlim/Badges4-README.md-Profile -->

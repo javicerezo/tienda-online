@@ -1,0 +1,21 @@
+@use 'settings/variables' as v;
+@use 'tools/mixins' as m;
+
+.c-subnav {
+    &__hombre, &__mujer, &__niños, &__calzado, &__esqui, &__material {
+        width: 100%;
+        padding: 0.5rem;
+        @include m.position (absolute, 1.6875rem, null, null, 0);
+        background-color: map-get(v.$colores, color-secundario);
+        color: map-get(v.$colores, color-primario);
+        border-radius: 0 0 5px 5px;
+        li {
+            padding: 0.2rem;
+            cursor: pointer;
+            transition: all 0.6s ease;
+        }
+        li:hover {
+            color: map-get(v.$colores, color-fondo-hover);
+        }
+    }
+}
