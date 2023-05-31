@@ -86,7 +86,7 @@
             }
         }
 
-        buscadorArticulos () {
+        buscadorArticulos (palabra='Buscar...') {
             const buscadorScreen = document.createElement('div');
             buscadorScreen.classList.add('c-buscador__screen');
             buscadorScreen.innerHTML = `
@@ -96,7 +96,7 @@
                             <a href="https://javicerezo.github.io/tienda-online/"><img src='build/img/logo.svg' alt='logo empresa'></a>
                         </div>
                         <div class='c-buscador__form'>
-                            <input type='text' class='c-buscador__input' placeholder='Buscar...'>
+                            <input type='text' class='c-buscador__input' placeholder='Buscar...' value='${palabra}'>
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                         <div class='c-buscador__close'>
@@ -556,8 +556,8 @@
 
         window.addEventListener("resize",() => {
             if (contenedorHeader.clientWidth >= desktop) {
-                if (contenedorNav.classList.contains('c-header__contenedor-nav--mod')) {
-                    contenedorNav.classList.remove('c-header__contenedor-nav--mod');
+                if (contenedorNav.classList.contains('c-nav--mod')) {
+                    contenedorNav.classList.remove('c-nav--mod');
                     contenedorHeader.classList.remove('c-header--fixed');
                     btnBurger.children[0].children[0].classList.toggle('fa-bars');
                     btnBurger.children[0].children[0].classList.toggle('fa-xmark');
@@ -568,7 +568,18 @@
 
         //EVENTOS PARA CONTENEDORES
         contenedorNav.addEventListener('click', e => {
-            console.log(e.target)
+            if (e.target.classList.contains('c-subnav__li')) {
+                const li = e.target.textContent;
+                ui.buscadorArticulos(li);
+                
+                const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
+                // const input = document.querySelector('.c-buscador__input');
+                // input.textContent = li;
+
+                ui.limpiarHTML(contenedorUl);
+                ui.filtarArticulos(li, contenedorUl);
+
+            }
         });
 
         contenedorDestacados.addEventListener('click', e => {
@@ -698,7 +709,7 @@
 
     // FUNCIONES
     function mostrarNav () {
-        contenedorNav.classList.toggle('c-header__contenedor-nav--mod');
+        contenedorNav.classList.toggle('c-nav--mod');
         contenedorHeader.classList.toggle('c-header--fixed');
         btnBurger.children[0].children[0].classList.toggle('fa-bars');
         btnBurger.children[0].children[0].classList.toggle('fa-xmark');

@@ -2,48 +2,63 @@
 @use 'tools/mixins' as m;
 
 .c-nav {
+    display: none;
+    @include m.position (absolute, (2.8243rem+2.5rem), null, null, null);
+    @include m.tablet {
+        top: 4.499rem+2.5rem;
+    }
+    &--mod {
+        display: block;
+    }
     @include m.desktop {
-        width: 80%;
+        width: 85%;   
         @include m.flex (row, nowrap, space-between, center);
-        &__ul {
+        @include m.position (absolute, 6.1368rem, null, null, null);
+    }
+    &__ul {
+        @include m.desktop {
             @include m.flex (row, nowrap, space-around, center);
         }
-        &__outlet {
-            @include m.flex (row, nowrap, center, center);
-        }
-        &__li {
-            position: relative;
-            @include m.flex (column, nowrap, center, center);
-            margin-top: .375rem;
-            padding: .3125rem 1.375rem;
+    }
+    &__li {
+        position: relative;
+        @include m.flex (column, nowrap, center, center);
+        padding: .3125rem 1.375rem;
+        margin-top: .375rem;
+        @include m.desktop {
             border-right: 1px solid #444;
-            &:hover {
-                background-color: map-get(v.$colores, color-secundario);
-                color: map-get(v.$colores, color-primario);
-                border-radius: 10px 10px 0 0;
-                .c-nav__li-subnav {
-                    display: block;
-                }
-            }
-            &-encabezado {
-                @include m.flex (row, nowrap, center, center);
-                p {
-                    cursor: pointer;
-                    text-transform: uppercase;
-                    font-size: 15px;
-                    font-weight: 500;
-                }
-                i {
-                    transform: rotate(180deg);
-                    margin-left: 0.5rem;
-                }
-            }
-            &-subnav {
-                display: none;
+        }
+        &:hover {
+            background-color: map-get(v.$colores, color-secundario);
+            color: map-get(v.$colores, color-primario);
+            border-radius: 10px 10px 0 0;
+            .c-nav__li-subnav {
+                display: block;
+                z-index: 100;
             }
         }
-        &__li:last-child {
-            border-right: none;
+        &-encabezado {
+            width: 100%;
+            @include m.flex (row, nowrap, space-between, center);
+            i {
+                transform: rotate(180deg);
+                margin-left: 0.5rem;
+            }
         }
+        &-categoria {
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 1em;
+        }
+        &-subnav {
+            display: none;
+        }
+    }
+    
+    &__li:last-child {
+        border-right: none;
+    }
+    &__outlet:hover > .c-nav__li{
+        border-radius: 10px;
     }
 }

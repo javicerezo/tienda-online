@@ -5,22 +5,18 @@
     background-color: map-get(v.$colores, color-fondo);
     position: relative;
     z-index: 80;
-    // @include m.desktop {
-        // height: 15.5vh;
-    // }
     &--fixed {
         position: fixed;
     }
     @include m.flex (column, nowrap, center, center);
     &__cabecera {
         @include m.flex (row, nowrap, space-between, center);
-        // padding: 0.2rem 0.5rem;
         width: 100%;
         @include m.telefonoXL {
-            width: 75%;
+            width: 95%;
         }
         @include m.tablet {
-            width: 90%;
+            width: 95%;
         }
         @include m.desktop {
             width: 75%;
@@ -41,6 +37,13 @@
         max-width: 5em;
         @include m.tablet {
             max-width: 9em;
+        }
+    }
+    &__titulo {
+        font-size: 0.7em;
+        text-transform: uppercase;
+        @include m.tablet {
+            font-size: 0.8em;
         }
     }
     &__centro {
@@ -130,41 +133,11 @@
     &__contenedor-nav {
         background-color: map-get(v.$colores, color-primario);
         color: map-get(v.$colores, color-secundario);
-        visibility: hidden;
-        pointer-events: none;
-        height: 0px;
-        &--mod {
-            visibility: visible;
-            pointer-events: unset;
-            height: auto;
-            width: 100%;
-            padding: 1rem;
-            @include m.flex (column, nowrap, flex-start, flex-start);
-            @include m.position (absolute, (45.188px+40px), null, null, null);
-            @include m.tablet {
-                top: 71.984px+40px;
-            }
-        }
-        &.c-header__contenedor-nav--mod {
-            .c-nav__ul, .c-nav__outlet {
-                width: 100%;
-                .c-nav__li {
-                    @include m.flex (row, nowrap, space-between, center);
-                    padding: 0.5rem;
-                    border-bottom: 1px solid #444;
-                    i {
-                        rotate: -180deg;
-                    }
-                }
-            }
-        }
+        width: 100%;
+        padding: 1rem;
         @include m.desktop {
             border-radius: 5px;
-            position: absolute;
-            bottom: -1.0313rem;
-            visibility: visible;
-            pointer-events: unset;
-            height: auto;
+            padding: 0rem;
         }
     }
 }
