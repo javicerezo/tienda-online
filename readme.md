@@ -1,4 +1,4 @@
-# Título del proyecto
+# Tienda online
 ![Imagen del proyecto](https://raw.githubusercontent.com/javicerezo/tienda-online/master/src/assets/img/online.png)
 
 ## Ejemplo en vivo
