@@ -53,7 +53,6 @@
             width: 70%;
         }
         i {
-            // font-size: 1.5em;
             padding: 0.5rem;
             @include m.tablet {
                 font-size: 1.5em;
@@ -92,7 +91,7 @@
         }
     }
     &__p {
-        font-size: 1em;
+        font-size: 0.8em;
         padding: 0.2rem 1rem;
         font-weight: bold;
         @include m.tablet {
@@ -105,7 +104,7 @@
         max-height: 18.75rem;
     }
     &__li-populares {
-        font-size: 0.9em;
+        font-size: 0.7em;
         margin: 0.2rem 0;
         padding: 0 1rem;
         cursor: pointer;
@@ -125,6 +124,7 @@
         max-height: 450px;
         overflow-y: scroll;
         @include m.tablet {
+            max-height: 450px;
             padding: 1rem;
             margin-top: 0;
             margin-left: 3rem;

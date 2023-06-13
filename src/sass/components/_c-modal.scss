@@ -21,12 +21,12 @@
         padding: 1rem;
         background-color: map-get(v.$colores, color-secundario);
         color: map-get(v.$colores, color-primario);
-        border-radius: 10px;
-        width: 90%;
+        border-radius: 5px;
+        width: 95%;
         height: 95%;
         @include m.telefonoXL {
             @include m.flex (row, nowrap, space-around, center);
-            height: 75%;
+            height: 80%;
         }
         @include m.tablet {
             width: 85%;
@@ -81,10 +81,16 @@
         &-contenido {
             width: 100%;
             @include m.telefonoM {
+                width: 80%;
+            }
+            @include m.telefonoXL {
+                width: 100%;
+            }
+            @include m.telefonoXL {
                 width: auto;
             }
             position: relative;
-            padding: 1rem;
+            padding: 0.5rem;
             @include m.neomorfismo (5px, 2px, map-get(v.$colores, color-secundario-2), map-get(v.$colores, color-secundario-2), map-get(v.$colores, color-primario));
             @include m.flex (column, nowrap, center, center);
             &--mod {
@@ -98,15 +104,13 @@
             padding: 0.1rem 0;
             @include m.tablet {
                 padding: 0.3rem 0;
-
             }
             &-p {
-                font-size: 0.75em;
+                font-size: 0.6em;
                 padding: 0.1rem 0;
                 @include m.tablet {
                     font-size: 1em;
                     padding: 0.2rem 0;
-
                 }
                 span {
                     font-weight: bold;
@@ -114,17 +118,19 @@
                 &--mod {
                     color: blue;
                     font-weight: lighter;
-                    font-size: 0.9em;
+                    font-size: 0.6em;
+                    @include m.tablet {
+                        font-size: 0.9em;
+                    }
                 }
             }
         }
         &-titulo {
-            font-size: 1em;
+            font-size: 0.9em;
             padding: 0.3rem;
             @include m.tablet {
                 font-size: 1.7em;
                 padding: 0.5rem;
-
             }
             span {
                 text-transform: capitalize;
@@ -132,7 +138,7 @@
             }
         }
         &-precio {
-            font-size: 2em;
+            font-size: 1.7em;
             padding: 0.2rem;
             font-weight: bold;
             color: map-get(v.$colores, color-precios);
@@ -141,7 +147,7 @@
                 padding: 0.5rem;
             }
             &--old {
-                font-size: 1.1em;
+                font-size: 1em;
                 text-decoration: line-through;
                 padding-right: 1rem;
                 @include m.tablet {
@@ -149,7 +155,7 @@
                 }
             }
             &--descuento {
-                font-size: 1.1em;
+                font-size: 1em;
                 color: map-get(v.$colores, color-gris);
                 @include m.tablet {
                     font-size: 1.4em;
@@ -157,8 +163,14 @@
             }
         }
         &-button {
-            padding-top: 1rem;
+            padding-top: 0.8rem;
+            padding-bottom: 0;
+            font-size: 0.7em;
+            @include m.telefonoXL {
+                padding-top: 1rem;
+            }
             @include m.tablet {
+                font-size: 1em;
                 padding-top: 2rem;
             }
         }
@@ -168,7 +180,6 @@
             cursor: pointer;
             @include m.tablet {
                 font-size: 2rem;
-
             }
         }
         &-mensaje {
