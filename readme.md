@@ -35,10 +35,11 @@ Si quieres hechar un vistazo al proyecto, te recomiendo:
 + Este proyecto no necesita instalación, ya que si hay algún fallo en la petición a 'db.json', hace la consulta localmente desde 'src/js/baseDatos.js'.
 
 + Si quieres hacer la petición a 'db.json':
-   1. Instalación de Node JS (desde su página).
-   2. Instalación de JSON SERVER 
-       - Ejecuta 'npm install -g json-server' (en la powerShell, para instalar el paquete de json-server de manera global en el pc).
-       - Ejecuta 'json-server db.json -p 4000' (para que las peticiones a la base de datos se hagan correctamente).
+    1. Clona el repositorio.
+    2. Instala Node JS (desde su página).
+    3. Instala JSON SERVER:
+        - Ejecuta 'npm install -g json-server' (en la powerShell, para instalar el paquete de json-server de manera global en el pc).
+        - Ejecuta 'json-server db.json -p 4000' (para que las peticiones a la base de datos se hagan correctamente).
 
 + Puedes instalar NodeJS desde su página [https://nodejs.org/es](https://nodejs.org/es).
 + Puedes ver la documentación de JSON SERVER en [https://github.com/typicode/json-server](https://github.com/typicode/json-server) para ver como instalarlo.
