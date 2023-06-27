@@ -31,16 +31,21 @@ Si quieres hechar un vistazo al proyecto, te recomiendo:
 [![Porfolio web](https://img.shields.io/badge/website-000000?style=for-the-badge&logo=About.me&logoColor=white)](https://javicerezo.netlify.app/)
 [![Correo](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](<mailto:jc.webmob@gmail.com>)
 
-## Instalación 
-Este proyecto necesita:
-1.- Instalación de Node JS (desde su página)
-2.- Instalación de JSON SERVER 
-    1.- Ejecuta 'npm install -g json-server' (en la powerShell, para instalar el paquete de json-server de manera global en el pc).
-    2.- Ejecuta 'json-server db.json -p 4000' (para que las peticiones a la base de datos se hagan correctamente).
+## Instalación
+```
++ Este proyecto no necesita instalación, ya que si hay algún fallo en la petición a 'db.json', hace la consulta localmente desde 'src/js/baseDatos.js'.
++ Si quieres hacer la petición a 'db.json':
++   1. Instalación de Node JS (desde su página).
++   2. Instalación de JSON SERVER 
++       - Ejecuta 'npm install -g json-server' (en la powerShell, para instalar el paquete de json-server de manera global en el pc).
++       - Ejecuta 'json-server db.json -p 4000' (para que las peticiones a la base de datos se hagan correctamente).
+```
 
-Puedes instalar NodeJS desde su página [https://nodejs.org/es](https://nodejs.org/es)
-Puedes ver la documentación de JSON SERVER en [https://github.com/typicode/json-server](https://github.com/typicode/json-server) para ver como instalarlo.
-  
+```
++ Puedes instalar NodeJS desde su página [https://nodejs.org/es](https://nodejs.org/es).
++ Puedes ver la documentación de JSON SERVER en [https://github.com/typicode/json-server](https://github.com/typicode/json-server) para ver como instalarlo.
+```
+
 ## Licencia 📄
 MIT Public License v3.0
 No puede usarse comencialmente.

@@ -31,7 +31,7 @@ const contenedorContacto = document.querySelector('.js-contacto__contenedor');
 
 let articulosCarrito = [];
 let articulosVisitados = [];
-let materialDeportivo = [];
+// let materialDeportivo = [];
 
 // CLASES
 class UI {
@@ -533,7 +533,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     ui.imprimirVisitados(articulosVisitados);
     ui.comprobarCarrito(articulosCarrito);
 
-    // Cargamos de manera global el array con todo el material deportivo disponible
+    // intentamos conectar con la base de datos
     materialDeportivo = await consultarBD('materialDeportivo');
 
     // Creamos un array de material destacado con 8 elementos aleatorios que están dentro de material deportivo para mostrarlo por pantalla
@@ -805,13 +805,15 @@ function cargarStorage (nombreArray) {
 
 async function consultarBD (nombre) {
     const url = `http://localhost:4000/${nombre}`;
-
     try {
+        // OK. Consultamos la BD desde db.json
         const respuesta = await fetch(url);
         const resultado = await respuesta.json();
         return resultado;
     } catch (error) {
+        // NO OK. Consultamos la BD desde 'src/js/baseDatos.js'
         console.log(error);
+        return materialDeportivo;
     }
 }
 
