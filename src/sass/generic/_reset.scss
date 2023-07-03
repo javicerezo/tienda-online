@@ -18,6 +18,7 @@ img , picture , video , iframe , figure{
   display: block;
   max-width: 100%;
   width: 100%;
+  height: auto;
   /* (Opcional) */ object-fit: cover;        
   /* (Opcional) */ object-position: center center;
 }

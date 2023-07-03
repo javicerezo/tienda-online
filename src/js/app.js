@@ -1,5 +1,5 @@
 
-// VARIABLES 
+    // VARIABLES 
 const desktop = 1024;
 let contadorvisitados = 0;
 // variables para eventos
@@ -31,7 +31,6 @@ const contenedorContacto = document.querySelector('.js-contacto__contenedor');
 
 let articulosCarrito = [];
 let articulosVisitados = [];
-// let materialDeportivo = [];
 
 // CLASES
 class UI {
@@ -42,7 +41,7 @@ class UI {
     }
 
     compararBD (arrayBD, arrayAleatorio) {
-        // método recibe 1 array BaseDatos completa, y 1 array con id, y devuelve otro array con los objetos correspodientes a esos ids
+        // método recibe 1 array BaseDatos completa, y 1 array con ids, y devuelve otro array con los objetos correspodientes a esos ids
         const arrayReturn = [];
         arrayAleatorio.forEach( id => {
             const obj = arrayBD.filter( elemento => elemento.id === id);
@@ -63,7 +62,11 @@ class UI {
                     <p>${descuento}%</p>
                 </div>
                 <div class='${componente}__li-img'>
-                    <img src='${imagen}' alt='imagen producto'>
+                    <picture>
+                        <source loading="lazy" srcset="${imagen}" type="image/webp">
+                        <source loading="lazy" srcset="${imagen}" type="image/jpg">
+                        <img loading="lazy" src='${imagen}' alt='imagen producto ${id}'>
+                    </picture>
                 </div>                        
                 <div class='${componente}__li-contenido'>
                     <div class='${componente}__li-contenido--mod'>
@@ -197,7 +200,11 @@ class UI {
                     <p>${descuento}%</p>
                 </div>
                 <div class='c-modal__li-img'>
-                    <img src='${imagen}' alt='imagen producto'>
+                    <picture>
+                        <source loading="lazy" srcset="${imagen}" type="image/webp">
+                        <source loading="lazy" srcset="${imagen}" type="image/jpg">
+                        <img loading="lazy" src='${imagen}' alt='imagen producto ${id}'>
+                    </picture>
                 </div>
                 <div class='c-modal__li-contenido'>
                     <div class='c-modal__li-caracteristicas'>
@@ -305,7 +312,11 @@ class UI {
                 li.classList.add('c-submenus__cesta-secciones','c-submenus__cesta-secciones--mod2');
                 li.innerHTML = `
                     <div class="c-submenus__cesta-img">
-                        <img src="${imagen}" alt="imagen producto">
+                        <picture>
+                            <source loading="lazy" srcset="${imagen}" type="image/webp">
+                            <source loading="lazy" srcset="${imagen}" type="image/jpg">
+                            <img loading="lazy" src="${imagen}" alt="imagen producto ${id}">
+                        </picture>
                     </div>
                     <div class="c-submenus__cesta-contenido">
                         <p><span class="c-submenus__cesta-span">${marca}</span> - ${nombre}</p>
@@ -472,7 +483,11 @@ class UI {
                 row.classList.add('c-cesta__tr');
                 row.innerHTML = `
                     <td class='c-cesta__td'>
-                        <img class='c-cesta__tbody-img' src='${imagen}'>
+                        <picture>
+                            <source loading="lazy" srcset="${imagen}" type="image/webp">
+                            <source loading="lazy" srcset="${imagen}" type="image/jpg">
+                            <img loading="lazy" class='c-cesta__tbody-img' src='${imagen}' alt='imagen producto ${id}'>
+                        </picture>
                         <div class='c-cesta__tbody-descripcion'>
                             <p class='c-cesta__tbody-p'><span>${marca}</span> ${nombre}</p>
                             <p class='c-cesta__tbody-p'>Color: white/black  |  Talla: M-L</p>
@@ -503,12 +518,8 @@ class UI {
                     precios.children[2].classList.add('c-cesta__tbody-precio--mod');
                 }
             });
-
             const totalCesta = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.cantidad*producto.precioNew, 0));
             let totalAhorro = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0));
-            // console.log(totalAhorro)
-            // console.log(totalCesta)    
-            // console.log(articulosCarrito);
         }
         
     }
@@ -527,6 +538,10 @@ window.addEventListener('DOMContentLoaded', async () => {
     // Cargamos posibles busquedas del cliente en el storage
     articulosCarrito = cargarStorage('articulosCarrito');
     articulosVisitados = cargarStorage('articulosVisitados');
+
+    // desactivamos los botones de newsletter y mail
+    btnEnviarNewsletter.disabled = true;
+    btnEnviarContacto.disabled = true;
     
     // En funcion del storage, se imprimen ciertas secciones de la página de una manera o de otra
     ui.imprimirCarrito(articulosCarrito);
@@ -534,7 +549,7 @@ window.addEventListener('DOMContentLoaded', async () => {
     ui.comprobarCarrito(articulosCarrito);
 
     // intentamos conectar con la base de datos
-    materialDeportivo = await consultarBD('materialDeportivo');
+    let materialDeportivo = await consultarBD('materialDeportivo');
 
     // Creamos un array de material destacado con 8 elementos aleatorios que están dentro de material deportivo para mostrarlo por pantalla
     const arrayAleatorio = numerosAleatorios(8, materialDeportivo.length);
@@ -548,7 +563,6 @@ btnBurger.addEventListener('click', mostrarNav);
 btnConsulta.addEventListener('click', mostrarContacto);
 btnContacto.children[0].addEventListener('click', mostrarContacto);
 
-btnEnviarNewsletter.disabled = true;
 formularioNewsletter.children[0].addEventListener('click', mostrarRadioButton);
 formularioNewsletter.children[0].addEventListener('blur', (e) => {
     validarEmail(e, btnEnviarNewsletter, contenedorNewsletter);
@@ -558,7 +572,7 @@ formularioNewsletter.addEventListener('submit', (e) => {
     enviarEmail(spinnerNewsletter, formularioNewsletter, btnEnviarNewsletter, contenedorNewsletter);
 });
 
-btnEnviarContacto.disabled = true;
+
 formularioContacto.children[0].children[1].addEventListener('blur', (e) => {
     validarEmail(e, btnEnviarContacto, contenedorContacto);
 });
@@ -834,3 +848,4 @@ function numerosAleatorios (cantidadNumeros, limite) {
     }
     return array;
 }
+

@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PRELOAD -->
     <link rel="shortcut icon" href="build/img/favicon-transp.png" type="image/x-icon">
+    <link rel="preload" href="build/css/app.css" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+     integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+     crossorigin="anonymous" referrerpolicy="no-referrer" as="style" crossorigin="crossorigin"/>
+    <link rel="preload" href="build/img/logo.svg" as="image">
+    <!-- LOAD -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
      integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
      crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="build/css/app.css">
+
     <title>Tienda de montaña</title>
 </head>
 <body class="o-container-100 js-body">
@@ -22,7 +30,8 @@
                 </label>
             </div>
             <div class="c-header__izq">
-                <a href="https://javicerezo.github.io/tienda-online/"><img src="build/img/logo.svg" 
+                <a href="https://javicerezo.github.io/tienda-online/">
+                    <img src="build/img/logo.svg" 
                     alt="logo tienda deportes montaña">
                 </a>
             </div>
@@ -378,6 +387,7 @@
     <div class="c-modal js-modal"></div>
 
     <script src="src/js/baseDatos.js"></script>
-    <script src="src/js/app.js"></script>
+    <script src="src/js/modernizr.js"></script>
+    <script src="src/js/app.js" defer></script>
 </body>
 </html>

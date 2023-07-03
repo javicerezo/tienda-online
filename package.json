@@ -1,18 +1,17 @@
 {
-  "name": "portafolio_javicerezo",
+  "name": "tienda-online",
   "version": "1.0.0",
-  "description": "Portafolio Web profesional de Javi Cerezo",
+  "description": "tienda online dedicada a los productos de montaña",
   "main": "gulpfile.js",
   "scripts": {
-    "dev": "gulp"
+    "dev": "gulp",
+    "test": "jest"
   },
   "keywords": [
     "SASS",
     "JAVASCRIPT",
-    "PHP",
-    "MYSQL",
-    "GULP"
-  ],
+    "JEST"
+    ],
   "author": "Javier Cerezo",
   "license": "ISC",
   "devDependencies": {
@@ -30,6 +29,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-terser-js": "^5.2.2",
     "gulp-webp": "^4.0.1",
+    "jest": "^29.5.0",
     "sass": "^1.49.9",
     "terser": "^4.8.0"
   }
