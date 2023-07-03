@@ -63,9 +63,8 @@ class UI {
                 </div>
                 <div class='${componente}__li-img'>
                     <picture>
-                        <source loading="lazy" srcset="${imagen}" type="image/webp">
-                        <source loading="lazy" srcset="${imagen}" type="image/jpg">
-                        <img loading="lazy" src='${imagen}' alt='imagen producto ${id}'>
+                        <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
+                        <img class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                     </picture>
                 </div>                        
                 <div class='${componente}__li-contenido'>
@@ -179,8 +178,10 @@ class UI {
             descuento: parseFloat(producto.querySelector('.' + componente + '__li-descuento p').textContent),
             id: producto.querySelector('.c-button').getAttribute('data-id'),
             cantidad: 1
-        };    
-
+        }; 
+        // le quito la extension a src de la imagen para evistar problemas con el método consultarBD()
+        let imagenSinExtension = infoProducto.imagen.substring(0, infoProducto.imagen.indexOf(".jpg"));
+        infoProducto.imagen = imagenSinExtension;
         if(accion === 'carrito') {
             this.agregarCarrito(infoProducto);
         }
@@ -201,9 +202,8 @@ class UI {
                 </div>
                 <div class='c-modal__li-img'>
                     <picture>
-                        <source loading="lazy" srcset="${imagen}" type="image/webp">
-                        <source loading="lazy" srcset="${imagen}" type="image/jpg">
-                        <img loading="lazy" src='${imagen}' alt='imagen producto ${id}'>
+                        <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
+                        <img class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                     </picture>
                 </div>
                 <div class='c-modal__li-contenido'>
@@ -266,12 +266,20 @@ class UI {
                     <ul class='c-visitados__grid js-visitados__grid'>
                     
                     </ul>
-                    <div class='c-visitados__contenedor-botones'>
-                        <button class='c-visitados__botones js-visitados__botones'><i class="fa-solid fa-angle-left"></i></button>
-                        <button class='c-visitados__botones js-visitados__botones'><i class="fa-solid fa-angle-right"></i></button>
-                    </div>
                 `;
                 contenedorProductosVisitados.appendChild(div);
+                const boton1 = document.createElement('BUTTON');
+                boton1.classList.add('c-visitados__botones', 'c-visitados__boton1','js-visitados__botones');
+                boton1.innerHTML = `
+                    <i class="fa-solid fa-angle-left"></i>
+                `;
+                const boton2 = document.createElement('BUTTON');
+                boton2.classList.add('c-visitados__botones', 'c-visitados__boton2', 'js-visitados__botones');
+                boton2.innerHTML = `
+                    <i class="fa-solid fa-angle-right"></i>
+                `;
+                contenedorProductosVisitados.appendChild(boton1);
+                contenedorProductosVisitados.appendChild(boton2);
             }
             const contenedorGrid = contenedorProductosVisitados.children[0].children[1];
             this.limpiarHTML(contenedorGrid);
@@ -313,9 +321,8 @@ class UI {
                 li.innerHTML = `
                     <div class="c-submenus__cesta-img">
                         <picture>
-                            <source loading="lazy" srcset="${imagen}" type="image/webp">
-                            <source loading="lazy" srcset="${imagen}" type="image/jpg">
-                            <img loading="lazy" src="${imagen}" alt="imagen producto ${id}">
+                            <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
+                            <img class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                         </picture>
                     </div>
                     <div class="c-submenus__cesta-contenido">
@@ -483,10 +490,9 @@ class UI {
                 row.classList.add('c-cesta__tr');
                 row.innerHTML = `
                     <td class='c-cesta__td'>
-                        <picture>
-                            <source loading="lazy" srcset="${imagen}" type="image/webp">
-                            <source loading="lazy" srcset="${imagen}" type="image/jpg">
-                            <img loading="lazy" class='c-cesta__tbody-img' src='${imagen}' alt='imagen producto ${id}'>
+                        <picture class='c-cesta__tbody-picture'>
+                            <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
+                            <img class='c-cesta__tbody-img js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                         </picture>
                         <div class='c-cesta__tbody-descripcion'>
                             <p class='c-cesta__tbody-p'><span>${marca}</span> ${nombre}</p>
@@ -623,11 +629,11 @@ contenedorDestacados.addEventListener('click', e => {
         const productoSeleccionado = e.target.parentElement.parentElement;
         const contenedorMensaje = e.target.parentElement.parentElement.children[3];
         ui.leerArticulo('carrito', productoSeleccionado, 'c-item'); 
-        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
+        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');       
     }
         //desplegar el modal
-    if (e.target.parentElement.classList.contains('c-item__li-img')) {
-        const productoSeleccionado = e.target.parentElement.parentElement;
+    if (e.target.classList.contains('js-picture')) {
+        const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
         ui.leerArticulo('modal', productoSeleccionado, 'c-item');
     }
 });
@@ -697,7 +703,6 @@ contenedorBuscador.addEventListener('input', e => {
 
 contenedorProductosVisitados.addEventListener('click', e => {
     //agregar carrito
-    
     if (e.target.classList.contains('c-button')){
         const productoSeleccionado = e.target.parentElement.parentElement;
         const contenedorMensaje = e.target.parentElement.parentElement.children[3];
@@ -705,8 +710,8 @@ contenedorProductosVisitados.addEventListener('click', e => {
         ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
     }
     //desplegar el modal
-    if (e.target.parentElement.classList.contains('c-visitados__li-img')) {
-        const productoSeleccionado = e.target.parentElement.parentElement;
+    if (e.target.classList.contains('js-picture')) {
+        const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
         ui.leerArticulo('modal', productoSeleccionado, 'c-visitados');
     }
     

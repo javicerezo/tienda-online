@@ -2,7 +2,9 @@
 @use 'tools/mixins' as m;
 
 .c-visitados {
-    padding: 0.5rem 0;
+    padding: 0.5rem;
+    position: relative;
+    margin: 0 auto;
     @include m.tablet {
         padding: 1.5rem 0;
     }
@@ -25,17 +27,15 @@
             font-size: 2em;
         }
     }
-    &__contenedor-botones {
-        width: 100%;
-        @include m.flex (row, nowrap, space-between, center);
-        @include m.position(absolute, null, null, null, null);
-        @include m.tablet {
-            display: none;
-        }
-    }
     &__botones {
         font-size: 1.5em;
         cursor: pointer;
+    }
+    &__boton1 {
+        @include m.position(absolute, 50%, null, null, 1rem);
+    }
+    &__boton2 {
+        @include m.position(absolute, 50%, 1rem, null, null);
     }
     &__grid {
         margin: 1rem 0 0 0;
@@ -44,8 +44,6 @@
         @include m.flex(row, nowrap, flex-start, center);
         @include m.tablet {
             margin: 1.5rem 0;
-            // $slide-transform : 0;
-            // transform: translateX(var(--slide-transform));
             transform: translateX(0);
         }
         @include m.tablet {
@@ -67,17 +65,11 @@
             min-width: auto;
         }
         &-descuento {
-            @include m.position (absolute, 0.3rem, 16rem, null, null);
+            @include m.position (absolute, 0.3rem, 7rem, null, null);
             background-color: map-get(v.$colores, color-fondo);
             width: 3.125em;
             height: 3.125em;
             border-radius: 50% 50% 50% 0;
-            @include m.telefonoM {
-                right: 15rem;
-            }
-            @include m.telefonoXL {
-                right: 13rem;
-            }
             @include m.tablet {
                 right: 0.3rem;
             }

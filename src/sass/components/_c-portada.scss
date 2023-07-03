@@ -4,8 +4,13 @@
 .c-portada {
     position: relative;
     @include m.flex (row, nowrap, center, center);
+    html.webp &__foto{
+        background-image: url(../img/img-portada5.webp);
+    }
+    html.nowebp &__foto{
+        background-image: url(../img/img-portada5.jpj);
+    }
     &__foto {
-        background-image: url(../img/img-portada5.jpg);
         background-attachment: local;
         background-repeat: repeat;
         background-size: contain;

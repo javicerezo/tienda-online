@@ -77,18 +77,33 @@
         padding: 1.2rem 0;
         @include m.flex (row, nowrap, center, center);
         & > :nth-child(1) {
-            background-image: url(../img/avatar1.jpg);
             right: -0.5rem;
             z-index: 89;
         }
+        html.webp & > :nth-child(1) {
+            background-image: url(../img/avatar1.webp);
+        }
+        html.nowebp & > :nth-child(1) {
+            background-image: url(../img/avatar1.jpg);
+        }
         & > :nth-child(2) {
-            background-image: url(../img/avatar2.jpg);
             z-index: 90;
         }
+        html.webp & > :nth-child(2) {
+            background-image: url(../img/avatar2.webp);
+        }
+        html.nowebp & > :nth-child(2) {
+            background-image: url(../img/avatar2.jpg);
+        }
         & > :nth-child(3) {
-            background-image: url(../img/avatar3.jpg);
             right: 0.5rem;
             z-index: 89;
+        }
+        html.webp & > :nth-child(3) {
+            background-image: url(../img/avatar3.webp);
+        }
+        html.nowebp & > :nth-child(3) {
+            background-image: url(../img/avatar3.jpg);
         }
     }
     &__li {

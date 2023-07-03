@@ -6,7 +6,7 @@ let materialDeportivo = [
         marca: 'Roxi',
         nombre: 'Liberty Hoodie W',
         tipo: 'sudadera',
-        imagen: 'build/img/material/material1.jpg',
+        imagen: 'build/img/material/material1',
         precio: 115.49,
         descuento: 0,
         id: 1
@@ -15,7 +15,7 @@ let materialDeportivo = [
         marca: 'Grifone',
         nombre: 'Costoia Pants',
         tipo: 'pantalon',
-        imagen: 'build/img/material/material2.jpg',
+        imagen: 'build/img/material/material2',
         precio: 50.55,
         descuento: 18,
         id: 2
@@ -24,7 +24,7 @@ let materialDeportivo = [
         marca: 'Trangoworld',
         nombre: 'Velez',
         tipo: 'sudadera',
-        imagen: 'build/img/material/material3.jpg',
+        imagen: 'build/img/material/material3',
         precio: 82.80,
         descuento: 12,
         id: 3
@@ -33,7 +33,7 @@ let materialDeportivo = [
         marca: 'Grifone',
         nombre: 'Adur Jacket W',
         tipo: 'chaqueta impermeable',
-        imagen: 'build/img/material/material4.jpg',
+        imagen: 'build/img/material/material4',
         precio: 150.15,
         descuento: 43,
         id: 4
@@ -42,7 +42,7 @@ let materialDeportivo = [
         marca: 'Salomon',
         nombre: ' Speed Jaket W',
         tipo: 'chaqueta plumas plumifero',
-        imagen: 'build/img/material/material5.jpg',
+        imagen: 'build/img/material/material5',
         precio: 80.45,
         descuento: 33,
         id: 5
@@ -51,7 +51,7 @@ let materialDeportivo = [
         marca: 'The North Face',
         nombre: 'Summit Pro 120',
         tipo: 'sudadera camiseta',
-        imagen: 'build/img/material/material6.jpg',
+        imagen: 'build/img/material/material6',
         precio: 322.80,
         descuento: 50,
         id: 6
@@ -60,7 +60,7 @@ let materialDeportivo = [
         marca: 'Salomon',
         nombre: 'Pierra Ment Pant',
         tipo: 'pantalon',
-        imagen: 'build/img/material/material7.jpg',
+        imagen: 'build/img/material/material7',
         precio: 150.15,
         descuento: 60,
         id: 7
@@ -69,7 +69,7 @@ let materialDeportivo = [
         marca: '+8000',
         nombre: 'TLT Gtx Overpant',
         tipo: 'pantalon',
-        imagen: 'build/img/material/material8.jpg',
+        imagen: 'build/img/material/material8',
         precio: 80.45,
         descuento: 8,
         id: 8
@@ -78,7 +78,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Quark',
         tipo: 'piolet',
-        imagen: 'build/img/material/material9.jpg',
+        imagen: 'build/img/material/material9',
         precio: 242.00,
         descuento: 25,
         id: 9
@@ -87,7 +87,7 @@ let materialDeportivo = [
         marca: 'Atomic',
         nombre: 'Nightshade',
         tipo: 'casco esqui',
-        imagen: 'build/img/material/material10.jpg',
+        imagen: 'build/img/material/material10',
         precio: 129.99,
         descuento: 30,
         id: 10
@@ -96,7 +96,7 @@ let materialDeportivo = [
         marca: 'Scarpa',
         nombre: 'Ribelle HD',
         tipo: 'botas alpinismo',
-        imagen: 'build/img/material/material11.jpg',
+        imagen: 'build/img/material/material11',
         precio: 312.55,
         descuento: 0,
         id: 11
@@ -105,7 +105,7 @@ let materialDeportivo = [
         marca: 'La Sportiva',
         nombre: 'miura',
         tipo: 'pies de gato escalada',
-        imagen: 'build/img/material/material12.jpg',
+        imagen: 'build/img/material/material12',
         precio: 145.99,
         descuento: 9,
         id: 12
@@ -114,7 +114,7 @@ let materialDeportivo = [
         marca: 'La Sportiva',
         nombre: 'Kataki',
         tipo: 'pies de gato escalada',
-        imagen: 'build/img/material/material13.jpg',
+        imagen: 'build/img/material/material13',
         precio: 151.95,
         descuento: 9,
         id: 13
@@ -123,7 +123,7 @@ let materialDeportivo = [
         marca: 'La Sportiva',
         nombre: 'Katana',
         tipo: 'pies de gato escalada',
-        imagen: 'build/img/material/material14.jpg',
+        imagen: 'build/img/material/material14',
         precio: 139.00,
         descuento: 9,
         id: 14
@@ -132,7 +132,7 @@ let materialDeportivo = [
         marca: 'Totem Cams',
         nombre: '0.65',
         tipo: 'friends escalada clasica',
-        imagen: 'build/img/material/material15.jpg',
+        imagen: 'build/img/material/material15',
         precio: 84.95,
         descuento: 0,
         id: 15
@@ -141,7 +141,7 @@ let materialDeportivo = [
         marca: 'Totem Cams',
         nombre: '1.80',
         tipo: 'friends escalada clasica',
-        imagen: 'build/img/material/material16.jpg',
+        imagen: 'build/img/material/material16',
         precio: 84.95,
         descuento: 0,
         id: 16
@@ -150,7 +150,7 @@ let materialDeportivo = [
         marca: 'Totem Cams',
         nombre: 'Set intermedio',
         tipo: 'friends escalada clasica',
-        imagen: 'build/img/material/material17.jpg',
+        imagen: 'build/img/material/material17',
         precio: 264.95,
         descuento: 0,
         id: 17
@@ -159,7 +159,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Tango 8.5mm x 60m',
         tipo: 'cuerda dinamica escalada',
-        imagen: 'build/img/material/material18.jpg',
+        imagen: 'build/img/material/material18',
         precio: 140.00,
         descuento: 29,
         id: 18
@@ -168,7 +168,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Paso Guide 7.7mm x 60m',
         tipo: 'cuerda dinamica escalada',
-        imagen: 'build/img/material/material19.jpg',
+        imagen: 'build/img/material/material19',
         precio: 152.00,
         descuento: 25,
         id: 19
@@ -177,7 +177,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Volta Guide 9.2mm x 30m',
         tipo: 'cuerda dinamica escalada',
-        imagen: 'build/img/material/material20.jpg',
+        imagen: 'build/img/material/material20',
         precio: 116.50,
         descuento: 29,
         id: 20
@@ -186,7 +186,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Pack 6 Djinn Axess 12cm',
         tipo: 'cintas expres escalada deportiva mosqueton',
-        imagen: 'build/img/material/material21.jpg',
+        imagen: 'build/img/material/material21',
         precio: 151.95,
         descuento: 9,
         id: 21
@@ -195,7 +195,7 @@ let materialDeportivo = [
         marca: 'Fixe',
         nombre: 'Lotus rosca',
         tipo: 'cintas expres escalada deportiva mosqueton',
-        imagen: 'build/img/material/material22.jpg',
+        imagen: 'build/img/material/material22',
         precio: 11.99,
         descuento: 12,
         id: 22
@@ -204,7 +204,7 @@ let materialDeportivo = [
         marca: 'Camp',
         nombre: 'Nano 22 Rack Pack',
         tipo: 'cintas expres escalada deportiva mosqueton',
-        imagen: 'build/img/material/material23.jpg',
+        imagen: 'build/img/material/material23',
         precio: 46.00,
         descuento: 10,
         id: 23
@@ -213,7 +213,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'OK Triact-Lock',
         tipo: 'cintas expres escalada deportiva mosqueton',
-        imagen: 'build/img/material/material24.jpg',
+        imagen: 'build/img/material/material24',
         precio: 139.00,
         descuento: 9,
         id: 24
@@ -222,7 +222,7 @@ let materialDeportivo = [
         marca: 'Kong',
         nombre: 'Frog Quickdraw',
         tipo: 'cintas expres escalada deportiva mosqueton',
-        imagen: 'build/img/material/material25.jpg',
+        imagen: 'build/img/material/material25',
         precio: 35.48,
         descuento: 14,
         id: 25
@@ -231,7 +231,7 @@ let materialDeportivo = [
         marca: 'Black Diamond',
         nombre: 'ATC-Guide',
         tipo: 'descensor escalada deportiva',
-        imagen: 'build/img/material/material26.jpg',
+        imagen: 'build/img/material/material26',
         precio: 39.00,
         descuento: 12,
         id: 26
@@ -240,7 +240,7 @@ let materialDeportivo = [
         marca: 'Climbing Technology',
         nombre: 'Alpine Up',
         tipo: 'descensor escalada deportiva',
-        imagen: 'build/img/material/material27.jpg',
+        imagen: 'build/img/material/material27',
         precio: 115.95,
         descuento: 20,
         id: 27
@@ -249,7 +249,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Grigri +',
         tipo: 'asegurador escalada deportiva',
-        imagen: 'build/img/material/material28.jpg',
+        imagen: 'build/img/material/material28',
         precio: 121.00,
         descuento: 30,
         id: 28
@@ -258,7 +258,7 @@ let materialDeportivo = [
         marca: 'Fixe',
         nombre: 'Parabold M12 x 90mm (20 uds)',
         tipo: 'escalada deportiva equipamiento',
-        imagen: 'build/img/material/material29.jpg',
+        imagen: 'build/img/material/material29',
         precio: 110.45,
         descuento: 30,
         id: 29
@@ -267,7 +267,7 @@ let materialDeportivo = [
         marca: 'Grivel',
         nombre: 'Stealth Titanium',
         tipo: 'escalada deportiva casco',
-        imagen: 'build/img/material/material30.jpg',
+        imagen: 'build/img/material/material30',
         precio: 102.00,
         descuento: 23,
         id: 30
@@ -276,7 +276,7 @@ let materialDeportivo = [
         marca: 'Mammut',
         nombre: 'Skywalker 2',
         tipo: 'escalada deportiva casco',
-        imagen: 'build/img/material/material31.jpg',
+        imagen: 'build/img/material/material31',
         precio: 70.00,
         descuento: 40,
         id: 31
@@ -285,7 +285,7 @@ let materialDeportivo = [
         marca: 'Petzl',
         nombre: 'Meteor S/M',
         tipo: 'escalada deportiva casco',
-        imagen: 'build/img/material/material32.jpg',
+        imagen: 'build/img/material/material32',
         precio: 90.75,
         descuento: 20,
         id: 32
