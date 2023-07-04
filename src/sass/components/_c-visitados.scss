@@ -30,6 +30,9 @@
     &__botones {
         font-size: 1.5em;
         cursor: pointer;
+        @include m.tablet {
+            display: none;
+        }
     }
     &__boton1 {
         @include m.position(absolute, 50%, null, null, 1rem);

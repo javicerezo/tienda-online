@@ -24,7 +24,6 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
-        // .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write('.'))
         .pipe(dest('build/css'));
 }
@@ -35,7 +34,6 @@ function javascript() {
         .pipe(concat('bundle.js'))
         .pipe(terser())
         .pipe(sourcemaps.write('.'))
-        .pipe(rename({ suffix: '.min' }))
         .pipe(dest('./build/js'))
 }
 
@@ -60,5 +58,7 @@ function watchArchivos() {
 }
 
 exports.css = css;
+exports.versionWebp = versionWebp;
+exports.versionAvif = versionAvif;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript, imagenes, versionWebp, watchArchivos); 

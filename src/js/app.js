@@ -64,7 +64,7 @@ class UI {
                 <div class='${componente}__li-img'>
                     <picture>
                         <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
-                        <img class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
+                        <img width='200' height='300' class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                     </picture>
                 </div>                        
                 <div class='${componente}__li-contenido'>
@@ -203,7 +203,7 @@ class UI {
                 <div class='c-modal__li-img'>
                     <picture>
                         <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
-                        <img class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
+                        <img width='200' height='300' class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                     </picture>
                 </div>
                 <div class='c-modal__li-contenido'>
@@ -322,7 +322,7 @@ class UI {
                     <div class="c-submenus__cesta-img">
                         <picture>
                             <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
-                            <img class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
+                            <img width='200' height='300' class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                         </picture>
                     </div>
                     <div class="c-submenus__cesta-contenido">
@@ -492,7 +492,7 @@ class UI {
                     <td class='c-cesta__td'>
                         <picture class='c-cesta__tbody-picture'>
                             <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
-                            <img class='c-cesta__tbody-img js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
+                            <img width='200' height='300' class='c-cesta__tbody-img js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
                         </picture>
                         <div class='c-cesta__tbody-descripcion'>
                             <p class='c-cesta__tbody-p'><span>${marca}</span> ${nombre}</p>
@@ -571,11 +571,21 @@ btnContacto.children[0].addEventListener('click', mostrarContacto);
 
 formularioNewsletter.children[0].addEventListener('click', mostrarRadioButton);
 formularioNewsletter.children[0].addEventListener('blur', (e) => {
-    validarEmail(e, btnEnviarNewsletter, contenedorNewsletter);
+    if(e.target.type === 'email'){
+        const emailCorrecto = comprobarEmail(e.target.value);
+        if(emailCorrecto) {
+            habilitarBoton(btnEnviarNewsletter);
+        } else {
+            ui.imprimirAlerta(contenedorNewsletter, 'error', 'el email no es valido');
+        }
+    } 
 });
 formularioNewsletter.addEventListener('submit', (e) => {
     e.preventDefault();
-    enviarEmail(spinnerNewsletter, formularioNewsletter, btnEnviarNewsletter, contenedorNewsletter);
+    enviarEmail();
+    mostrarSpiner(spinnerNewsletter);
+    ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado correctamente');
+    resetFormulario(formularioNewsletter, btnEnviarNewsletter);
 });
 
 
@@ -784,34 +794,40 @@ function mostrarRadioButton() {
     });
 };
 
-function validarEmail (e, botonEnviar, contenedor) {
+function comprobarEmail (email) {
     // validamos email con Email Regex
-    if(e.target.type === 'email'){
-        if (!er.test(e.target.value)){
-            ui.imprimirAlerta(contenedor, 'error', 'El email no es valido');
-        } 
+    let correcto = false;
+    if (!er.test(email)){
+        return correcto;
+    } else {
+        correcto = true;
+        return correcto;
     }
-    //habilitamos el botón de enviar la newsletter si todo esta ok
-    if (er.test(e.target.value)) {
-        botonEnviar.classList.remove('u-cursor--not-allowed','u-opacity--50');
-        botonEnviar.disabled = false;
-    }
+}
+function habilitarBoton (botonEnviar) {
+    //habilitamos el botón de enviar la newsletter
+    botonEnviar.classList.remove('u-cursor--not-allowed','u-opacity--50');
+    botonEnviar.disabled = false;
 };
-function enviarEmail (contenedorSpinner, formulario, botonEnviar, contenedor) {
-    //mostramos spinner
-    contenedorSpinner.classList.remove('u-display--none');
-
+function mostrarSpiner (spinner){
+    spinner.classList.remove('u-display--none');
     setTimeout(() => {
-        contenedorSpinner.classList.add('u-display--none');
-        ui.imprimirAlerta(contenedor, 'exito', 'mensaje enviado correctamente');
+        spinner.classList.add('u-display--none');
+    }, 3000);
+}
+function resetFormulario (formulario, botonEnviar){
+    setTimeout(() => {
         formulario.reset();
         botonEnviar.classList.add('u-cursor--not-allowed','u-opacity--50');
         botonEnviar.disabled = true;
     }, 3000);
+}
+function enviarEmail () {
+    console.log('ENVIANDO EMAIL...');
 };
 
 function redondearResultado (valor) {
-    resultado = Math.round(valor*100)/100;
+    const resultado = Math.round(valor*100)/100;
     return resultado;
 };
 
