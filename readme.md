@@ -5,7 +5,7 @@
 - [Haz click para ver el proyecto](https://javicerezo.github.io/tienda-online/) 🚀
 
 ## Descripción 📑
-Frontend de una tienda online dedicada a los deportes de montaña. Hecho con arquitectura BEMIT. Los productos que se muestran son leídos mediante petición asíncrona a una pequeña BD creada con JSON.SERVER (NO ES UNA BASE DE DATOS REAL). Usa localStorage para guardar los productos de la cesta, además de los productos ya visitados para mostralos de nuevo más abajo. 
+Frontend de una tienda online dedicada a los deportes de montaña. Hecho con arquitectura BEMIT. Los productos que se muestran son leídos mediante petición asíncrona a una pequeña BD creada con JSON.SERVER (NO ES UNA BASE DE DATOS REAL). Usa localStorage para guardar los productos de la cesta, además de los productos ya visitados para mostralos de nuevo más abajo. Contiene testing con JEST para comprobar la correcta comunicación entre funciones. Buen rendimiento en Lighthouse gracias al minificado del sass y del js, y al uso de imágenes del tipo webp mediante GULP.
 
 ## Tecnologías 🛠
 <!-- Iconos de https://github.com/alexandresanlim/Badges4-README.md-Profile -->
