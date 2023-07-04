@@ -546,8 +546,8 @@ window.addEventListener('DOMContentLoaded', async () => {
     articulosVisitados = cargarStorage('articulosVisitados');
 
     // desactivamos los botones de newsletter y mail
-    btnEnviarNewsletter.disabled = true;
-    btnEnviarContacto.disabled = true;
+    deshabilitarBoton(btnEnviarNewsletter);
+    deshabilitarBoton(btnEnviarContacto);
     
     // En funcion del storage, se imprimen ciertas secciones de la página de una manera o de otra
     ui.imprimirCarrito(articulosCarrito);
@@ -576,6 +576,7 @@ formularioNewsletter.children[0].addEventListener('blur', (e) => {
         if(emailCorrecto) {
             habilitarBoton(btnEnviarNewsletter);
         } else {
+            deshabilitarBoton(btnEnviarNewsletter);
             ui.imprimirAlerta(contenedorNewsletter, 'error', 'el email no es valido');
         }
     } 
@@ -590,11 +591,22 @@ formularioNewsletter.addEventListener('submit', (e) => {
 
 
 formularioContacto.children[0].children[1].addEventListener('blur', (e) => {
-    validarEmail(e, btnEnviarContacto, contenedorContacto);
+    if(e.target.type === 'email'){
+        const emailCorrecto = comprobarEmail(e.target.value);
+        if(emailCorrecto) {
+            habilitarBoton(btnEnviarContacto);
+        } else {
+            deshabilitarBoton(btnEnviarContacto);
+            ui.imprimirAlerta(contenedorContacto, 'error', 'el email no es valido');
+        }
+    }
 });
 formularioContacto.addEventListener('submit', (e) => {
     e.preventDefault();
-    enviarEmail(spinnerContacto, formularioContacto, btnEnviarContacto, contenedorContacto);
+    enviarEmail();
+    mostrarSpiner(spinnerContacto);
+    ui.imprimirAlerta(contenedorContacto, 'exito', 'mensaje enviado correctamente');
+    resetFormulario(formularioContacto, btnEnviarContacto);
 });
 
 btnChat.addEventListener('click', () => {
@@ -804,10 +816,15 @@ function comprobarEmail (email) {
         return correcto;
     }
 }
-function habilitarBoton (botonEnviar) {
+function habilitarBoton (boton) {
     //habilitamos el botón de enviar la newsletter
-    botonEnviar.classList.remove('u-cursor--not-allowed','u-opacity--50');
-    botonEnviar.disabled = false;
+    boton.classList.remove('u-cursor--not-allowed','u-opacity--50');
+    boton.disabled = false;
+};
+function deshabilitarBoton (boton) {
+    //deshabilitamos el botón de enviar la newsletter
+    boton.classList.add('u-cursor--not-allowed','u-opacity--50');
+    boton.disabled = true;
 };
 function mostrarSpiner (spinner){
     spinner.classList.remove('u-display--none');
