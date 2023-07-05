@@ -40,8 +40,8 @@ class UI {
         }
     }
 
+    // método recibe 1 array BaseDatos completa, y 1 array con ids, y devuelve otro array con los objetos correspodientes a esos ids
     compararBD (arrayBD, arrayAleatorio) {
-        // método recibe 1 array BaseDatos completa, y 1 array con ids, y devuelve otro array con los objetos correspodientes a esos ids
         const arrayReturn = [];
         arrayAleatorio.forEach( id => {
             const obj = arrayBD.filter( elemento => elemento.id === id);
@@ -50,39 +50,43 @@ class UI {
         return arrayReturn;
     }
 
-    recorrerBD (array, contenedor, componente) {
-        // método que recorre una BD y la imprime en un contenedor (ambos como parámetros)
-        array.forEach( articulo => {
-            const {marca, nombre, imagen, precio, descuento, id} = articulo;
-            let precioNew = redondearResultado(precio * ((100-descuento)/100));                
-            const li = document.createElement('li');                    
-            li.classList.add(`${componente}`+'__li');
-            li.innerHTML = `                        
-                <div class='${componente}__li-descuento js-descuento'>
-                    <p>${descuento}%</p>
-                </div>
-                <div class='${componente}__li-img'>
-                    <picture>
-                        <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
-                        <img width='200' height='300' class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
-                    </picture>
-                </div>                        
-                <div class='${componente}__li-contenido'>
-                    <div class='${componente}__li-contenido--mod'>
-                        <p class='${componente}__li-titulo'><span>${marca}</span></p>
-                        <p class='${componente}__li-titulo'>${nombre}</p>
+    // método que recorre una BD y la imprime en un contenedor (ambos como parámetros)
+    imprimirBD (array, contenedor, componente) {
+        if (array.length == 0) {
+            this.imprimirAlerta(contenedor, 'alerta', 'Ups... Prueba con otra búsqueda');    
+        } else {
+            array.forEach( articulo => {
+                const {marca, nombre, imagen, precio, descuento, id} = articulo;
+                let precioNew = redondearResultado(precio * ((100-descuento)/100));                
+                const li = document.createElement('li');                    
+                li.classList.add(`${componente}`+'__li');
+                li.innerHTML = `                        
+                    <div class='${componente}__li-descuento js-descuento'>
+                        <p>${descuento}%</p>
                     </div>
-                    <div class ='${componente}__li-contenido--mod'>
-                        <p class='${componente}__li-precio'>${precioNew} €</p>  
-                        <p class='${componente}__li-precio--old js-precio--old'>${precio} €</p>                        
+                    <div class='${componente}__li-img'>
+                        <picture>
+                            <source loading="lazy" srcset="${imagen}.webp" type="image/webp">
+                            <img width='200' height='300' class='js-picture' loading="lazy" src='${imagen}.jpg' alt='imagen producto ${id}'>
+                        </picture>
+                    </div>                        
+                    <div class='${componente}__li-contenido'>
+                        <div class='${componente}__li-contenido--mod'>
+                            <p class='${componente}__li-titulo'><span>${marca}</span></p>
+                            <p class='${componente}__li-titulo'>${nombre}</p>
+                        </div>
+                        <div class ='${componente}__li-contenido--mod'>
+                            <p class='${componente}__li-precio'>${precioNew} €</p>  
+                            <p class='${componente}__li-precio--old js-precio--old'>${precio} €</p>                        
+                        </div>
+                        <button class="${componente}__li-button c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>                    
                     </div>
-                    <button class="${componente}__li-button c-button c-button--amarillo" data-id=${id}>Añadir a la cesta</button>                    
-                </div>
-                <div class="${componente}__mensaje"></div>
-                `;
-                contenedor.appendChild(li);
-        });
-        this.quitarDescuento(contenedor);
+                    <div class="${componente}__mensaje"></div>
+                    `;
+                    contenedor.appendChild(li);
+            });
+            this.quitarDescuento(contenedor);
+        } 
     }
     
     quitarDescuento (contenedor) {
@@ -97,6 +101,7 @@ class UI {
         }
     }
 
+    //crea el modal para buscar articulos por inputs
     buscadorArticulos (palabra='Buscar...') {
         const buscadorScreen = document.createElement('div');
         buscadorScreen.classList.add('c-buscador__screen');
@@ -107,7 +112,7 @@ class UI {
                         <a href="https://javicerezo.github.io/tienda-online/"><img src='build/img/logo.svg' alt='logo empresa'></a>
                     </div>
                     <div class='c-buscador__form'>
-                        <input type='text' class='c-buscador__input' placeholder='Buscar...' value='${palabra}'>
+                        <input type='text' class='c-buscador__input js-buscador__input' placeholder='Buscar...' value='${palabra}'>
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class='c-buscador__close'>
@@ -143,10 +148,11 @@ class UI {
 
         const arrayAleatorio = numerosAleatorios(3, materialDeportivo.length);
         const ejemploBusqueda = ui.compararBD(materialDeportivo, arrayAleatorio);        
-        this.recorrerBD(ejemploBusqueda, contenedorUl, 'c-buscador');           
+        this.imprimirBD(ejemploBusqueda, contenedorUl, 'c-buscador');           
     }
 
-    filtarArticulos (string, contenedor) {
+    // recibe un string y devuelve un array que coincide al compararlo con materialDeportivo
+    filtarArticulos (string) {
         let nuevoArray = [];
         string = string.toLowerCase();
 
@@ -160,15 +166,11 @@ class UI {
                 }
             }
         });
-        if (nuevoArray.length == 0) {
-            this.imprimirAlerta(contenedor, 'alerta', 'Ups... Prueba con otra búsqueda');    
-        } else {
-            this.recorrerBD(nuevoArray, contenedor, 'c-buscador');
-        } 
+        return nuevoArray;
     }
     
-    leerArticulo (accion, producto, componente) {
-        // creo obj con el contenido del producto 
+    // Devuelve un obj con el contenido del producto 
+    leerArticulo (producto, componente) {
         const infoProducto = {
             imagen: producto.querySelector('img').src,
             marca: producto.querySelector('.' + componente + '__li-titulo:first-Child').textContent,
@@ -179,18 +181,15 @@ class UI {
             id: producto.querySelector('.c-button').getAttribute('data-id'),
             cantidad: 1
         }; 
-        // le quito la extension a src de la imagen para evistar problemas con el método consultarBD()
+
+        // le quito la extension a src de la imagen para evitar problemas con el método consultarBD()
         let imagenSinExtension = infoProducto.imagen.substring(0, infoProducto.imagen.indexOf(".jpg"));
         infoProducto.imagen = imagenSinExtension;
-        if(accion === 'carrito') {
-            this.agregarCarrito(infoProducto);
-        }
-        if(accion === 'modal') {
-            this.modalArticulos(infoProducto);
-            this.agregarVisitados(infoProducto);
-        }
+
+        return infoProducto;
     }
 
+    // Construye un modal con la info del producto
     modalArticulos (producto) {
         const {imagen, marca, nombre, precioNew, precio, descuento, id} = producto;
         const modalScreen = document.createElement('div');
@@ -244,15 +243,13 @@ class UI {
         const repetido = articulosVisitados.some( articulo => articulo.id === producto.id);
         if (repetido == false) {
             if(articulosVisitados.length < 6) {
-                articulosVisitados = [...articulosVisitados, producto];
+                return articulosVisitados = [...articulosVisitados, producto];
             }
             else {
                 articulosVisitados.shift();
-                articulosVisitados = [...articulosVisitados, producto];
+                return articulosVisitados = [...articulosVisitados, producto];
             }
-        }       
-        guardarStorage('articulosVisitados', articulosVisitados);
-        this.imprimirVisitados(articulosVisitados);
+        }
     }
 
     imprimirVisitados(array) {
@@ -283,7 +280,7 @@ class UI {
             }
             const contenedorGrid = contenedorProductosVisitados.children[0].children[1];
             this.limpiarHTML(contenedorGrid);
-            this.recorrerBD(array, contenedorGrid, 'c-visitados');
+            this.imprimirBD(array, contenedorGrid, 'c-visitados');
         }
     }
 
@@ -300,20 +297,19 @@ class UI {
                 }
             });
             articulosCarrito = [... articulosModificadosCarrito];
-            this.imprimirCarrito(articulosCarrito);
+            return articulosCarrito;
         } else {
             articulosCarrito = [...articulosCarrito, producto];
-            this.imprimirCarrito(articulosCarrito);
+            return articulosCarrito;
         }
-        guardarStorage('articulosCarrito', articulosCarrito);
+        
     }
 
     imprimirCarrito (array){
+        this.limpiarHTML(contenedorCarrito); // CONTENEDOR DE LOS ARTICULOS
+        this.limpiarHTML(contenedorCarrito.parentElement.children[1]); // ES EL CONTENEDOR DEL PRECIO TOTAL
         if (array.length != 0) {
-            this.limpiarHTML(contenedorCarrito);
-            this.limpiarHTML(contenedorCarrito.parentElement.children[1]);
-    
-            // imprime los artículos del array articulosCarrito
+            // imprime los artículos del array
             array.forEach( articulo => {
                 const {imagen, marca, nombre, precioNew, precio, descuento, cantidad, id} = articulo;
                 const li = document.createElement('li');
@@ -351,22 +347,7 @@ class UI {
                 `; 
                 contenedorCarrito.parentElement.children[1].appendChild(total);   
             }
-            this.comprobarCarrito(array);
         }
-    }
-
-    eliminarArticulo (articulo, string=null) {
-        const id = articulo.getAttribute('data-id');
-        articulosCarrito = articulosCarrito.filter( a => a.id != id);
-        this.imprimirCarrito(articulosCarrito);
-        if(string === 'cesta' || contenedorCesta.childElementCount != 0) {
-            this.limpiarHTML(contenedorCesta);
-            this.verCesta(articulosCarrito);
-        }
-        guardarStorage('articulosCarrito', articulosCarrito);
-    }
-
-    comprobarCarrito (array) {
         if(array.length == 0) {
             const articulo = document.createElement ('li');
             articulo.classList.add('c-submenus__secciones');
@@ -374,14 +355,26 @@ class UI {
                 <p>En este momento no hay productos en tu cesta.</p>
             `;
             contenedorCarrito.appendChild(articulo);
-            ui.numeroArticulos(0);
-        } else {
-            const cantidad = array.reduce( (total, producto) => total + producto.cantidad, 0);
-            ui.numeroArticulos(cantidad);
         }
     }
 
-    numeroArticulos (cantidad) {
+    eliminarArticulo (articulo, string=null) {
+        const id = articulo.getAttribute('data-id');
+        articulosCarrito = articulosCarrito.filter( a => a.id != id);
+        return articulosCarrito;
+    }
+
+    // Comprueba la cantidad de articulos del array de carrito
+    comprobarNumeroArticulos (array) {
+        if (array.length == 0) {    
+            return 0;
+        } else {
+            const cantidad = array.reduce( (total, producto) => total + producto.cantidad, 0);
+            return cantidad;
+        }
+    }
+
+    imprimirNumeroArticulos (cantidad) {
         this.limpiarHTML(contenedorNumArticulos);
 
         const numeroArticulos = document.createElement('p');
@@ -414,9 +407,11 @@ class UI {
         }
     }
 
-    verCesta () {
+    // Imprime la cesta de compra con todos los articulos
+    imprimirCesta (array, contenedor) {
+        ui.limpiarHTML(contenedor);
         // antes de imprimir calculo los totales para meterlos en el innerHTML directamente
-        const subTotal = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.cantidad, 0));
+        const subTotal = redondearResultado(array.reduce( (total, producto) => total += producto.precio - producto.cantidad, 0));
         let gastosEnvio;
         if(subTotal == 0) {
             gastosEnvio = 0;
@@ -424,7 +419,7 @@ class UI {
             gastosEnvio = 5;
         }
         const subtotalPedido = subTotal + gastosEnvio;
-        const ahorroTotal = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0));
+        const ahorroTotal = redondearResultado(array.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0));
 
         const cestaScreen = document.createElement('div');
         cestaScreen.classList.add('c-cesta__screen');
@@ -473,16 +468,15 @@ class UI {
             </div>
 
         `;
-        contenedorCesta.classList.add('c-cesta--mod');
-        contenedorCesta.appendChild(cestaScreen);
+        contenedor.classList.add('c-cesta--mod');
+        contenedor.appendChild(cestaScreen);
 
         const contenedorTbody = document.querySelector('.js-cesta__tbody');
-        if (articulosCarrito.length == 0){
+        if (array.length == 0){
             const botonTramitar = document.querySelector('.js-cesta__boton');
-            botonTramitar.disabled = true;
-            botonTramitar.classList.add('u-opacity--50','u-cursor--not-allowed');
+            deshabilitarBoton(botonTramitar);
         } else {
-            articulosCarrito.forEach( articulo => {
+            array.forEach( articulo => {
                 const {marca, nombre, imagen, precio, precioNew, descuento, cantidad, id} = articulo;
                 let precioMismoTipo = redondearResultado(cantidad*precioNew);
                 let ahorro = redondearResultado(precio - precioNew);
@@ -524,8 +518,8 @@ class UI {
                     precios.children[2].classList.add('c-cesta__tbody-precio--mod');
                 }
             });
-            const totalCesta = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.cantidad*producto.precioNew, 0));
-            let totalAhorro = redondearResultado(articulosCarrito.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0));
+            const totalCesta = redondearResultado(array.reduce( (total, producto) => total += producto.cantidad*producto.precioNew, 0));
+            let totalAhorro = redondearResultado(array.reduce( (total, producto) => total += producto.precio - producto.precioNew, 0));
         }
         
     }
@@ -541,27 +535,28 @@ const ui = new UI();
 // EVENTOS
 // evento para iniciar app
 window.addEventListener('DOMContentLoaded', async () => {
-    // Cargamos posibles busquedas del cliente en el storage
+    // Cargamos posibles busquedas del cliente en el storage (carrito y visitados)
     articulosCarrito = cargarStorage('articulosCarrito');
     articulosVisitados = cargarStorage('articulosVisitados');
+    
+    // intentamos conectar con la base de datos
+    let materialDeportivo = await consultarBD('materialDeportivo');
 
     // desactivamos los botones de newsletter y mail
     deshabilitarBoton(btnEnviarNewsletter);
     deshabilitarBoton(btnEnviarContacto);
     
-    // En funcion del storage, se imprimen ciertas secciones de la página de una manera o de otra
+    // imprimimos los datos del storage del carrito y visitados
     ui.imprimirCarrito(articulosCarrito);
+    const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+    ui.imprimirNumeroArticulos(cantidadArticulos);
     ui.imprimirVisitados(articulosVisitados);
-    ui.comprobarCarrito(articulosCarrito);
-
-    // intentamos conectar con la base de datos
-    let materialDeportivo = await consultarBD('materialDeportivo');
 
     // Creamos un array de material destacado con 8 elementos aleatorios que están dentro de material deportivo para mostrarlo por pantalla
     const arrayAleatorio = numerosAleatorios(8, materialDeportivo.length);
     const destacados = ui.compararBD(materialDeportivo, arrayAleatorio);
     // imprimimos el array destacados en la seccion destacados
-    ui.recorrerBD(destacados, contenedorDestacados, 'c-item');
+    ui.imprimirBD(destacados, contenedorDestacados, 'c-item');
 });
 // EVENTOS PARA BOTONES
 btnBurger.addEventListener('click', mostrarNav);
@@ -570,27 +565,29 @@ btnConsulta.addEventListener('click', mostrarContacto);
 btnContacto.children[0].addEventListener('click', mostrarContacto);
 
 formularioNewsletter.children[0].addEventListener('click', mostrarRadioButton);
-formularioNewsletter.children[0].addEventListener('blur', (e) => {
+formularioNewsletter.children[0].addEventListener('blur', e => {
     if(e.target.type === 'email'){
-        const emailCorrecto = comprobarEmail(e.target.value);
+        const email = e.target.value;
+        const emailCorrecto = comprobarEmail(email);
         if(emailCorrecto) {
             habilitarBoton(btnEnviarNewsletter);
         } else {
             deshabilitarBoton(btnEnviarNewsletter);
             ui.imprimirAlerta(contenedorNewsletter, 'error', 'el email no es valido');
         }
-    } 
+    }
 });
-formularioNewsletter.addEventListener('submit', (e) => {
+formularioNewsletter.addEventListener('submit', e => {
     e.preventDefault();
-    enviarEmail();
+    const email = e.target.value;
+    enviarEmail(email);
     mostrarSpiner(spinnerNewsletter);
     ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado correctamente');
     resetFormulario(formularioNewsletter, btnEnviarNewsletter);
 });
 
 
-formularioContacto.children[0].children[1].addEventListener('blur', (e) => {
+formularioContacto.children[0].children[1].addEventListener('blur', e => {
     if(e.target.type === 'email'){
         const emailCorrecto = comprobarEmail(e.target.value);
         if(emailCorrecto) {
@@ -601,9 +598,10 @@ formularioContacto.children[0].children[1].addEventListener('blur', (e) => {
         }
     }
 });
-formularioContacto.addEventListener('submit', (e) => {
+formularioContacto.addEventListener('submit', e => {
     e.preventDefault();
-    enviarEmail();
+    const email = e.target.value;
+    enviarEmail(email);
     mostrarSpiner(spinnerContacto);
     ui.imprimirAlerta(contenedorContacto, 'exito', 'mensaje enviado correctamente');
     resetFormulario(formularioContacto, btnEnviarContacto);
@@ -617,7 +615,7 @@ btnBuscador.addEventListener('click', () => {
     ui.buscadorArticulos();
 });
 
-window.addEventListener("resize",() => {
+window.addEventListener("resize", () => {
     if (contenedorHeader.clientWidth >= desktop) {
         if (contenedorNav.classList.contains('c-nav--mod')) {
             contenedorNav.classList.remove('c-nav--mod');
@@ -631,110 +629,164 @@ window.addEventListener("resize",() => {
 
 //EVENTOS PARA CONTENEDORES
 contenedorNav.addEventListener('click', e => {
-    console.log(e.target)
+    // evento para las secciones del la barra navegación
     if (e.target.classList.contains('c-subnav__li')) {
-        const li = e.target.textContent;
-        ui.buscadorArticulos(li);
+        const string = e.target.textContent;
+        ui.buscadorArticulos(string);
         
         const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
-        // const input = document.querySelector('.c-buscador__input');
-        // input.textContent = li;
-
+        
         ui.limpiarHTML(contenedorUl);
-        ui.filtarArticulos(li, contenedorUl);
+        const arrayCoincide = ui.filtarArticulos(string);
+        console.log(arrayCoincide)
+        ui.imprimirBD(arrayCoincide, contenedorUl, 'c-buscador');
     }
 });
 
 contenedorDestacados.addEventListener('click', e => {
+    // Agregar al carrito
     if (e.target.classList.contains('c-button')){
-        //agregar carrito
         const productoSeleccionado = e.target.parentElement.parentElement;
         const contenedorMensaje = e.target.parentElement.parentElement.children[3];
-        ui.leerArticulo('carrito', productoSeleccionado, 'c-item'); 
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-item');
+        const articulosCarrito = ui.agregarCarrito(producto);
+        ui.imprimirCarrito(articulosCarrito);
+        const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+        ui.imprimirNumeroArticulos(cantidadArticulos);
+        guardarStorage('articulosCarrito', articulosCarrito);
         ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');       
     }
-        //desplegar el modal
+        // Desplegar el modal
     if (e.target.classList.contains('js-picture')) {
         const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
-        ui.leerArticulo('modal', productoSeleccionado, 'c-item');
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-item');
+        ui.modalArticulos(producto);
+        const articulosVisitados = ui.agregarVisitados(producto);
+        ui.imprimirVisitados(articulosVisitados);
+        guardarStorage('articulosVisitados', articulosVisitados);
     }
 });
 
 contenedorCarrito.addEventListener('click', e => {
+    // Boton eliminar
     if (e.target.classList.contains('js-submenus__cesta-eliminar')) {
-        ui.eliminarArticulo(e.target);
+        const articulo = e.target;
+        const articulosCarrito = ui.eliminarArticulo(articulo);
+        ui.imprimirCarrito(articulosCarrito);
+        const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+        ui.imprimirNumeroArticulos(cantidadArticulos);
+        guardarStorage('articulosCarrito', articulosCarrito);
     }
 });
 contenedorCarrito.parentElement.children[1].addEventListener('click', e => {
+    // Botón ver cesta
     if (e.target.classList.contains('js-submenus__ver-cesta')) {
-        ui.verCesta();
+        ui.imprimirCesta(articulosCarrito, contenedorCesta);
         setTimeout(() => {
             contenedorHeader.classList.add('c-header--fixed');
         }, 2000);
     }
+    // Botón ver tramitar
     if (e.target.classList.contains('js-submenus__resultado-button')) {
         ui.tramitarPedido();
     }
 });
 
 contenedorModal.addEventListener('click', e => {
+    // Salgo del modal
     if(e.target.classList.contains('fa-solid') || e.target.classList.contains('c-modal__screen')) {
         contenedorModal.classList.remove('c-modal--mod');
         setTimeout(() => {
             ui.limpiarHTML(contenedorModal);
         }, 100);
     }
+    // Agrego articulo a la cesta
     if(e.target.classList.contains('c-button')) {
         const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
         const contenedorMensaje = productoSeleccionado.children[4];
-        ui.leerArticulo('carrito', productoSeleccionado, 'c-modal'); 
-        ui.imprimirAlerta(contenedorMensaje, 'exito', 'producto añadido al carrito');
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-modal');
+        const articulosCarrito = ui.agregarCarrito(producto);
+        ui.imprimirCarrito(articulosCarrito);
+        const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+        ui.imprimirNumeroArticulos(cantidadArticulos);
+        guardarStorage('articulosCarrito', articulosCarrito);
+        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');    
     }
 });
 
 contenedorBuscador.addEventListener('click', e => {            
     const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
+    let input = document.querySelector('.js-buscador__input');
+    // salgo del buscador
     if(e.target.classList.contains('c-buscador__close') || e.target.classList.contains('fa-solid')) {
         contenedorBuscador.classList.remove('c-buscador--mod');
         setTimeout(() => {
             ui.limpiarHTML(contenedorBuscador);
         }, 100);
+        //si hemos visto algún producto que actualice los visitados
+        ui.imprimirVisitados(articulosVisitados);
     }
+    // Agrego al carrito
     if (e.target.classList.contains('c-button')){
         const productoSeleccionado = e.target.parentElement.parentElement;
         const contenedorMensaje = e.target.parentElement.parentElement.children[3];
-        ui.leerArticulo('carrito', productoSeleccionado, 'c-buscador'); 
-        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-buscador');
+        const articulosCarrito = ui.agregarCarrito(producto);
+        ui.imprimirCarrito(articulosCarrito);
+        const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+        ui.imprimirNumeroArticulos(cantidadArticulos);
+        guardarStorage('articulosCarrito', articulosCarrito);
+        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');
     }
-    if (e.target.parentElement.classList.contains('c-buscador__li-img')) {
-        const productoSeleccionado = e.target.parentElement.parentElement;
-        ui.leerArticulo('modal', productoSeleccionado, 'c-buscador');
+    // Desplegar el modal
+    if (e.target.classList.contains('js-picture')) {
+        const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-buscador');
+        ui.modalArticulos(producto);
+        const articulosVisitados = ui.agregarVisitados(producto);
+        guardarStorage('articulosVisitados', articulosVisitados);
     }
+    // Li búsquedas populares
     if(e.target.classList.contains('c-buscador__li-populares')) {
         ui.limpiarHTML(contenedorUl);
-        ui.filtarArticulos(e.target.textContent, contenedorUl);
+        const string = e.target.textContent;
+        const arrayCoincide = ui.filtarArticulos(string);
+        ui.imprimirBD(arrayCoincide, contenedorUl, 'c-buscador');
+        input.value = string;
     }
 });
 contenedorBuscador.addEventListener('input', e => {
     const contenedorUl = document.querySelector('.js-buscador__ul-buscar');
+    let string = e.target.value;
+    ui.limpiarHTML(contenedorUl);
     if(e.target.classList.contains('c-buscador__input')) {
-        ui.limpiarHTML(contenedorUl);
-        ui.filtarArticulos(e.target.value, contenedorUl);
+        if(string === '') {
+            ui.imprimirAlerta(contenedorUl, 'alerta', '¿qué quieres buscar?');
+        } else {
+            const arrayCoincide = ui.filtarArticulos(string);
+            ui.imprimirBD(arrayCoincide, contenedorUl, 'c-buscador');
+        }
     }
 });
 
 contenedorProductosVisitados.addEventListener('click', e => {
-    //agregar carrito
+    // Agregar al carrito
     if (e.target.classList.contains('c-button')){
         const productoSeleccionado = e.target.parentElement.parentElement;
         const contenedorMensaje = e.target.parentElement.parentElement.children[3];
-        ui.leerArticulo('carrito', productoSeleccionado, 'c-visitados'); 
-        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');          
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-visitados');
+        const articulosCarrito = ui.agregarCarrito(producto);
+        ui.imprimirCarrito(articulosCarrito);
+        const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+        ui.imprimirNumeroArticulos(cantidadArticulos);
+        guardarStorage('articulosCarrito', articulosCarrito);
+        ui.imprimirAlerta(contenedorMensaje,'exito', 'producto añadido al carrito');       
     }
-    //desplegar el modal
+        // Desplegar el modal
     if (e.target.classList.contains('js-picture')) {
         const productoSeleccionado = e.target.parentElement.parentElement.parentElement;
-        ui.leerArticulo('modal', productoSeleccionado, 'c-visitados');
+        const producto = ui.leerArticulo(productoSeleccionado, 'c-visitados');
+        ui.modalArticulos(producto);
     }
     
     // slider de visitados
@@ -756,6 +808,7 @@ contenedorProductosVisitados.addEventListener('click', e => {
 });
 
 contenedorCesta.addEventListener('click', e => {
+    // cerral la cesta
     if(e.target.classList.contains('fa-solid') || e.target.textContent == 'Continuar comprando') {
         contenedorCesta.classList.remove('c-cesta--mod');
         contenedorHeader.classList.remove('c-header--fixed');
@@ -763,11 +816,30 @@ contenedorCesta.addEventListener('click', e => {
             ui.limpiarHTML(contenedorCesta);
         }, 100);
     }
+    // Boton eliminar de la cesta
     if (e.target.classList.contains('c-cesta__tbody-a')) {
-        ui.eliminarArticulo(e.target, 'cesta');
+        const articulo = e.target;
+        const articulosCarrito = ui.eliminarArticulo(articulo);
+        ui.imprimirCarrito(articulosCarrito);
+        const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+        ui.imprimirNumeroArticulos(cantidadArticulos);
+        guardarStorage('articulosCarrito', articulosCarrito);
+        ui.imprimirCesta(articulosCarrito, contenedorCesta);
     }
+    // Boton eliminar del carrito de compra
+    contenedorCarrito.addEventListener('click', e => {
+        if (e.target.classList.contains('js-submenus__cesta-eliminar')) {
+            const articulo = e.target;
+            const articulosCarrito = ui.eliminarArticulo(articulo);
+            ui.imprimirCarrito(articulosCarrito);
+            const cantidadArticulos = ui.comprobarNumeroArticulos(articulosCarrito);
+            ui.imprimirNumeroArticulos(cantidadArticulos);
+            guardarStorage('articulosCarrito', articulosCarrito);
+            ui.imprimirCesta(articulosCarrito, contenedorCesta);
+        }
+    });
+    
 });
-
 
 // FUNCIONES
 function mostrarNav () {
@@ -817,12 +889,12 @@ function comprobarEmail (email) {
     }
 }
 function habilitarBoton (boton) {
-    //habilitamos el botón de enviar la newsletter
+    // Habilitamos el uso de un botón
     boton.classList.remove('u-cursor--not-allowed','u-opacity--50');
     boton.disabled = false;
 };
 function deshabilitarBoton (boton) {
-    //deshabilitamos el botón de enviar la newsletter
+    // Deshabilitamos el uso de un botón
     boton.classList.add('u-cursor--not-allowed','u-opacity--50');
     boton.disabled = true;
 };
@@ -839,8 +911,9 @@ function resetFormulario (formulario, botonEnviar){
         botonEnviar.disabled = true;
     }, 3000);
 }
-function enviarEmail () {
-    console.log('ENVIANDO EMAIL...');
+function enviarEmail (email) {
+    console.log(`ENVIANDO EMAIL...a ${email}`);
+
 };
 
 function redondearResultado (valor) {
