@@ -1,4 +1,4 @@
-// NOTA: SI PASAN LOS TEST A NEWSLETTER, PASARÁN LOS TEST A CONTACTO YA QUE SON LAS MISMAS FUNCIONES
+// NOTA: SI PASAN LOS TEST A CONTACTO, PASARÁN LOS TEST A NEWSLETTER YA QUE SON LAS MISMAS FUNCIONES
 
 function comprobarEmail (email) {
     const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
@@ -12,7 +12,11 @@ function comprobarEmail (email) {
     }
 }
 
-describe('testing al formulario newsletter', () => {
+function rellenarEmail (e) {
+    emailObj[e.target.name] = e.target.value.trim();
+};
+
+describe('testing al formulario contacto', () => {
     test('email correcto', () => {
         expect(comprobarEmail('correo@correo.es')).toBe(true);
     });

@@ -287,15 +287,15 @@
                 Recibe nuestras novedades, ofertas y promociones.
             </h4>
             <form class="c-newsletter__form js-newsletter__form" action="" method="">
-                <input class="c-newsletter__input" type="email">
+                <input class="c-newsletter__input js-newsletter__input" type="email" name="emailNewsletter">
                 <label class="c-newsletter__label">Tu dirección de email</label>
                 <div class="c-newsletter__form-radio">
                     <div class="c-newsletter__radio">
-                        <input type="radio" name="sexo">
+                        <input type="radio" name="sexoHombre">
                         <label>Hombre</label>
                     </div>
                     <div class="c-newsletter__radio">
-                        <input type="radio" name="sexo">
+                        <input type="radio" name="sexoMujer">
                         <label>Mujer</label>
                     </div>
                 </div>
@@ -349,11 +349,11 @@
                 <form action="" class="c-contacto__form js-contacto__form">
                     <fieldset class="c-contacto__fieldset">
                         <label>Email</label>
-                        <input type="email" name="" id="">
+                        <input type="email" name="emailContacto" class="js-contacto__input">
                     </fieldset>
                     <fieldset class="c-contacto__fieldset">
                         <label>¿En qué podemos ayudarte?</label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea type="textarea" name="textAreaContacto" class="js-contacto__textArea" cols="30" rows="10"></textarea>
                     </fieldset>
                     <fieldset class="c-contacto__fieldset">
                         <button class="c-button c-button--amarillo

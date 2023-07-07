@@ -10,8 +10,11 @@ const btnChat = document.querySelector('.js-submenus__boton-chat');
 const btnContacto = document.querySelector('.js-contacto');
 const btnEnviarContacto = document.querySelector('.js-contacto__enviar');
 const btnEnviarNewsletter = document.querySelector('.js-newsletter__enviar');
+const inputEmailNewsletter = document.querySelector('.js-newsletter__input');
 const formularioNewsletter = document.querySelector('.js-newsletter__form');
 const spinnerNewsletter = document.querySelector('.js-newsletter__spinner');
+const inputEmailContacto = document.querySelector('.js-contacto__input');
+const textAreaContacto = document.querySelector('.js-contacto__textArea');
 const formularioContacto = document.querySelector('.js-contacto__form');
 const spinnerContacto = document.querySelector('.js-contacto__spinner');
 const er = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
@@ -31,6 +34,13 @@ const contenedorContacto = document.querySelector('.js-contacto__contenedor');
 
 let articulosCarrito = [];
 let articulosVisitados = [];
+const emailObj = {
+    emailContacto: '',
+    emailCorrecto: '',
+    textAreaContacto: '',
+    textoCorrecto: ''
+}
+let emailNewsletter = '';
 
 // CLASES
 class UI {
@@ -452,9 +462,9 @@ class UI {
                 </div>
                 <div class='c-cesta__resultado'>
                     <div class='c-cesta__caja-botones'>
-                        <button class='c-cesta__boton c-button c-button--amarillo'>Continuar comprando</button>
+                        <button class='c-cesta__boton c-button c-button--amarillo'>continuar comprando</button>
                         <div class='c-cesta__tramitar c-button c-button--amarillo js-cesta__boton'>
-                            <button class='c-cesta__boton'>Tramitar</button>
+                            <button class='c-cesta__boton'>tramitar</button>
                             <i class="fa-solid fa-cart-shopping"></i>
                         </div>
                     </div>
@@ -523,10 +533,6 @@ class UI {
         }
         
     }
-    
-    tramitarPedido () {
-        console.log('estas tramitando el pedido');
-    }
 }
 
 // INSTANCIAS DE CLASE
@@ -564,47 +570,27 @@ btnBurger.addEventListener('click', mostrarNav);
 btnConsulta.addEventListener('click', mostrarContacto);
 btnContacto.children[0].addEventListener('click', mostrarContacto);
 
-formularioNewsletter.children[0].addEventListener('click', mostrarRadioButton);
-formularioNewsletter.children[0].addEventListener('blur', e => {
-    if(e.target.type === 'email'){
-        const email = e.target.value;
-        const emailCorrecto = comprobarEmail(email);
-        if(emailCorrecto) {
-            habilitarBoton(btnEnviarNewsletter);
-        } else {
-            deshabilitarBoton(btnEnviarNewsletter);
-            ui.imprimirAlerta(contenedorNewsletter, 'error', 'el email no es valido');
-        }
-    }
-});
+inputEmailNewsletter.addEventListener('click', mostrarRadioButton);
+inputEmailNewsletter.addEventListener('blur', comprobarInput);
+
 formularioNewsletter.addEventListener('submit', e => {
     e.preventDefault();
-    const email = e.target.value;
-    enviarEmail(email);
+    enviarEmail(emailNewsletter);
     mostrarSpiner(spinnerNewsletter);
     ui.imprimirAlerta(contenedorNewsletter, 'exito', 'mensaje enviado correctamente');
     resetFormulario(formularioNewsletter, btnEnviarNewsletter);
+    correoNewsletter = '';
 });
 
-
-formularioContacto.children[0].children[1].addEventListener('blur', e => {
-    if(e.target.type === 'email'){
-        const emailCorrecto = comprobarEmail(e.target.value);
-        if(emailCorrecto) {
-            habilitarBoton(btnEnviarContacto);
-        } else {
-            deshabilitarBoton(btnEnviarContacto);
-            ui.imprimirAlerta(contenedorContacto, 'error', 'el email no es valido');
-        }
-    }
-});
+inputEmailContacto.addEventListener('blur', comprobarInput);
+textAreaContacto.addEventListener('blur', comprobarInput);
 formularioContacto.addEventListener('submit', e => {
     e.preventDefault();
-    const email = e.target.value;
-    enviarEmail(email);
+    enviarEmail(emailObj);
     mostrarSpiner(spinnerContacto);
     ui.imprimirAlerta(contenedorContacto, 'exito', 'mensaje enviado correctamente');
     resetFormulario(formularioContacto, btnEnviarContacto);
+    reiniciarObjEmail();
 });
 
 btnChat.addEventListener('click', () => {
@@ -688,7 +674,7 @@ contenedorCarrito.parentElement.children[1].addEventListener('click', e => {
     }
     // Botón ver tramitar
     if (e.target.classList.contains('js-submenus__resultado-button')) {
-        ui.tramitarPedido();
+        tramitarPedido();
     }
 });
 
@@ -809,7 +795,7 @@ contenedorProductosVisitados.addEventListener('click', e => {
 
 contenedorCesta.addEventListener('click', e => {
     // cerral la cesta
-    if(e.target.classList.contains('fa-solid') || e.target.textContent == 'Continuar comprando') {
+    if(e.target.classList.contains('fa-xmark') || e.target.textContent === 'continuar comprando') {
         contenedorCesta.classList.remove('c-cesta--mod');
         contenedorHeader.classList.remove('c-header--fixed');
         setTimeout(() => {
@@ -826,7 +812,12 @@ contenedorCesta.addEventListener('click', e => {
         guardarStorage('articulosCarrito', articulosCarrito);
         ui.imprimirCesta(articulosCarrito, contenedorCesta);
     }
-    // Boton eliminar del carrito de compra
+    // Boton tramitar pedido
+    if(e.target.classList.contains('fa-cart-shopping') || e.target.textContent === 'tramitar' || 
+    e.target.classList.contains('js-cesta__boton')){
+        tramitarPedido();
+    }
+    // Boton eliminar del carrito de compra cuando tenemos el modal de cesta activo
     contenedorCarrito.addEventListener('click', e => {
         if (e.target.classList.contains('js-submenus__cesta-eliminar')) {
             const articulo = e.target;
@@ -847,7 +838,8 @@ function mostrarNav () {
     contenedorHeader.classList.toggle('c-header--fixed');
     btnBurger.children[0].children[0].classList.toggle('fa-bars');
     btnBurger.children[0].children[0].classList.toggle('fa-xmark');
-}
+};
+
 function mostrarContacto () {
     btnContacto.children[1].classList.toggle('c-contacto__screen--mod');
     btnContacto.children[0].children[0].classList.toggle('c-contacto__img--mod');
@@ -865,7 +857,7 @@ function moverVisitados (direccion, anchoElemento, rootstyle) {
     else if(direccion === 'derecha') {
         rootstyle.setProperty('--slide-transform', `${transformValue - anchoElemento}px`);
     }
-}
+};
 
 function mostrarRadioButton() {
     formularioNewsletter.children[2].classList.add('c-newsletter__form-radio--mod');
@@ -878,6 +870,78 @@ function mostrarRadioButton() {
     });
 };
 
+// chequea los input y habilita el botón de enviar
+function comprobarInput (e) {
+    if (e.target.type === 'email') {
+        if (e.target.name === 'emailNewsletter') {
+            const email = e.target.value;
+            const emailCorrecto = comprobarEmail(email);
+            emailNewsletter = email;
+            if(emailCorrecto) {
+                habilitarBoton(btnEnviarNewsletter);
+            } else {
+                deshabilitarBoton(btnEnviarNewsletter);
+                ui.imprimirAlerta(contenedorNewsletter, 'error', 'el email no es valido');
+            }
+        }
+        if (e.target.name === 'emailContacto') {
+            const email = e.target.value;
+            const emailCorrecto = comprobarEmail(email);
+            rellenarEmail(e);
+            if(emailCorrecto) {
+                emailObj.emailCorrecto = emailCorrecto;
+            } else {
+                emailObj.emailCorrecto = emailCorrecto;
+                ui.imprimirAlerta(contenedorContacto, 'error', 'el email no es valido');
+            } 
+        }
+    } 
+    if (e.target.type === 'textarea') {
+        const mensaje = e.target.value.trim();
+        let textoCorrecto = '';
+        if (mensaje !=='' && mensaje !== null && mensaje !== ' ') {
+            rellenarEmail(e);
+            textoCorrecto = true;
+            emailObj.textoCorrecto = textoCorrecto;
+        } else {
+            rellenarEmail(e);
+            ui.imprimirAlerta(contenedorContacto, 'error', 'el mensaje no es valido');
+            textoCorrecto = false;
+            emailObj.textoCorrecto = textoCorrecto;
+        }
+    } 
+    // si email y texto pasan validación, habilita el botón enviar
+    const { emailCorrecto, textoCorrecto } = emailObj;
+    if (emailCorrecto && textoCorrecto ) {
+        habilitarBoton(btnEnviarContacto);
+    } else {
+        deshabilitarBoton(btnEnviarContacto);
+        ui.imprimirAlerta(contenedorContacto, 'error', 'Todos los campos son obligatorios');
+    }
+}
+
+function rellenarEmail (e) {
+    //llena el objeto con los datos de los input del mismo name que le vamos pasando
+    emailObj[e.target.name] = e.target.value.trim();
+};
+
+function enviarEmail (email) {
+    if(typeof email === 'string'){
+        console.log(`ENVIANDO EMAIL...a ${email}`);
+    }
+    if(typeof email === 'object'){
+        const { emailContacto, textAreaContacto } = email;
+        console.log(`Email: '${emailContacto}' - Contenido: '${textAreaContacto}'`);
+    }
+};
+
+function reiniciarObjEmail () {
+    emailObj.emailContacto = '';
+    emailObj.emailCorrecto = '';
+    emailObj.textAreaContacto = '',
+    emailObj.textoCorrecto = '';
+};
+
 function comprobarEmail (email) {
     // validamos email con Email Regex
     let correcto = false;
@@ -887,33 +951,33 @@ function comprobarEmail (email) {
         correcto = true;
         return correcto;
     }
-}
+};
+
 function habilitarBoton (boton) {
     // Habilitamos el uso de un botón
     boton.classList.remove('u-cursor--not-allowed','u-opacity--50');
     boton.disabled = false;
 };
+
 function deshabilitarBoton (boton) {
     // Deshabilitamos el uso de un botón
     boton.classList.add('u-cursor--not-allowed','u-opacity--50');
     boton.disabled = true;
 };
+
 function mostrarSpiner (spinner){
     spinner.classList.remove('u-display--none');
     setTimeout(() => {
         spinner.classList.add('u-display--none');
     }, 3000);
-}
+};
+
 function resetFormulario (formulario, botonEnviar){
     setTimeout(() => {
         formulario.reset();
         botonEnviar.classList.add('u-cursor--not-allowed','u-opacity--50');
         botonEnviar.disabled = true;
     }, 3000);
-}
-function enviarEmail (email) {
-    console.log(`ENVIANDO EMAIL...a ${email}`);
-
 };
 
 function redondearResultado (valor) {
@@ -924,9 +988,10 @@ function redondearResultado (valor) {
 function guardarStorage(nombreArray, array){
     localStorage.setItem(nombreArray, JSON.stringify(array));
 };
+
 function cargarStorage (nombreArray) {
     return JSON.parse(localStorage.getItem(nombreArray)) || [];
-}
+};
 
 async function consultarBD (nombre) {
     const url = `http://localhost:4000/${nombre}`;
@@ -940,7 +1005,7 @@ async function consultarBD (nombre) {
         console.log(error);
         return materialDeportivo;
     }
-}
+};
 
 function numerosAleatorios (cantidadNumeros, limite) {
     const array = [];
@@ -958,5 +1023,8 @@ function numerosAleatorios (cantidadNumeros, limite) {
         }
     }
     return array;
-}
+};
 
+function tramitarPedido () {
+    console.log('estas tramitando el pedido');
+};
