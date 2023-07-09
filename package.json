@@ -2,7 +2,7 @@
   "name": "tienda-online",
   "version": "1.0.0",
   "description": "tienda online dedicada a los productos de montaña",
-  "main": "gulpfile.js",
+  "main": "index.html",
   "scripts": {
     "dev": "gulp",
     "test": "jest"
