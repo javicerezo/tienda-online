@@ -19,7 +19,7 @@
             width: 95%;
         }
         @include m.desktop {
-            width: 75%;
+            width: 80%;
         }
     }
     &__burger {
@@ -40,10 +40,39 @@
         }
     }
     &__titulo {
-        font-size: 0.7em;
-        text-transform: uppercase;
-        @include m.tablet {
-            font-size: 0.8em;
+        &-h2 {
+            font-size: 0.7em;
+            text-transform: uppercase;
+            @include m.tablet {
+                font-size: 0.8em;
+            }
+            @include m.desktop {
+                @include m.position(relative, -1rem, null, null, null);
+            }
+        }
+        &-enlaces {
+            display: none;
+            @include m.desktop {
+                @include m.flex(row, nowrap, center, center);
+                @include m.position(absolute, null, null, 1.0625rem, null);
+            }
+        }
+        &-a {
+            position: relative;
+            background-color: map-get(v.$colores, color-fondo-iconos);
+            padding: 0.4rem 0.8rem;
+            margin: 0 0.1rem 0 0.1rem;
+            border-top: 1px solid map-get(v.$colores, color-fondo);
+            border-right: 1px solid map-get(v.$colores, color-fondo);
+            border-left: 1px solid map-get(v.$colores, color-fondo);
+            border-radius: 15px 15px 0 0;
+            &:hover {
+                text-decoration-line: underline;
+            }
+        }
+        &-a:first-child {
+            background-color: map-get(v.$colores, color-primario-3);
+            color: map-get(v.$colores, color-secundario);
         }
     }
     &__centro {
@@ -54,7 +83,8 @@
                 display: block
             }
         }
-        @include m.desktop{
+        @include m.desktop {
+            @include m.position(relative, -1rem, -2rem, null, null);
             @include m.flex (row, nowrap, center, center);
             padding: 0.5rem;
             border-radius: 10px;
@@ -131,7 +161,7 @@
         width: 100%;
     }
     &__contenedor-nav {
-        background-color: map-get(v.$colores, color-primario);
+        background-color: map-get(v.$colores, color-primario-3);
         color: map-get(v.$colores, color-secundario);
         width: 100%;
         padding: 1rem;

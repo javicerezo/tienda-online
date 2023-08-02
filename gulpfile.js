@@ -55,6 +55,7 @@ function watchArchivos() {
     watch(paths.sass, css);
     watch(paths.js, javascript);
     watch(paths.imagenes, imagenes);
+    watch(paths.imagenes, versionWebp);
 }
 
 exports.css = css;
