@@ -58,6 +58,7 @@ function watchArchivos() {
     watch(paths.imagenes, versionWebp);
 }
 
+exports.js = javascript;
 exports.css = css;
 exports.versionWebp = versionWebp;
 exports.watchArchivos = watchArchivos;
