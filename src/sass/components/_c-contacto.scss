@@ -81,29 +81,29 @@
             z-index: 89;
         }
         html.webp & > :nth-child(1) {
-            background-image: url(../img/avatar1.webp);
+            background-image: url('../../public/assets/imgs/avatar1.webp');
         }
         html.nowebp & > :nth-child(1) {
-            background-image: url(../img/avatar1.jpg);
+            background-image: url('../../public/assets/imgs/avatar1.webp');
         }
         & > :nth-child(2) {
             z-index: 90;
         }
         html.webp & > :nth-child(2) {
-            background-image: url(../img/avatar2.webp);
+            background-image: url('../../public/assets/imgs/avatar2.webp');
         }
         html.nowebp & > :nth-child(2) {
-            background-image: url(../img/avatar2.jpg);
+            background-image: url('../../public/assets/imgs/avatar2.webp');
         }
         & > :nth-child(3) {
             right: 0.5rem;
             z-index: 89;
         }
         html.webp & > :nth-child(3) {
-            background-image: url(../img/avatar3.webp);
+            background-image: url('../../public/assets/imgs/avatar3.webp');
         }
         html.nowebp & > :nth-child(3) {
-            background-image: url(../img/avatar3.jpg);
+            background-image: url('../../public/assets/imgs/avatar3.webp');
         }
     }
     &__li {

@@ -5,10 +5,10 @@
     position: relative;
     @include m.flex (row, nowrap, center, center);
     html.webp &__foto{
-        background-image: url(../img/img-portada.webp);
+        background-image: url('../../public/assets/imgs/img-portada.webp');
     }
     html.nowebp &__foto{
-        background-image: url(../img/img-portada.jpj);
+        background-image: url('../../public/assets/imgs/img-portada.jpg');
     }
     &__foto {
         width: 100%;

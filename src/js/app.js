@@ -119,7 +119,7 @@ class UI {
             <div class='c-buscador__contenedor'>
                 <div class='c-buscador__cabecera'>
                     <div class='c-buscador__logo'>
-                        <a href="https://javicerezo.github.io/tienda-online/"><img src='build/img/logo.svg' alt='logo empresa'></a>
+                        <a href="https://javicerezo.github.io/tienda-online/"><img src='public/assets/imgs/logo.svg' alt='logo empresa'></a>
                     </div>
                     <div class='c-buscador__form'>
                         <input type='text' class='c-buscador__input js-buscador__input' placeholder='Buscar...' value='${palabra}'>
